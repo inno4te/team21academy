@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Team21 Academy — Consulting · Training · Talent Incubation | Yaoundé, Cameroun</title>
+<meta name="description" content="Mentor-guided AI, Leadership, and Professional training in Cameroon — onsite in Yaoundé, online via WhatsApp/Telegram, or live virtual. Bilingual EN/FR. Fees in USD."/>
+<style>
+:root{
+  --navy:#1C2028; --navy-d:#0C0F14; --blue:#FF5714; --blue-l:#FF7A3D; --sky:#FFF1E9;
+  --white:#FFFFFF; --ink:#1E2938; --grey:#5B6472; --line:#DCE4F0;
+  --gold:#C9A227; --orange:#FF5714; /* heritage micro-accent */
+  --green:#15803D; --red:#B91C1C; --amber:#B45309;
+  --shadow:0 10px 30px rgba(15,42,92,.10); --shadow-s:0 4px 14px rgba(15,42,92,.08);
+  --r:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Georgia,'Times New Roman',serif;color:var(--ink);background:var(--white);line-height:1.6}
+h1,h2,h3,h4,.btn,nav,.tag,.sans,button,input,select,label,td,th{font-family:'Segoe UI',system-ui,Arial,sans-serif}
+.hidden{display:none!important}
+a{color:var(--blue);text-decoration:none}
+img{max-width:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+.btn{display:inline-block;background:var(--blue);color:#fff;padding:12px 26px;border-radius:8px;font-weight:700;font-size:15px;border:none;cursor:pointer;letter-spacing:.2px;transition:background .15s,transform .1s}
+.btn:hover{background:var(--navy)}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+.btn.ghost:hover{background:var(--sky)}
+.btn.sm{padding:8px 16px;font-size:13px}
+.btn.gold{background:var(--gold)} .btn.gold:hover{background:#a9871d}
+.tag{display:inline-block;background:var(--sky);color:var(--navy);font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:5px 12px;border-radius:99px}
+.tag.orange{background:#FFF0E9;color:var(--orange)}
+.eyebrow{font-family:'Segoe UI',Arial,sans-serif;font-size:12px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+section{padding:72px 0}
+.h2{font-size:34px;color:var(--navy);line-height:1.2;margin-bottom:14px;font-weight:400}
+.lead{font-size:18px;color:var(--grey);max-width:720px}
+
+/* NAV */
+header{position:sticky;top:0;z-index:60;background:#fff;border-bottom:1px solid var(--line)}
+.topbar{background:var(--navy);color:#F5D9C8;font-size:12.5px;padding:7px 0;font-family:'Segoe UI',Arial,sans-serif}
+.topbar .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px}
+.logo{display:flex;align-items:center;gap:12px;cursor:pointer}
+.logo-mark{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#0C0F14,var(--blue));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;letter-spacing:-.5px;font-family:'Segoe UI',Arial,sans-serif;position:relative}
+.logo-mark::after{content:'';position:absolute;right:-3px;bottom:-3px;width:10px;height:10px;border-radius:50%;background:var(--orange);border:2px solid #fff}
+.logo-name{font-family:'Segoe UI',Arial,sans-serif;line-height:1.1}
+.logo-name b{display:block;color:var(--navy);font-size:18px}
+.logo-name span{font-size:11px;color:var(--grey);letter-spacing:1.2px;text-transform:uppercase}
+.navlinks{display:flex;gap:26px;align-items:center;font-size:15px;font-weight:600}
+.navlinks a{color:var(--ink)}
+.navlinks a:hover{color:var(--blue)}
+.hamb{display:none;background:none;border:none;font-size:26px;color:var(--navy);cursor:pointer}
+@media(max-width:900px){
+  .navlinks{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;flex-direction:column;padding:18px;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+  .navlinks.open{display:flex}
+  .hamb{display:block}
+}
+
+/* HERO */
+.hero{background:linear-gradient(160deg,#07090D 0%,var(--navy-d) 55%,#241109 100%);color:#fff;padding:88px 0 96px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:
+  radial-gradient(600px 300px at 85% 20%,rgba(255,87,20,.30),transparent 70%),
+  repeating-linear-gradient(115deg,transparent 0 120px,rgba(255,255,255,.03) 120px 121px)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+.hero h1{font-size:46px;line-height:1.15;font-weight:400;margin:18px 0 20px}
+.hero h1 em{font-style:normal;color:#FFB38A;border-bottom:3px solid #FFD166}
+.hero p{font-size:18px;color:#E8D9CF;max-width:560px;margin-bottom:30px}
+.hero .cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:38px;margin-top:44px;font-family:'Segoe UI',Arial,sans-serif}
+.hero-stats b{display:block;font-size:30px;color:#fff}
+.hero-stats span{font-size:12.5px;color:#C9A38C;letter-spacing:.6px;text-transform:uppercase}
+.hero-card{background:#fff;color:var(--ink);border-radius:18px;padding:30px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.hero-card h3{color:var(--navy);font-size:17px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.mode{display:flex;gap:14px;align-items:flex-start;padding:13px 0;border-bottom:1px solid var(--line)}
+.mode:last-child{border:none}
+.mode .ic{width:38px;height:38px;flex:none;border-radius:9px;background:var(--sky);display:flex;align-items:center;justify-content:center;font-size:18px}
+.mode b{font-family:'Segoe UI',Arial,sans-serif;color:var(--navy);font-size:15px}
+.mode p{font-size:13.5px;color:var(--grey);margin:0}
+@media(max-width:900px){.hero .wrap{grid-template-columns:1fr}.hero h1{font-size:34px}}
+
+/* TRUST STRIP */
+.strip{background:var(--sky);padding:22px 0;font-family:'Segoe UI',Arial,sans-serif}
+.strip .wrap{display:flex;gap:12px 40px;flex-wrap:wrap;justify-content:center;color:var(--navy);font-weight:700;font-size:13.5px;letter-spacing:.6px}
+.strip span::before{content:'✓ ';color:var(--blue)}
+
+/* COURSE GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:26px;margin-top:36px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow-s);display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.card-top{height:8px;background:linear-gradient(90deg,#0C0F14,var(--blue))}
+.card-top.lead-c{background:linear-gradient(90deg,#0F5C3F,#15803D)}
+.card-top.pm-c{background:linear-gradient(90deg,#5B21B6,#7C3AED)}
+.card-body{padding:24px;flex:1;display:flex;flex-direction:column}
+.card .meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.card h3{color:var(--navy);font-size:19px;line-height:1.3;margin-bottom:8px;font-family:'Segoe UI',Arial,sans-serif}
+.card p{font-size:14.5px;color:var(--grey);flex:1}
+.card .foot{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+.price{font-family:'Segoe UI',Arial,sans-serif}
+.price b{color:var(--navy);font-size:20px}
+.price span{font-size:12px;color:var(--grey);display:block}
+
+/* SECTIONS */
+.alt{background:var(--sky)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
+@media(max-width:900px){.split{grid-template-columns:1fr}}
+.checklist{list-style:none;margin-top:18px}
+.checklist li{padding:10px 0 10px 34px;position:relative;font-size:16px;border-bottom:1px dashed var(--line)}
+.checklist li::before{content:'✓';position:absolute;left:0;top:9px;width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;font-family:Arial}
+.mentor-band{background:var(--navy);color:#fff;border-radius:20px;padding:46px;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center;margin-top:56px}
+.mentor-band h3{font-size:26px;font-weight:400;margin-bottom:10px}
+.mentor-band p{color:#E8D9CF;max-width:640px}
+@media(max-width:800px){.mentor-band{grid-template-columns:1fr}}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;margin-top:36px;counter-reset:st}
+.step{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px;counter-increment:st}
+.step::before{content:counter(st,decimal-leading-zero);font-family:'Segoe UI',Arial,sans-serif;font-weight:800;font-size:13px;color:var(--blue);letter-spacing:2px}
+.step h4{color:var(--navy);margin:8px 0 6px;font-size:17px}
+.step p{font-size:14px;color:var(--grey)}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:12px;padding:16px 20px}
+.faq summary{font-family:'Segoe UI',Arial,sans-serif;font-weight:700;color:var(--navy);cursor:pointer;font-size:15.5px}
+.faq p{margin-top:10px;font-size:15px;color:var(--grey)}
+
+/* CONTACT + FOOTER */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:30px}
+@media(max-width:800px){.contact-grid{grid-template-columns:1fr}}
+.field label{display:block;font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--navy);margin:14px 0 6px}
+.field input,.field select,.field textarea{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:8px;font-size:15px;font-family:'Segoe UI',Arial,sans-serif;outline:none;background:#fff}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue)}
+footer{background:var(--navy-d);color:#C9A38C;padding:56px 0 30px;font-family:'Segoe UI',Arial,sans-serif;font-size:14px}
+footer .cols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:34px;margin-bottom:34px}
+@media(max-width:800px){footer .cols{grid-template-columns:1fr 1fr}}
+footer h4{color:#fff;font-size:14px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
+footer a{color:#C9A38C;display:block;padding:4px 0}
+footer a:hover{color:#fff}
+.foot-base{border-top:1px solid rgba(255,255,255,.12);padding-top:22px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12.5px}
+.verse{font-style:italic;color:#C08A66}
+
+/* ===== LMS / PORTAL ===== */
+.portal{min-height:100vh;background:#F4F7FC}
+.pnav{background:var(--navy);color:#fff;padding:0 22px;display:flex;align-items:center;justify-content:space-between;height:62px;position:sticky;top:0;z-index:50}
+.pnav .who{font-family:'Segoe UI',Arial,sans-serif;font-size:13.5px;display:flex;align-items:center;gap:14px}
+.pill{background:rgba(255,255,255,.14);padding:4px 12px;border-radius:99px;font-size:12px}
+.ptabs{display:flex;gap:4px;background:#fff;border-bottom:1px solid var(--line);padding:0 22px;overflow-x:auto;position:sticky;top:62px;z-index:49}
+.ptab{padding:15px 20px;font-family:'Segoe UI',Arial,sans-serif;font-weight:700;font-size:14px;color:var(--grey);border:none;background:none;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
+.ptab.active{color:var(--navy);border-bottom-color:var(--blue)}
+.pbody{max-width:1180px;margin:0 auto;padding:30px 22px 80px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px;box-shadow:var(--shadow-s);margin-bottom:24px}
+.panel h3{color:var(--navy);font-family:'Segoe UI',Arial,sans-serif;margin-bottom:14px;font-size:18px}
+.progress-outer{background:var(--sky);border-radius:99px;height:12px;overflow:hidden}
+.progress-inner{height:100%;background:linear-gradient(90deg,var(--blue),#B23400);border-radius:99px;transition:width .4s}
+.mod-list{list-style:none}
+.mod-item{display:flex;align-items:center;gap:14px;padding:14px 10px;border-bottom:1px solid var(--line);cursor:pointer;border-radius:8px}
+.mod-item:hover{background:var(--sky)}
+.mod-num{width:34px;height:34px;flex:none;border-radius:50%;background:var(--sky);color:var(--navy);display:flex;align-items:center;justify-content:center;font-family:'Segoe UI',Arial,sans-serif;font-weight:800;font-size:13px}
+.mod-item.done .mod-num{background:var(--green);color:#fff}
+.mod-item b{font-family:'Segoe UI',Arial,sans-serif;font-size:15px;color:var(--ink)}
+.mod-item small{display:block;color:var(--grey);font-size:12.5px;font-family:'Segoe UI',Arial,sans-serif}
+.lesson-body{font-size:16.5px;line-height:1.75}
+.lesson-body h4{font-family:'Segoe UI',Arial,sans-serif;color:var(--navy);margin:22px 0 8px;font-size:17px}
+.lesson-body ul{margin:8px 0 14px 22px}
+.lesson-body li{margin-bottom:6px}
+.callout{background:var(--sky);border-left:4px solid var(--blue);padding:14px 18px;border-radius:0 10px 10px 0;margin:16px 0;font-size:15px}
+.callout.f{border-left-color:var(--orange);background:#FFF4EE}
+.quotecard{background:linear-gradient(135deg,var(--navy-d),var(--navy));color:#F2E8DF;border-radius:14px;padding:20px 24px;margin:18px 0;font-size:15.5px;font-style:italic;line-height:1.7;box-shadow:var(--shadow-s)}
+.qmark{font-style:italic;font-weight:600}
+.lab{background:#F5FBF7;border:1.5px solid #BFE3CD;border-radius:12px;padding:16px 18px;margin:18px 0}
+.lab b{font-family:'Segoe UI',Arial,sans-serif;color:#15803D;font-size:14px}
+.lab .labp{font-family:ui-monospace,Consolas,monospace;font-size:13px;background:#fff;border:1px dashed #BFE3CD;border-radius:8px;padding:12px;margin:10px 0;white-space:pre-wrap}
+
+.qz{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:18px;margin:14px 0}
+.qz b{font-family:'Segoe UI',Arial,sans-serif;color:var(--navy)}
+.qz .opt{display:block;margin:8px 0;padding:10px 14px;border:1.5px solid var(--line);border-radius:8px;cursor:pointer;font-family:'Segoe UI',Arial,sans-serif;font-size:14.5px;background:#fff;width:100%;text-align:left}
+.qz .opt:hover{border-color:var(--blue)}
+.qz .opt.ok{border-color:var(--green);background:#EFFBF3}
+.qz .opt.bad{border-color:var(--red);background:#FDF1F1}
+.qz .opt.sel{border-color:var(--blue);background:var(--sky);font-weight:700}
+.qcard{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:12px 0}
+.qz .opt:disabled{cursor:default;opacity:.95}
+.ddwrap{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:14px 0}
+@media(max-width:700px){.ddwrap{grid-template-columns:1fr}}
+.ddpool{display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start;min-height:60px;padding:10px;background:var(--sky);border-radius:10px}
+.ddchip{background:#fff;border:1.5px solid var(--navy);color:var(--navy);border-radius:8px;padding:8px 12px;font-family:'Segoe UI',Arial,sans-serif;font-size:13.5px;cursor:grab;font-weight:600;box-shadow:var(--shadow-s)}
+.ddtargets{display:flex;flex-direction:column;gap:10px}
+.ddrow{display:flex;align-items:center;gap:10px}
+.ddlabel{flex:1;font-family:'Segoe UI',Arial,sans-serif;font-size:13.5px;color:var(--ink)}
+.ddzone{width:180px;min-height:44px;border:2px dashed var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;padding:4px;background:#fafcff}
+.ddzone.ddover{border-color:var(--blue);background:var(--sky)}
+.ddzone.ddright{border-color:var(--green);border-style:solid;background:#EFFBF3}
+.ddzone.ddwrong{border-color:var(--red);border-style:solid;background:#FDF1F1}
+.labfill{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.labfill input{flex:1;min-width:200px;padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:14px;font-family:'Segoe UI',Arial,sans-serif}
+table.dt{width:100%;border-collapse:collapse;font-size:13.5px}
+table.dt th{background:var(--navy);color:#fff;text-align:left;padding:10px 12px;font-size:12px;letter-spacing:.6px;text-transform:uppercase}
+table.dt td{padding:10px 12px;border-bottom:1px solid var(--line)}
+table.dt tr:hover td{background:var(--sky)}
+.cred{font-family:ui-monospace,Consolas,monospace;background:var(--sky);padding:3px 8px;border-radius:6px;font-size:13px;color:var(--navy)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:24px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px}
+.kpi b{font-size:28px;color:var(--navy);font-family:'Segoe UI',Arial,sans-serif}
+.kpi span{font-size:12px;color:var(--grey);text-transform:uppercase;letter-spacing:1px;font-family:'Segoe UI',Arial,sans-serif;display:block;margin-top:4px}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:#fff;padding:14px 22px;border-radius:10px;font-family:'Segoe UI',Arial,sans-serif;font-size:14px;box-shadow:var(--shadow);z-index:99;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none}
+.toast.show{opacity:1;transform:none}
+
+/* LOGIN MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(10,29,66,.72);z-index:80;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal{background:#fff;border-radius:18px;padding:36px;width:440px;max-width:100%;box-shadow:0 30px 80px rgba(0,0,0,.4);position:relative}
+.modal .x{position:absolute;top:14px;right:18px;background:none;border:none;font-size:22px;color:var(--grey);cursor:pointer}
+.ltabs2{display:flex;gap:4px;background:var(--sky);border-radius:10px;padding:4px;margin:18px 0}
+.ltab2{flex:1;padding:9px;border:none;background:none;border-radius:8px;font-weight:700;font-size:13px;color:var(--grey);cursor:pointer;font-family:'Segoe UI',Arial,sans-serif}
+.ltab2.active{background:#fff;color:var(--navy);box-shadow:var(--shadow-s)}
+.err{color:var(--red);font-size:13px;margin-top:10px;font-family:'Segoe UI',Arial,sans-serif;text-align:center}
+@media print{header,.hero,footer{display:none}}
+:focus-visible{outline:3px solid var(--blue-l);outline-offset:2px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<script>
+/* Tiny QR generator (qrcode-generator, MIT, David Shim) — trimmed for URL/email payloads */
+var qrcode=function(){var f=function(a,c){this.typeNumber=a;this.errorCorrectLevel=c;this.modules=null;this.moduleCount=0;this.dataCache=null;this.dataList=[]};var q=f.prototype;q.addData=function(a){this.dataList.push(g(a));this.dataCache=null};q.isDark=function(a,c){if(a<0||this.moduleCount<=a||c<0||this.moduleCount<=c)throw Error(a+","+c);return this.modules[a][c]};q.getModuleCount=function(){return this.moduleCount};q.make=function(){if(this.typeNumber<1){var a=1;for(a=1;40>a;a++){for(var c=t.getRSBlocks(a,this.errorCorrectLevel),d=new u,b=0,e=0;e<c.length;e++)b+=c[e].dataCount;for(e=0;e<this.dataList.length;e++){var h=this.dataList[e];d.put(h.mode,4);d.put(h.getLength(),j.getLengthInBits(h.mode,a));h.write(d)}if(d.getLengthInBits()<=8*b)break}this.typeNumber=a}this.makeImpl(!1,this.getBestMaskPattern())};q.makeImpl=function(a,c){this.moduleCount=4*this.typeNumber+17;this.modules=function(a){for(var c=Array(a),d=0;d<a;d++){c[d]=Array(a);for(var b=0;b<a;b++)c[d][b]=null}return c}(this.moduleCount);this.setupPositionProbePattern(0,0);this.setupPositionProbePattern(this.moduleCount-7,0);this.setupPositionProbePattern(0,this.moduleCount-7);this.setupPositionAdjustPattern();this.setupTimingPattern();this.setupTypeInfo(a,c);7<=this.typeNumber&&this.setupTypeNumber(a);null==this.dataCache&&(this.dataCache=f.createData(this.typeNumber,this.errorCorrectLevel,this.dataList));this.mapData(this.dataCache,c)};q.setupPositionProbePattern=function(a,c){for(var d=-1;7>=d;d++)if(!(-1>=a+d||this.moduleCount<=a+d))for(var b=-1;7>=b;b++)-1>=c+b||this.moduleCount<=c+b||(this.modules[a+d][c+b]=0<=d&&6>=d&&(0==b||6==b)||0<=b&&6>=b&&(0==d||6==d)||2<=d&&4>=d&&2<=b&&4>=b?!0:!1)};q.getBestMaskPattern=function(){for(var a=0,c=0,d=0;8>d;d++){this.makeImpl(!0,d);var b=k.getLostPoint(this);if(0==d||a>b)a=b,c=d}return c};q.setupTimingPattern=function(){for(var a=8;a<this.moduleCount-8;a++)null==this.modules[a][6]&&(this.modules[a][6]=0==a%2);for(a=8;a<this.moduleCount-8;a++)null==this.modules[6][a]&&(this.modules[6][a]=0==a%2)};q.setupPositionAdjustPattern=function(){for(var a=j.getPatternPosition(this.typeNumber),c=0;c<a.length;c++)for(var d=0;d<a.length;d++){var b=a[c],e=a[d];if(null==this.modules[b][e])for(var h=-2;2>=h;h++)for(var g=-2;2>=g;g++)this.modules[b+h][e+g]=-2==h||2==h||-2==g||2==g||0==h&&0==g}};q.setupTypeNumber=function(a){for(var c=j.getBCHTypeNumber(this.typeNumber),d=0;18>d;d++){var b=!a&&1==(c>>d&1);this.modules[Math.floor(d/3)][d%3+this.moduleCount-8-3]=b}for(d=0;18>d;d++)b=!a&&1==(c>>d&1),this.modules[d%3+this.moduleCount-8-3][Math.floor(d/3)]=b};q.setupTypeInfo=function(a,c){for(var d=j.getBCHTypeInfo(this.errorCorrectLevel<<3|c),b=0;15>b;b++){var e=!a&&1==(d>>b&1);6>b?this.modules[b][8]=e:8>b?this.modules[b+1][8]=e:this.modules[this.moduleCount-15+b][8]=e}for(b=0;15>b;b++)e=!a&&1==(d>>b&1),8>b?this.modules[8][this.moduleCount-b-1]=e:9>b?this.modules[8][15-b-1+1]=e:this.modules[8][15-b-1]=e;this.modules[this.moduleCount-8][8]=!a};q.mapData=function(a,c){for(var d=-1,b=this.moduleCount-1,e=7,h=0,g=this.moduleCount-1;0<g;g-=2)for(6==g&&g--;;){for(var f=0;2>f;f++)if(null==this.modules[b][g-f]){var m=!1;h<a.length&&(m=1==(a[h]>>>e&1));k.getMask(c,b,g-f)&&(m=!m);this.modules[b][g-f]=m;-1==--e&&(h++,e=7)}b+=d;if(0>b||this.moduleCount<=b){b-=d;d=-d;break}}};u=function(){this.buffer=[];this.length=0};u.prototype={get:function(a){return 1==(this.buffer[Math.floor(a/8)]>>>7-a%8&1)},put:function(a,c){for(var d=0;d<c;d++)this.putBit(1==(a>>>c-d-1&1))},getLengthInBits:function(){return this.length},putBit:function(a){var c=Math.floor(this.length/8);this.buffer.length<=c&&this.buffer.push(0);a&&(this.buffer[c]|=128>>>this.length%8);this.length++}};var v=1,w=0,x=3,r=2,g=function(a){this.mode=v;this.data=a;this.parsedData=[];for(var c=0,d=this.data.length;c<d;c++){var b=[],e=this.data.charCodeAt(c);128>e?b.push(e):2048>e?(b.push(192|e>>6),b.push(128|e&63)):55296>e||57344<=e?(b.push(224|e>>12),b.push(128|e>>6&63),b.push(128|e&63)):(c++,e=65536+((e&1023)<<10|this.data.charCodeAt(c)&1023),b.push(240|e>>18),b.push(128|e>>12&63),b.push(128|e>>6&63),b.push(128|e&63));this.parsedData.push(b)}this.parsedData=Array.prototype.concat.apply([],this.parsedData);this.parsedData.length!=this.data.length&&(this.parsedData.unshift(191),this.parsedData.unshift(187),this.parsedData.unshift(239))};g.prototype={getLength:function(){return this.parsedData.length},write:function(a){for(var c=0,d=this.parsedData.length;c<d;c++)a.put(this.parsedData[c],8)}};var j={PATTERN_POSITION_TABLE:[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],G15:1335,G18:7973,G15_MASK:21522,getBCHTypeInfo:function(a){for(var c=a<<10;0<=j.getBCHDigit(c)-j.getBCHDigit(j.G15);)c^=j.G15<<j.getBCHDigit(c)-j.getBCHDigit(j.G15);return(a<<10|c)^j.G15_MASK},getBCHTypeNumber:function(a){for(var c=a<<12;0<=j.getBCHDigit(c)-j.getBCHDigit(j.G18);)c^=j.G18<<j.getBCHDigit(c)-j.getBCHDigit(j.G18);return a<<12|c},getBCHDigit:function(a){for(var c=0;0!=a;)c++,a>>>=1;return c},getPatternPosition:function(a){return j.PATTERN_POSITION_TABLE[a-1]},getMask:function(a,c,d){switch(a){case 0:return 0==(c+d)%2;case 1:return 0==c%2;case 2:return 0==d%3;case 3:return 0==(c+d)%3;case 4:return 0==(Math.floor(c/2)+Math.floor(d/3))%2;case 5:return 0==c*d%2+c*d%3;case 6:return 0==(c*d%2+c*d%3)%2;case 7:return 0==(c*d%3+(c+d)%2)%2;default:throw Error("bad maskPattern:"+a);}},getErrorCorrectPolynomial:function(a){for(var c=new l([1],0),d=0;d<a;d++)c=c.multiply(new l([1,p.gexp(d)],0));return c},getLengthInBits:function(a,c){if(1<=c&&10>c)switch(a){case v:return 10;case w:return 9;case x:return 8;case r:return 8;default:throw Error("mode:"+a);}else if(27>c)switch(a){case v:return 12;case w:return 11;case x:return 16;case r:return 10;default:throw Error("mode:"+a);}else if(41>c)switch(a){case v:return 14;case w:return 13;case x:return 16;case r:return 12;default:throw Error("mode:"+a);}else throw Error("type:"+c);},getLostPoint:function(a){for(var c=a.getModuleCount(),d=0,b=0;b<c;b++)for(var e=0;e<c;e++){for(var h=0,g=a.isDark(b,e),f=-1;1>=f;f++)if(!(0>b+f||c<=b+f))for(var k=-1;1>=k;k++)0>e+k||c<=e+k||0==f&&0==k||g==a.isDark(b+f,e+k)&&h++;5<h&&(d+=3+h-5)}for(b=0;b<c-1;b++)for(e=0;e<c-1;e++)if(h=0,a.isDark(b,e)&&h++,a.isDark(b+1,e)&&h++,a.isDark(b,e+1)&&h++,a.isDark(b+1,e+1)&&h++,0==h||4==h)d+=3;for(b=0;b<c;b++)for(e=0;e<c-6;e++)a.isDark(b,e)&&!a.isDark(b,e+1)&&a.isDark(b,e+2)&&a.isDark(b,e+3)&&a.isDark(b,e+4)&&!a.isDark(b,e+5)&&a.isDark(b,e+6)&&(d+=40);for(e=0;e<c;e++)for(b=0;b<c-6;b++)a.isDark(b,e)&&!a.isDark(b+1,e)&&a.isDark(b+2,e)&&a.isDark(b+3,e)&&a.isDark(b+4,e)&&!a.isDark(b+5,e)&&a.isDark(b+6,e)&&(d+=40);for(e=h=0;e<c;e++)for(b=0;b<c;b++)a.isDark(b,e)&&h++;a=Math.abs(100*h/c/c-50)/5;return d+10*a}},p={glog:function(a){if(1>a)throw Error("glog("+a+")");return p.LOG_TABLE[a]},gexp:function(a){for(;0>a;)a+=255;for(;256<=a;)a-=255;return p.EXP_TABLE[a]},EXP_TABLE:Array(256),LOG_TABLE:Array(256)},n=0;8>n;n++)p.EXP_TABLE[n]=1<<n;for(n=8;256>n;n++)p.EXP_TABLE[n]=p.EXP_TABLE[n-4]^p.EXP_TABLE[n-5]^p.EXP_TABLE[n-6]^p.EXP_TABLE[n-8];for(n=0;255>n;n++)p.LOG_TABLE[p.EXP_TABLE[n]]=n;function l(a,c){if(void 0==a.length)throw Error(a.length+"/"+c);for(var d=0;d<a.length&&0==a[d];)d++;this.num=Array(a.length-d+c);for(var b=0;b<a.length-d;b++)this.num[b]=a[b+d]}l.prototype={get:function(a){return this.num[a]},getLength:function(){return this.num.length},multiply:function(a){for(var c=Array(this.getLength()+a.getLength()-1),d=0;d<this.getLength();d++)for(var b=0;b<a.getLength();b++)c[d+b]^=p.gexp(p.glog(this.get(d))+p.glog(a.get(b)));return new l(c,0)},mod:function(a){if(0>this.getLength()-a.getLength())return this;for(var c=p.glog(this.get(0))-p.glog(a.get(0)),d=Array(this.getLength()),b=0;b<this.getLength();b++)d[b]=this.get(b);for(b=0;b<a.getLength();b++)d[b]^=p.gexp(p.glog(a.get(b))+c);return(new l(d,0)).mod(a)}};function t(a,c){this.totalCount=a;this.dataCount=c}t.RS_BLOCK_TABLE=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16]];t.getRSBlocks=function(a,c){var d=t.getRsBlockTable(a,c);if(void 0==d)throw Error("bad rs block @ typeNumber:"+a+"/errorCorrectLevel:"+c);for(var b=d.length/3,e=[],h=0;h<b;h++)for(var g=d[3*h],f=d[3*h+1],k=d[3*h+2],l=0;l<g;l++)e.push(new t(f,k));return e};t.getRsBlockTable=function(a,c){switch(c){case 1:return t.RS_BLOCK_TABLE[4*(a-1)+0];case 0:return t.RS_BLOCK_TABLE[4*(a-1)+1];case 3:return t.RS_BLOCK_TABLE[4*(a-1)+2];case 2:return t.RS_BLOCK_TABLE[4*(a-1)+3]}};f.createData=function(a,c,d){for(var b=t.getRSBlocks(a,c),e=new u,h=0;h<d.length;h++){var g=d[h];e.put(g.mode,4);e.put(g.getLength(),j.getLengthInBits(g.mode,a));g.write(e)}for(h=a=0;h<b.length;h++)a+=b[h].dataCount;if(e.getLengthInBits()>8*a)throw Error("code length overflow. ("+e.getLengthInBits()+">"+8*a+")");for(e.getLengthInBits()+4<=8*a&&e.put(0,4);0!=e.getLengthInBits()%8;)e.putBit(!1);for(;!(e.getLengthInBits()>=8*a);){e.put(236,8);if(e.getLengthInBits()>=8*a)break;e.put(17,8)}var f=0;h=0;for(var k=[],l=[],m=Array(b.length),n=Array(b.length),p=0;p<b.length;p++){var q=b[p].dataCount,r=b[p].totalCount-q;h=Math.max(h,q);f=Math.max(f,r);m[p]=Array(q);for(var s=0;s<m[p].length;s++)m[p][s]=255&e.buffer[s+H];var H=H+q,s=j.getErrorCorrectPolynomial(r),t=(new l(m[p],s.getLength()-1)).mod(s);n[p]=Array(s.getLength()-1);for(s=0;s<n[p].length;s++)q=s+t.getLength()-n[p].length,n[p][s]=0<=q?t.get(q):0}for(s=e=0;s<b.length;s++)e+=b[s].totalCount;g=Array(e);for(s=t=0;s<h;s++)for(p=0;p<b.length;p++)s<m[p].length&&(g[t++]=m[p][s]);for(s=0;s<f;s++)for(p=0;p<b.length;p++)s<n[p].length&&(g[t++]=n[p][s]);return g};var H=0;var y={L:1,M:0,Q:3,H:2};var A=function(a,c){var d=qrcode(a,c);return{addData:function(a){d.addData(a)},make:function(){d.make()},svg:function(sz){d.make();var n=d.getModuleCount();var m=(sz||160);var cell=m/n;var s='<svg xmlns="http://www.w3.org/2000/svg" width="'+m+'" height="'+m+'" viewBox="0 0 '+m+' '+m+'"><rect width="'+m+'" height="'+m+'" fill="#fff"/>';for(var r=0;r<n;r++)for(var c2=0;c2<n;c2++)if(d.isDark(r,c2))s+='<rect x="'+(c2*cell)+'" y="'+(r*cell)+'" width="'+cell+'" height="'+cell+'" fill="#0F2A5C"/>';return s+'</svg>'}}};A.stringToBytes=function(a){for(var c=[],d=0;d<a.length;d++){var b=a.charCodeAt(d);c.push(b&255)}return c};return A}();
+function makeQRSVG(text,size){try{var q=qrcode(0,1);q.addData(text);q.make();return q.svg(size||150);}catch(e){return '';}}
+</script>
+
+<!-- ================= PUBLIC SITE ================= -->
+<div id="site">
+<div class="topbar"><div class="wrap">
+  <span>📱 WhatsApp: +237 694 294 406 · ✉️ team21online@gmail.com · Yaoundé, Cameroun</span>
+  <span>Bilingue EN/FR · One FREE class every month · Fees in USD</span>
+</div></div>
+<header><nav><div class="wrap">
+  <div class="logo" onclick="scrollTo(0,0)">
+    <div class="logo-mark">T21</div>
+    <div class="logo-name"><b>Team21 Academy</b><span>Yaoundé · AI · Leadership · Consulting</span></div>
+  </div>
+  <button class="hamb" onclick="document.getElementById('nl').classList.toggle('open')" aria-label="Menu">☰</button>
+  <div class="navlinks" id="nl">
+    <a href="#programs">Programs</a>
+    <a href="#delivery">Delivery Options</a>
+    <a href="#mentorship">Mentorship</a>
+    <a href="#organizations">For Organizations</a>
+    <a href="#consulting">Consulting</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <button class="btn sm" onclick="openLogin()">Learner Login</button>
+  </div>
+</div></nav></header>
+
+<div class="hero"><div class="wrap">
+  <div>
+    <span class="tag" style="background:rgba(255,255,255,.12);color:#FFB38A">Inscriptions ouvertes — new cohort every month · 1 free class monthly</span>
+    <h1>Lead with confidence in the <em>age of AI</em>.</h1>
+    <p>Team21 Academy delivers mentor-guided training in AI fluency, servant leadership, project management, and procurement — from Yaoundé to the world. Live weekend classes onsite and on WhatsApp/Telegram, bilingual EN/FR. Every course includes a human mentor. Every learner leaves with real work products. Ending AI poverty, one cohort at a time.</p>
+    <div class="cta">
+      <a class="btn" href="#programs">Explore Programs</a>
+      <a class="btn ghost" style="color:#fff;border-color:#fff;background:transparent" href="#organizations">Train Your Team</a>
+    </div>
+    <div class="hero-stats">
+      <div><b>500+</b><span>Professionals Trained</span></div>
+      <div><b>6</b><span>Countries Reached</span></div>
+      <div><b>1:10</b><span>Mentor Ratio</span></div>
+      <div><b>100%</b><span>Mentor-Backed</span></div>
+    </div>
+  </div>
+  <div class="hero-card">
+    <h3>Choose how you learn</h3>
+    <div class="mode"><div class="ic">🏢</div><div><b>Onsite (Yaoundé)</b><p>Live weekend classes in Yaoundé, or we come to your organization anywhere in Cameroon.</p></div></div>
+    <div class="mode"><div class="ic">💻</div><div><b>Online (WhatsApp/Telegram + Platform)</b><p>Learn on the channels you already use, plus this platform — with two 1:1 mentor calls included.</p></div></div>
+    <div class="mode"><div class="ic">🎥</div><div><b>Virtual (Live Cohorts)</b><p>Instructor-led live classes over 4–6 weeks with weekly mentor office hours.</p></div></div>
+    <button class="btn" style="width:100%;margin-top:16px" onclick="openLogin()">Access Your Courses →</button>
+  </div>
+</div></div>
+
+<div class="strip"><div class="wrap">
+  <span>Bilingue EN / FR</span><span>Mentor 1:10 sur chaque cours</span><span>Mobile Money & card payments</span><span>PMI PDU-aligned</span><span>Pass-or-retrain guarantee (cert prep)</span>
+</div></div>
+
+<!-- PROGRAMS -->
+<section id="programs"><div class="wrap">
+  <p class="eyebrow">Programs</p>
+  <h2 class="h2">Practitioner-built. Mentor-accompanied. Outcome-driven.</h2>
+  <p class="lead">Three schools plus 15 AI Unlocked Specializations — one standard: you build real capability, not just certificates. All programs available onsite, online, or virtual. Bundle any 3 specializations for $495.</p>
+  <div class="grid" id="courseGrid"></div>
+</div></section>
+
+<!-- DELIVERY -->
+<section class="alt" id="delivery"><div class="wrap">
+  <p class="eyebrow">Delivery Options</p>
+  <h2 class="h2">One curriculum. Learn the way Cameroon learns.</h2>
+  <div class="steps">
+    <div class="step"><h4>Onsite Training</h4><p>Live weekend classes in Yaoundé, or facilitators travel to your organization across Cameroon and Central Africa. Ideal for teams of 8–25. Includes printed workbooks and a 30-day follow-up mentor sprint.</p></div>
+    <div class="step"><h4>Online (WhatsApp/Telegram + Platform)</h4><p>Full course access on this platform plus delivery through WhatsApp and Telegram — built for Cameroonian bandwidth. Micro-lessons, knowledge checks, templates, and two live 1:1 mentor sessions.</p></div>
+    <div class="step"><h4>Virtual Live Cohorts</h4><p>Live instructor-led classes (two 90-minute sessions per week over 4–6 weeks), weekly mentor office hours, a capstone project reviewed by a mentor panel, and a private cohort community.</p></div>
+    <div class="step"><h4>Blended (Enterprise)</h4><p>Combine self-paced foundations with onsite intensives and executive briefings. Our team designs the blend around your business calendar and adoption goals.</p></div>
+  </div>
+</div></section>
+
+<!-- MENTORSHIP -->
+<section id="mentorship"><div class="wrap">
+  <div class="split">
+    <div>
+      <p class="eyebrow">The Team21 Difference</p>
+      <h2 class="h2">Every course comes with a mentor. No exceptions.</h2>
+      <p class="lead">Industry-wide, self-paced course completion hovers near 10–15%. Ours doesn't — because a real practitioner is checking in on you, reviewing your work, and holding you to your goals.</p>
+      <ul class="checklist">
+        <li><b>Self-paced learners:</b> two scheduled 1:1 mentor calls + written review of one work product.</li>
+        <li><b>Cohort learners:</b> weekly mentor office hours + capstone panel review.</li>
+        <li><b>Enterprise teams:</b> a named mentor per 10 learners + executive sponsor briefings.</li>
+        <li><b>All learners:</b> direct messaging to mentors inside the learning portal.</li>
+      </ul>
+    </div>
+    <div class="panel" style="margin:0">
+      <h3>What learners build (samples)</h3>
+      <div class="mode"><div class="ic">🤖</div><div><b>A working AI workflow</b><p>for your actual role — drafted, tested, and mentor-reviewed by course end.</p></div></div>
+      <div class="mode"><div class="ic">🧭</div><div><b>A 90-day AI adoption roadmap</b><p>presented to a mentor panel in the Leaders capstone.</p></div></div>
+      <div class="mode"><div class="ic">📈</div><div><b>A personal leadership development plan</b><p>anchored to your Team21 360° assessment results.</p></div></div>
+      <div class="mode"><div class="ic">📑</div><div><b>Procurement SOPs & templates</b><p>adapted from field-tested institutional playbooks.</p></div></div>
+    </div>
+  </div>
+  <div class="mentor-band">
+    <div><h3>Meet your mentors before you enroll.</h3>
+    <p>Every mentor is a working practitioner — PMP-certified project leaders, AI implementation specialists, and executive coaches. Book a free 20-minute fit call and we'll match you.</p></div>
+    <a class="btn gold" href="#contact">Book a Free Fit Call</a>
+  </div>
+</div></section>
+
+<!-- ORGANIZATIONS -->
+<section class="alt" id="organizations"><div class="wrap">
+  <p class="eyebrow">For Organizations & Government</p>
+  <h2 class="h2">Upskill a team. Transform an institution.</h2>
+  <p class="lead">From 15-seat cohorts to institution-wide transformation programs, we design around your goals, calendar, and donor-compliance requirements. Trusted by public institutions, NGOs, and businesses across Cameroon, Chad, and beyond — procurement and systems training grounded in real institutional practice.</p>
+  <div class="steps">
+    <div class="step"><h4>Discovery</h4><p>A 45-minute consult to map your goals, audience, and constraints. We propose a blend, timeline, and fixed price within 5 business days.</p></div>
+    <div class="step"><h4>Pilot Cohort</h4><p>Start with one team of 10–20. Measure engagement, completion, and manager-rated capability change.</p></div>
+    <div class="step"><h4>Scale</h4><p>Roll out across departments with named mentors, executive briefings, and quarterly content refreshes.</p></div>
+    <div class="step"><h4>Sustain</h4><p>Train-the-trainer certification so your internal champions carry the program forward.</p></div>
+  </div>
+  <p style="margin-top:26px"><a class="btn" href="#contact">Request an Organization Proposal</a></p>
+</div></section>
+
+
+<!-- CONSULTING -->
+<section id="consulting"><div class="wrap">
+  <p class="eyebrow">Consulting & Advisory</p>
+  <h2 class="h2">Systems strengthening, delivered by practitioners who have built them.</h2>
+  <p class="lead">Beyond training, Team21 provides hands-on consulting in procurement &amp; supply-chain systems, organizational assessment, and leadership development — with past performance spanning continental health institutions, bilateral programs, universities, professional associations, and private enterprises.</p>
+
+  <div class="grid" style="margin-top:34px">
+    <div class="card"><div class="card-top"></div><div class="card-body">
+      <div class="meta"><span class="tag">Procurement & Supply Chain</span></div>
+      <h3>Procurement Systems Strengthening</h3>
+      <p>End-to-end design or reform of institutional procurement: policy &amp; procedures manuals, regulatory compliance review, annual procurement planning, contract management frameworks, tracking dashboards, and staff certification programs. Built for public institutions, NGOs, and federal contractors.</p>
+      <div class="foot"><div class="price"><b>$25,000+</b><span>engagements · 6 wks–6 mos</span></div><a class="btn sm" href="#contact" onclick="document.getElementById('cf-course').value='Consulting: Procurement Systems Strengthening'">Request scope</a></div>
+    </div></div>
+    <div class="card"><div class="card-top lead-c"></div><div class="card-body">
+      <div class="meta"><span class="tag">Organizational Development</span></div>
+      <h3>Organizational Assessment & Excellence (AE)</h3>
+      <p>Whole-organization diagnostics using the Team21 AE platform: 360° evaluations, leadership assessments, capacity gap analysis, and prioritized improvement roadmaps — delivered with consolidated reporting and executive debriefs.</p>
+      <div class="foot"><div class="price"><b>$8,500–$25,000</b><span>per assessment cycle</span></div><a class="btn sm" href="#contact" onclick="document.getElementById('cf-course').value='Consulting: Organizational Assessment (AE)'">Request scope</a></div>
+    </div></div>
+    <div class="card"><div class="card-top pm-c"></div><div class="card-body">
+      <div class="meta"><span class="tag">Advisory & Training</span></div>
+      <h3>Executive Advisory & Embedded Training</h3>
+      <p>Fractional advisory, leadership development for management teams, volunteer/program evaluation frameworks, and custom capacity-building sessions — onsite or virtual, in English or French.</p>
+      <div class="foot"><div class="price"><b>$225/hr</b><span>advisory · $2,200/day onsite</span></div><a class="btn sm" href="#contact" onclick="document.getElementById('cf-course').value='Consulting: Executive Advisory / Training'">Request scope</a></div>
+    </div></div>
+  </div>
+
+  <div class="split" style="margin-top:54px">
+    <div>
+      <h3 style="color:var(--navy);font-family:'Segoe UI',Arial,sans-serif;font-size:20px;margin-bottom:12px">Selected past performance</h3>
+      <ul class="checklist">
+        <li><b>Africa CDC — Chad National Public Health Institute:</b> strengthening national health-system capacity by building the Institute's procurement system end-to-end — policy manual, planning frameworks, contract management, supplier agreements, and staff certification.</li>
+        <li><b>USAID-funded programs:</b> systems strengthening for multiple local and international implementing organizations — compliance, procurement, and organizational capacity.</li>
+        <li><b>U.S. Embassy procurement programs:</b> systems-strengthening and procurement training delivered across Sub-Saharan Africa, Iraq, and Haiti.</li>
+        <li><b>Jimit University Institute:</b> organizational excellence (AE) consulting engagement — institutional assessment and improvement roadmap.</li>
+        <li><b>PMI Cameroon Chapter:</b> design and delivery of the chapter's volunteer evaluation framework.</li>
+        <li><b>Tasty Tasty Foods:</b> leadership training for the executive and management team.</li>
+      </ul>
+    </div>
+    <div class="panel" style="margin:0">
+      <h3>US consulting rate card (2026)</h3>
+      <div class="mode"><div class="ic">🕐</div><div><b>Advisory (hourly)</b><p>Senior practitioner advisory &amp; expert review — $175–$295/hr depending on scope; principal rate $225/hr standard.</p></div></div>
+      <div class="mode"><div class="ic">📅</div><div><b>Onsite delivery (day rate)</b><p>Facilitation, assessments, and embedded consulting — $1,800–$2,500/day plus travel; multi-day discounts.</p></div></div>
+      <div class="mode"><div class="ic">📊</div><div><b>Organizational assessment</b><p>AE / 360° cycle incl. instruments, analysis, and executive debrief — $8,500–$25,000 by organization size.</p></div></div>
+      <div class="mode"><div class="ic">🏛️</div><div><b>Systems-strengthening engagements</b><p>Procurement/compliance system build-outs — fixed-fee from $25,000 (small NGO) to $120,000+ (national institution scale).</p></div></div>
+      <div class="mode"><div class="ic">🤝</div><div><b>Retainer</b><p>Fractional procurement/OD advisor — from $3,500/month (4 advisory days).</p></div></div>
+      <p style="font-size:12.5px;color:var(--grey);margin-top:12px;font-family:'Segoe UI',Arial,sans-serif">International engagements priced in USD; Cameroon public-sector and NGO pricing adapted on request (Mobile Money and bank transfer accepted). Every engagement begins with a complimentary 45-minute discovery consult.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- ABOUT -->
+<section id="about"><div class="wrap">
+  <div class="split">
+    <div>
+      <p class="eyebrow">About Team21</p>
+      <h2 class="h2">Founded in Yaoundé to connect people to resources — serving Cameroon, Africa, and the world.</h2>
+      <p class="lead" style="margin-bottom:14px">Team21 Academy was founded by Innocent Forteh, a PMP®-certified acquisition and systems specialist whose career spans public-health institution building, USG-compliance consulting, and a decade of leadership development across Africa, Europe, and North America.</p>
+      <p style="color:var(--grey)">Our curriculum is built where resources are scarce and stakes are high — which means you learn what actually works. Servant leadership programs since 2016. AI Unlocked since 2023 — born from a mission to end \u201cAI poverty\u201d, launched with free community classes, and now a trusted resource across 6 countries. One free class every month, always. Leadership that serves first.</p>
+      <p style="margin-top:14px;font-style:italic;color:var(--grey)">"But they that wait upon the Lord shall renew their strength; they shall mount up with wings as eagles." — Isaiah 40:31</p>
+    </div>
+    <div class="panel" style="margin:0">
+      <h3>Frequently asked</h3>
+      <div class="faq">
+        <details><summary>How do I pay?</summary><p>Fees are listed in US Dollars. We accept MTN MoMo and Orange Money (XAF equivalent at the day's rate), bank transfer, and international cards. Payment details are sent after registration via WhatsApp or email.</p></details>
+        <details><summary>Can my organization mix delivery modes?</summary><p>Yes — blended programs (self-paced + onsite + virtual) are our most popular enterprise format.</p></details>
+        <details><summary>La formation est-elle disponible en français ?</summary><p>Oui. Tous les programmes phares sont disponibles en anglais et en français — supports, exercices plAIbox et mentorat inclus.</p></details>
+        <details><summary>How do I get my login?</summary><p>After registration and payment, our team issues your username and password within one business day via WhatsApp or email. Use Learner Login at the top of this page.</p></details>
+        <details><summary>What is your refund policy?</summary><p>Full refund within 7 days of self-paced purchase if less than 20% completed; cohort withdrawals accepted up to 5 business days before start. Cert-prep carries a pass-or-retrain-free guarantee.</p></details>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- CONTACT -->
+<section class="alt" id="contact"><div class="wrap">
+  <p class="eyebrow">Contact & Enrollment</p>
+  <h2 class="h2">Start here.</h2>
+  <div class="contact-grid">
+    <div>
+      <p class="lead">Tell us what you're trying to achieve. We'll reply within one business day with next steps — or a full proposal for organizations.</p>
+      <ul class="checklist">
+        <li>Individual enrollment: choose a program above, submit this form (or WhatsApp us directly at <b>+237 694 294 406</b>), and we'll send payment details and your platform credentials.</li>
+        <li>Organizations: request a proposal and a free discovery consult.</li>
+        <li>Email: <b>team21online@gmail.com</b> · WhatsApp: <b>+237 694 294 406</b></li>
+      </ul>
+    </div>
+    <div class="panel" style="margin:0">
+      <div class="field"><label>Full name</label><input id="cf-name" placeholder="Jane Doe"/></div>
+      <div class="field"><label>Email</label><input id="cf-email" type="email" placeholder="jane@company.com"/></div>
+      <div class="field"><label>I am a…</label><select id="cf-type"><option>Individual learner</option><option>Organization / team lead</option><option>Government / agency</option><option>Consulting client</option></select></div>
+      <div class="field"><label>Program of interest</label><select id="cf-course"></select></div>
+      <div class="field"><label>Preferred delivery</label><select id="cf-mode"><option>Online (self-paced)</option><option>Virtual (live cohort)</option><option>Onsite</option><option>Blended</option></select></div>
+      <div class="field"><label>Message</label><textarea id="cf-msg" rows="3" placeholder="Goals, team size, timeline…"></textarea></div>
+      <button class="btn" style="width:100%;margin-top:16px" onclick="submitInquiry()">Send Inquiry</button>
+      <p id="cf-ok" class="hidden" style="color:var(--green);font-family:'Segoe UI',Arial,sans-serif;font-size:14px;margin-top:10px">✓ Received. We'll reply within one business day.</p>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="cols">
+    <div>
+      <div class="logo" style="margin-bottom:12px"><div class="logo-mark">T21</div><div class="logo-name"><b style="color:#fff">Team21 Academy</b><span>Yaoundé, Cameroun · EN/FR</span></div></div>
+      <p>Consulting · Training · Talent Incubation · AI & Digital Skills.<br/>Yaoundé, Cameroun · WhatsApp +237 694 294 406 · team21online@gmail.com</p>
+    </div>
+    <div><h4>Programs</h4><a href="#programs">AI Unlocked</a><a href="#consulting">Consulting</a><a href="#programs">Leadership</a><a href="#programs">PMP Prep</a><a href="#programs">Procurement</a></div>
+    <div><h4>Company</h4><a href="#about">About</a><a href="#mentorship">Mentorship</a><a href="#organizations">Organizations</a><a href="#contact">Contact</a></div>
+    <div><h4>Portal</h4><a href="#" onclick="openLogin();return false">Learner Login</a><a href="#" onclick="openLogin('admin');return false">Administrator</a></div>
+  </div>
+  <div class="foot-base">
+    <span>© Innocent Forteh · Team21 Academy. All rights reserved.</span>
+    <span class="verse">Isaiah 40:31 — "They shall mount up with wings as eagles."</span>
+  </div>
+</div></footer>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="modal-bg hidden" id="loginModal">
+  <div class="modal">
+    <button class="x" onclick="closeLogin()" aria-label="Close">✕</button>
+    <h3 style="color:var(--navy);font-family:'Segoe UI',Arial,sans-serif">Sign in</h3>
+    <div class="ltabs2">
+      <button class="ltab2 active" id="lt-student" onclick="setLoginTab('student')">Learner</button>
+      <button class="ltab2" id="lt-admin" onclick="setLoginTab('admin')">Administrator</button>
+    </div>
+    <div class="field"><label>Username</label><input id="lg-user" autocomplete="username"/></div>
+    <div class="field"><label>Password</label><input id="lg-pass" type="password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"/></div>
+    <button class="btn" style="width:100%;margin-top:20px" onclick="doLogin()">Sign In</button>
+    <p class="err hidden" id="lg-err"></p>
+    <p style="font-size:12.5px;color:var(--grey);margin-top:14px;font-family:'Segoe UI',Arial,sans-serif;text-align:center">Credentials are issued after registration & payment. Need access? <a href="#contact" onclick="closeLogin()">Contact us</a>.</p>
+  </div>
+</div>
+
+<!-- ================= LEARNER PORTAL ================= -->
+<div id="lms" class="portal hidden">
+  <div class="pnav">
+    <div class="logo"><div class="logo-mark">T21</div><div class="logo-name"><b style="color:#fff">Learner Portal</b><span style="color:#C9A38C">Team21 Academy · Cameroun</span></div></div>
+    <div class="who"><span class="pill" id="lms-user"></span><button class="btn sm ghost" style="border-color:#fff;color:#fff;background:transparent" onclick="logout()">Sign out</button></div>
+  </div>
+  <div class="ptabs">
+    <button class="ptab active" data-t="dash" onclick="lmsTab('dash')">My Dashboard</button>
+    <button class="ptab" data-t="courses" onclick="lmsTab('courses')">My Courses</button>
+    <button class="ptab" data-t="lesson" onclick="lmsTab('lesson')" id="lessonTabBtn" style="display:none">Current Lesson</button>
+    <button class="ptab" data-t="mentor" onclick="lmsTab('mentor')">My Mentor</button>
+    <button class="ptab" data-t="prompts" onclick="lmsTab('prompts')">Prompt Library</button>
+    <button class="ptab" data-t="certs" onclick="lmsTab('certs')">Certificates</button>
+  </div>
+  <div class="pbody">
+    <div id="p-dash"></div>
+    <div id="p-courses" class="hidden"></div>
+    <div id="p-lesson" class="hidden"></div>
+    <div id="p-mentor" class="hidden"></div>
+    <div id="p-prompts" class="hidden"></div>
+    <div id="p-certs" class="hidden"></div>
+  </div>
+</div>
+
+<!-- ================= ADMIN DASHBOARD ================= -->
+<div id="admin" class="portal hidden">
+  <div class="pnav">
+    <div class="logo"><div class="logo-mark" style="background:linear-gradient(135deg,#4a1d0a,var(--orange))">T21</div><div class="logo-name"><b style="color:#fff">Administrator Dashboard</b><span style="color:#C9A38C">Team21 Academy · Cameroun</span></div></div>
+    <div class="who"><span class="pill">forteh · admin</span><button class="btn sm ghost" style="border-color:#fff;color:#fff;background:transparent" onclick="logout()">Sign out</button></div>
+  </div>
+  <div class="ptabs">
+    <button class="ptab active" data-t="a-over" onclick="admTab('a-over')">Overview</button>
+    <button class="ptab" data-t="a-gen" onclick="admTab('a-gen')">Credential Generator</button>
+    <button class="ptab" data-t="a-students" onclick="admTab('a-students')">Students</button>
+    <button class="ptab" data-t="a-enrol" onclick="admTab('a-enrol')">Enrolments</button>
+    <button class="ptab" data-t="a-analytics" onclick="admTab('a-analytics')">Analytics</button>
+    <button class="ptab" data-t="a-inq" onclick="admTab('a-inq')">Inquiries</button>
+    <button class="ptab" data-t="a-sync" onclick="admTab('a-sync')">Google Script Sync</button>
+  </div>
+  <div class="pbody">
+    <div id="p-a-over"></div>
+    <div id="p-a-enrol" class="hidden"></div>
+    <div id="p-a-analytics" class="hidden"></div>
+    <div id="p-a-gen" class="hidden"></div>
+    <div id="p-a-students" class="hidden"></div>
+    <div id="p-a-inq" class="hidden"></div>
+    <div id="p-a-sync" class="hidden"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================
+   TEAM21 ACADEMY US — Single-file platform
+   Public site + Learner LMS + Admin dashboard
+   Storage: localStorage (device) + optional Google Apps Script sync
+   © Innocent Forteh · Team21 Academy
+========================================================= */
+
+const ADMIN = { user:'forteh', pass:'f0rteh' };
+const LS_KEYS = { students:'t21cm_students', inquiries:'t21cm_inquiries', progress:'t21cm_progress', gs:'t21cm_gs_url' };
+
+/* ---------- COURSE CATALOG (dynamic, loaded from /courses/*.json) ---------- */
+let CATALOG = [];            // lightweight metadata for marketing grid + selects
+let COURSES = [];            // full course objects, loaded on demand (enrolled set at login)
+const courseCache = {};      // id -> full course object
+const COURSES_BASE = 'courses/';
+async function loadCatalog(){
+  try{ const r=await fetch(COURSES_BASE+'_catalog.json'); CATALOG=await r.json(); }
+  catch(e){ CATALOG=[]; console.warn('Catalog load failed — serve over http/GitHub Pages, not file://',e); }
+}
+async function loadCourse(id){
+  if(courseCache[id]) return courseCache[id];
+  const r=await fetch(COURSES_BASE+id+'.json'); const c=await r.json();
+  courseCache[id]=c; if(!COURSES.find(x=>x.id===id))COURSES.push(c); return c;
+}
+async function loadCourses(ids){ return Promise.all(ids.map(loadCourse)); }
+let PROMPTS = [];
+async function loadPrompts(){
+  if(PROMPTS.length) return PROMPTS;
+  try{ const r=await fetch(COURSES_BASE+'_prompts.json'); PROMPTS=await r.json(); }catch(e){ PROMPTS=[]; }
+  return PROMPTS;
+}
+
+/* ---------- STATE ---------- */
+let session = null; // {role:'student'|'admin', user, name, courses:[]}
+const load = (k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}};
+const save = (k,v)=>localStorage.setItem(k,JSON.stringify(v));
+let students = load(LS_KEYS.students,[]);
+let inquiries = load(LS_KEYS.inquiries,[]);
+let progress = load(LS_KEYS.progress,{}); // {username:{courseId:[doneIdx,...]}}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
+
+
+/* ---------- INTERACTIVE LAB ENGINE (drag-drop match + validated fill) ---------- */
+function copyLab(btn){const p=btn.parentElement.querySelector('.labp');if(!p)return;navigator.clipboard.writeText(p.textContent).then(()=>toast('Lab prompt copied \u2713 \u2014 paste into your AI tool'));}
+/* Drag & drop match: data model rendered by renderDDLab(id,pairs) via inline init */
+function ddAllow(e){e.preventDefault();e.currentTarget.classList.add('ddover');}
+function ddLeave(e){e.currentTarget.classList.remove('ddover');}
+function ddStart(e){e.dataTransfer.setData('t',e.target.dataset.k);e.dataTransfer.setData('src',e.target.id);}
+function ddDrop(e,zone){e.preventDefault();e.currentTarget.classList.remove('ddover');
+  const k=e.dataTransfer.getData('t');const src=document.getElementById(e.dataTransfer.getData('src'));
+  if(e.currentTarget.dataset.filled==='1')return;
+  e.currentTarget.appendChild(src);e.currentTarget.dataset.filled='1';src.draggable=false;src.style.cursor='default';
+}
+function ddCheck(labId){
+  const zones=document.querySelectorAll('#'+labId+' .ddzone');let ok=0,tot=zones.length;
+  zones.forEach(z=>{const chip=z.querySelector('.ddchip');z.classList.remove('ddright','ddwrong');
+    if(chip&&chip.dataset.k===z.dataset.want){z.classList.add('ddright');ok++;}else if(chip){z.classList.add('ddwrong');}});
+  const msg=document.getElementById(labId+'-msg');
+  msg.textContent=ok===tot?('\u2713 Perfect \u2014 all '+tot+' correct! '+(document.getElementById(labId).dataset.tip||'')):(ok+'/'+tot+' correct \u2014 red zones are wrong, drag them back and retry.');
+  msg.style.color=ok===tot?'var(--green)':'var(--amber)';
+  if(ok===tot)toast('Lab solved \u2713');
+}
+function ddReset(labId){location.hash='';renderLesson();}
+/* Validated fill-in: checkFill(inputId, answers[], msgId) */
+function checkFill(inId,ansCSV,msgId,tip){
+  const val=(document.getElementById(inId).value||'').trim().toLowerCase();
+  const ans=ansCSV.split('|').map(s=>s.trim().toLowerCase());
+  const m=document.getElementById(msgId);
+  if(ans.some(a=>val.includes(a)&&val.length>1)){m.textContent='\u2713 Correct. '+(tip||'');m.style.color='var(--green)';toast('Correct \u2713');}
+  else{m.textContent='\u2717 Not yet \u2014 rethink and try again.';m.style.color='var(--red)';}
+}
+/* ---------- PUBLIC SITE RENDER ---------- */
+function renderCatalog(){
+  document.getElementById('courseGrid').innerHTML = CATALOG.map(c=>`
+   <div class="card"><div class="card-top ${c.color}"></div><div class="card-body">
+    <div class="meta"><span class="tag">${c.tagTxt}</span><span class="tag orange">Mentor Included</span></div>
+    <h3>${c.title}</h3><p>${c.blurb}</p>
+    <div class="foot"><div class="price"><b>${c.price}</b><span>${c.unit} · ${c.len}</span></div>
+    <a class="btn sm" href="#contact" onclick="document.getElementById('cf-course').value='${c.title.replace(/'/g,"\\'")}'">Enroll</a></div>
+   </div></div>`).join('');
+  document.getElementById('cf-course').innerHTML = CATALOG.map(c=>`<option>${c.title}</option>`).join('')+'<option>Organization program (custom)</option>';
+}
+function submitInquiry(){
+  const q={id:Date.now(),name:v('cf-name'),email:v('cf-email'),type:v('cf-type'),course:v('cf-course'),mode:v('cf-mode'),msg:v('cf-msg'),date:new Date().toISOString().slice(0,10)};
+  if(!q.name||!q.email){toast('Please add your name and email.');return;}
+  inquiries.unshift(q);save(LS_KEYS.inquiries,inquiries);
+  gsPost('inquiry',q);
+  document.getElementById('cf-ok').classList.remove('hidden');
+  ['cf-name','cf-email','cf-msg'].forEach(i=>document.getElementById(i).value='');
+  toast('Inquiry received ✓');
+}
+const v=id=>document.getElementById(id).value.trim();
+
+/* ---------- LOGIN ---------- */
+let loginTab='student';
+function openLogin(t){document.getElementById('loginModal').classList.remove('hidden');setLoginTab(t==='admin'?'admin':'student');document.getElementById('lg-user').focus();}
+function closeLogin(){document.getElementById('loginModal').classList.add('hidden');document.getElementById('lg-err').classList.add('hidden');}
+function setLoginTab(t){loginTab=t;document.getElementById('lt-student').classList.toggle('active',t==='student');document.getElementById('lt-admin').classList.toggle('active',t==='admin');}
+function doLogin(){
+  const u=v('lg-user'),p=document.getElementById('lg-pass').value;
+  const err=document.getElementById('lg-err');
+  if(loginTab==='admin'){
+    if(u===ADMIN.user&&p===ADMIN.pass){session={role:'admin',user:u};enterAdmin();closeLogin();return;}
+    err.textContent='Invalid administrator credentials.';err.classList.remove('hidden');return;
+  }
+  const s=students.find(s=>s.username===u&&s.password===p&&s.status!=='suspended');
+  if(u===ADMIN.user&&p===ADMIN.pass){ // admin can preview learner portal too
+    session={role:'student',user:u,name:'Administrator (preview)',courses:CATALOG.map(c=>c.id)};
+    loadCourses(session.courses).then(()=>{enterLMS();closeLogin();});return;
+  }
+  if(s){session={role:'student',user:s.username,name:s.name,courses:s.courses||[]};
+    loadCourses(session.courses).then(()=>{enterLMS();closeLogin();});}
+  else{err.textContent='Invalid credentials, or account not yet activated.';err.classList.remove('hidden');}
+}
+function logout(){session=null;show('site');window.scrollTo(0,0);}
+function show(id){['site','lms','admin'].forEach(x=>document.getElementById(x).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');}
+
+/* ---------- LEARNER PORTAL ---------- */
+let curCourse=null,curMod=0;
+function enterLMS(){show('lms');document.getElementById('lms-user').textContent=session.name+' · '+session.user;lmsTab('dash');}
+function lmsTab(t){
+  document.querySelectorAll('#lms .ptab').forEach(b=>b.classList.toggle('active',b.dataset.t===t));
+  ['dash','courses','lesson','mentor','prompts','certs'].forEach(x=>document.getElementById('p-'+x).classList.toggle('hidden',x!==t));
+  if(t==='dash')renderDash(); if(t==='courses')renderMyCourses(); if(t==='mentor')renderMentor(); if(t==='prompts')renderPrompts(); if(t==='certs')renderCerts();
+}
+const myCourses=()=>COURSES.filter(c=>session.courses.includes(c.id));
+const prog=(cid)=> (progress[session.user]?.[cid])||[];
+const pct=(c)=>Math.round(100*prog(c.id).length/c.modules.length);
+function renderDash(){
+  const cs=myCourses();
+  document.getElementById('p-dash').innerHTML=`
+   <div class="panel"><h3>Welcome back, ${session.name.split(' ')[0]} 👋</h3>
+   <p style="color:var(--grey)">Your mentor-guided journey continues. Pick up where you left off, or book your next mentor session.</p></div>
+   <div class="kpis">
+     <div class="kpi"><b>${cs.length}</b><span>Enrolled courses</span></div>
+     <div class="kpi"><b>${cs.filter(c=>pct(c)===100).length}</b><span>Completed</span></div>
+     <div class="kpi"><b>${cs.reduce((a,c)=>a+prog(c.id).length,0)}</b><span>Modules finished</span></div>
+     <div class="kpi"><b>2</b><span>Mentor calls included</span></div>
+   </div>
+   ${cs.map(c=>`<div class="panel"><h3>${c.title}</h3>
+     <div style="display:flex;justify-content:space-between;font-family:'Segoe UI',Arial,sans-serif;font-size:13px;color:var(--grey);margin-bottom:6px"><span>${prog(c.id).length}/${c.modules.length} modules</span><span>${pct(c)}%</span></div>
+     <div class="progress-outer"><div class="progress-inner" style="width:${pct(c)}%"></div></div>
+     <button class="btn sm" style="margin-top:14px" onclick="openCourse('${c.id}')">${pct(c)===0?'Start course':'Continue'} →</button></div>`).join('')||'<div class="panel"><p>No courses assigned yet. Contact your administrator.</p></div>'}`;
+}
+function renderMyCourses(){
+  document.getElementById('p-courses').innerHTML=myCourses().map(c=>`
+   <div class="panel"><h3>${c.title}</h3><p style="color:var(--grey);font-size:14.5px;margin-bottom:14px">${c.blurb}</p>
+   <ul class="mod-list">${c.modules.map((m,i)=>`
+     <li class="mod-item ${prog(c.id).includes(i)?'done':''}" onclick="openCourse('${c.id}',${i})">
+       <div class="mod-num">${prog(c.id).includes(i)?'✓':i+1}</div>
+       <div><b>${m.t}</b><small>${m.d}</small></div>
+     </li>`).join('')}</ul></div>`).join('');
+}
+function openCourse(cid,mi=null){
+  curCourse=COURSES.find(c=>c.id===cid);
+  curMod=mi??(prog(cid).length<curCourse.modules.length?curCourse.modules.findIndex((_,i)=>!prog(cid).includes(i)):0);
+  if(curMod<0)curMod=0;
+  document.getElementById('lessonTabBtn').style.display='block';
+  lmsTab('lesson');renderLesson();
+}
+function renderLesson(){
+  const c=curCourse,m=c.modules[curMod],done=prog(c.id).includes(curMod);
+  document.getElementById('p-lesson').innerHTML=`
+   <div class="panel">
+    <p class="eyebrow">${c.title} · Module ${curMod+1} of ${c.modules.length}</p>
+    <h3 style="font-size:24px">${m.t}</h3>
+    <div class="lesson-body">${m.body}</div>
+    ${m.quiz?renderQuiz(m.quiz):''}
+    <div style="display:flex;gap:12px;margin-top:26px;flex-wrap:wrap">
+      ${curMod>0?`<button class="btn ghost sm" onclick="curMod--;renderLesson()">← Previous</button>`:''}
+      <button class="btn sm ${done?'ghost':''}" onclick="markDone()">${done?'✓ Completed':'Mark module complete'}</button>
+      ${curMod<c.modules.length-1?`<button class="btn ghost sm" onclick="curMod++;renderLesson()">Next →</button>`:''}
+    </div>
+   </div>`;
+  window.scrollTo(0,0);
+}
+function renderQuiz(q){
+  const qs=Array.isArray(q)?q:[q];
+  const secs=Math.max(qs.length*45,300); // 45s/question, min 5 min
+  window._qz={qs,sel:Array(qs.length).fill(null),graded:false,secs,left:secs,timer:null,started:false};
+  return '<div class="qz" id="qzbox">'+
+   '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">'+
+   '<b>Graded assessment \u2014 '+qs.length+' questions \u00b7 pass mark 75%</b>'+
+   '<span id="qz-timer" style="font-family:ui-monospace,Consolas,monospace;font-weight:800;font-size:15px;color:var(--navy);background:var(--sky);padding:4px 12px;border-radius:8px">\u23f1 '+fmtT(secs)+'</span></div>'+
+   '<p style="font-size:13px;color:var(--grey);font-family:\'Segoe UI\',Arial,sans-serif;margin:6px 0 12px">Timed: '+Math.round(secs/60)+' minutes. The clock starts when you press Start. Answer all questions, then submit \u2014 or it auto-submits at zero.</p>'+
+   '<div id="qz-startwrap"><button class="btn sm" onclick="startQuiz()">Start timed assessment \u2192</button></div>'+
+   '<div id="qz-body" class="hidden">'+
+   qs.map((it,qi)=>{
+     const opts=it.opts||it.o;
+     return '<div class="qcard"><p style="margin:0 0 8px;font-family:\'Segoe UI\',Arial,sans-serif;font-size:14.5px"><b>Q'+(qi+1)+'.</b> '+it.q+'</p>'+
+     opts.map((o,oi)=>'<button class="opt" id="qz-'+qi+'-'+oi+'" onclick="selOpt('+qi+','+oi+')">'+o+'</button>').join('')+
+     '<p class="hidden" id="qzx-'+qi+'" style="font-size:13px;color:var(--grey);margin:8px 0 2px;font-family:\'Segoe UI\',Arial,sans-serif;padding:8px 10px;background:var(--sky);border-radius:6px"></p></div>';
+   }).join('')+
+   '<button class="btn" style="margin-top:16px" onclick="gradeQuiz()">Submit assessment</button>'+
+   '<p id="qz-msg" style="font-family:\'Segoe UI\',Arial,sans-serif;font-weight:700;margin-top:12px;font-size:15px"></p>'+
+   '<div id="qz-cert" class="hidden" style="margin-top:14px"></div>'+
+   '</div></div>';
+}
+function fmtT(s){const m=Math.floor(s/60),x=s%60;return m+':'+(x<10?'0':'')+x;}
+function startQuiz(){
+  const z=window._qz;if(z.started)return;z.started=true;
+  document.getElementById('qz-startwrap').classList.add('hidden');
+  document.getElementById('qz-body').classList.remove('hidden');
+  z.timer=setInterval(()=>{
+    z.left--;const t=document.getElementById('qz-timer');
+    if(t){t.textContent='\u23f1 '+fmtT(z.left);if(z.left<=30)t.style.color='var(--red)';}
+    if(z.left<=0){clearInterval(z.timer);if(!z.graded)gradeQuiz(true);}
+  },1000);
+}
+function selOpt(qi,oi){
+  if(window._qz.graded)return;
+  window._qz.sel[qi]=oi;
+  (window._qz.qs[qi].opts||window._qz.qs[qi].o).forEach((_,i)=>{
+    document.getElementById('qz-'+qi+'-'+i).classList.toggle('sel',i===oi);
+  });
+}
+function gradeQuiz(auto){
+  const z=window._qz;if(z.graded)return;
+  if(!auto && z.sel.some(s=>s===null)){
+    const m=document.getElementById('qz-msg');m.textContent='Please answer all '+z.qs.length+' questions before submitting.';m.style.color='var(--amber)';return;
+  }
+  z.graded=true;if(z.timer)clearInterval(z.timer);
+  let correct=0;
+  z.qs.forEach((it,qi)=>{
+    const opts=it.opts||it.o;
+    opts.forEach((_,oi)=>{const el=document.getElementById('qz-'+qi+'-'+oi);if(el){if(oi===it.a)el.classList.add('ok');else if(z.sel[qi]===oi)el.classList.add('bad');el.disabled=true;}});
+    if(z.sel[qi]===it.a)correct++;
+    if(it.x){const xp=document.getElementById('qzx-'+qi);if(xp){xp.textContent='\u2192 '+it.x;xp.classList.remove('hidden');}}
+  });
+  const pct=Math.round(100*correct/z.qs.length),pass=pct>=75;
+  const msg=document.getElementById('qz-msg');
+  msg.textContent=(auto?'\u23f0 Time up. ':'')+(pass?'\u2713 PASSED \u2014 ':'\u2717 Below 75% \u2014 ')+correct+'/'+z.qs.length+' correct ('+pct+'%).';
+  msg.style.color=pass?'var(--green)':'var(--red)';
+  if(session&&curCourse){
+    progress[session.user]=progress[session.user]||{};
+    const sc=progress[session.user]['scores_'+curCourse.id]=progress[session.user]['scores_'+curCourse.id]||{};
+    if(pct>(sc[curMod]||0)){sc[curMod]=pct;save(LS_KEYS.progress,progress);}
+    gsPost('quiz_score',{user:session.user,name:session.name,course:curCourse.id,module:curMod+1,title:curCourse.modules[curMod].t,score:pct,passed:pass,date:new Date().toISOString()});
+  }
+  const cbox=document.getElementById('qz-cert');
+  if(pass){
+    if(session&&curCourse&&!prog(curCourse.id).includes(curMod)){
+      const arr=progress[session.user][curCourse.id]=progress[session.user][curCourse.id]||[];arr.push(curMod);save(LS_KEYS.progress,progress);
+    }
+    cbox.classList.remove('hidden');
+    cbox.innerHTML='<div class="callout" style="border-left-color:var(--green);background:#EFFBF3"><b>\ud83c\udf89 Congratulations, '+session.name.split(' ')[0]+'!</b> You passed this module\u2019s assessment with '+pct+'%. Your module certificate is ready.<br/><button class="btn sm" style="margin-top:10px" onclick="printCert(curCourse.id,curMod)">\u2b07 Download module certificate (PDF)</button></div>';
+    toast('Module passed \u2014 '+pct+'% \u2713 Certificate unlocked');
+  }else{
+    cbox.classList.remove('hidden');
+    cbox.innerHTML='<button class="btn sm ghost" onclick="renderLesson()">Review module & retake</button>';
+    toast('Score '+pct+'% \u2014 75% needed to pass');
+  }
+}
+function markDone(){
+  progress[session.user]=progress[session.user]||{};
+  const arr=progress[session.user][curCourse.id]=progress[session.user][curCourse.id]||[];
+  if(!arr.includes(curMod))arr.push(curMod);
+  save(LS_KEYS.progress,progress);
+  gsPost('progress',{user:session.user,course:curCourse.id,module:curMod+1,date:new Date().toISOString()});
+  toast('Module marked complete ✓');
+  renderLesson();
+}
+function renderMentor(){
+  document.getElementById('p-mentor').innerHTML=`
+   <div class="panel"><h3>Your Mentorship</h3>
+    <p style="color:var(--grey)">Every Team21 enrollment includes structured mentorship. Your mentor is assigned within one business day of your first course start.</p>
+    <ul class="checklist" style="margin-top:14px">
+      <li>Two 1:1 mentor calls (self-paced) or weekly office hours (cohorts)</li>
+      <li>Written review of your capstone work product</li>
+      <li>Direct email line to your mentor between sessions</li>
+    </ul></div>
+   <div class="panel"><h3>Book a mentor session</h3>
+    <div class="field"><label>Preferred topic</label><select id="mn-topic"><option>Capstone review</option><option>Course questions</option><option>Career application</option><option>Kickoff call</option></select></div>
+    <div class="field"><label>Preferred day/time (ET)</label><input id="mn-when" placeholder="e.g., Tuesday after 3pm"/></div>
+    <div class="field"><label>Notes for your mentor</label><textarea id="mn-notes" rows="3"></textarea></div>
+    <button class="btn" style="margin-top:14px" onclick="bookMentor()">Request session</button>
+    <p id="mn-ok" class="hidden" style="color:var(--green);font-family:'Segoe UI',Arial,sans-serif;font-size:14px;margin-top:10px">✓ Request sent — your mentor will confirm by email.</p>
+   </div>`;
+}
+function bookMentor(){
+  gsPost('mentor_request',{user:session.user,topic:v('mn-topic'),when:v('mn-when'),notes:v('mn-notes'),date:new Date().toISOString()});
+  document.getElementById('mn-ok').classList.remove('hidden');toast('Mentor session requested ✓');
+}
+async function renderPrompts(){
+  await loadPrompts();
+  document.getElementById('p-prompts').innerHTML='<div class="panel"><h3>Team21 Master Prompt Library</h3><p style="color:var(--grey);font-size:14.5px">Copy, replace the [brackets] with your details, and paste into your AI tool of choice. If a result misses, add: "Make it more specific to my market" or "Simplify for a solo entrepreneur."</p></div>'+
+  PROMPTS.map(g=>'<div class="panel"><h3>'+g.cat+'</h3>'+g.items.map(p=>
+    '<div class="qz" style="display:flex;gap:12px;align-items:flex-start"><p style="flex:1;font-size:14px;font-family:\'Segoe UI\',Arial,sans-serif">'+p+'</p><button class="btn sm ghost" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent).then(()=>toast(\'Prompt copied ✓\'))">Copy</button></div>').join('')+'</div>').join('');
+}
+function avgScore(c){const sc=(progress[session.user]&&progress[session.user]['scores_'+c.id])||{};const v=Object.values(sc);return v.length?Math.round(v.reduce((a,b)=>a+b,0)/v.length):0;}
+function quizzedMods(c){return c.modules.filter(m=>Array.isArray(m.quiz)||m.quiz).length;}
+function passedMods(c){const sc=(progress[session.user]&&progress[session.user]['scores_'+c.id])||{};return Object.values(sc).filter(s=>s>=75).length;}
+function certReady(c){return pct(c)===100 && (quizzedMods(c)===0 || passedMods(c)>=quizzedMods(c));}
+function renderCerts(){
+  const cs=myCourses();
+  const ready=cs.filter(certReady);
+  const inprog=cs.filter(c=>!certReady(c));
+  document.getElementById('p-certs').innerHTML=`<div class="panel"><h3>Certificates of Completion</h3>
+   <p style="color:var(--grey);font-size:14px;margin-bottom:8px">To earn a certificate: complete every module <b>and</b> pass every graded assessment (75%+). Every passed module earns its own certificate; completing all modules unlocks the full programme certificate. All are print-ready PDFs with a validation QR code, signed by Innocent Forteh, Program Director.</p>
+   ${ready.length?ready.map(c=>`
+     <div class="mode"><div class="ic">🎓</div><div><b>${c.title}</b><p>Full programme complete · assessment average ${avgScore(c)}% · signed &amp; ready.</p></div>
+     <button class="btn sm" onclick="printCert('${c.id}')">Full certificate PDF</button></div>`).join('')
+   :'<p style="color:var(--grey)">No full-programme certificate yet — pass every module below to unlock it. Passed modules already have their own certificates.</p>'}</div>
+   <div class="panel"><h3>Module certificates earned</h3>${(()=>{let out='';cs.forEach(c=>{const sc=(progress[session.user]&&progress[session.user]['scores_'+c.id])||{};const passed=Object.keys(sc).filter(k=>sc[k]>=75);if(passed.length){out+=`<p style="font-family:'Segoe UI',Arial,sans-serif;font-weight:700;color:var(--navy);margin:12px 0 6px;font-size:14px">${c.title}</p>`;passed.forEach(k=>{const i=+k;out+=`<div class="mode" style="padding:8px 0"><div class="ic">📜</div><div style="flex:1"><b style="font-size:14px">${c.modules[i].t}</b><small style="display:block;color:var(--grey)">Module ${i+1} · ${sc[k]}%</small></div><button class="btn sm ghost" onclick="printCert('${c.id}',${i})">Certificate</button></div>`;});}});return out||'<p style="color:var(--grey)">Pass a module assessment (75%) to earn your first module certificate.</p>';})()}</div>
+   ${inprog.length?`<div class="panel"><h3>Programme progress</h3>${inprog.map(c=>{const qm=quizzedMods(c),pm=passedMods(c);return `
+     <div style="padding:10px 0;border-bottom:1px solid var(--line)"><div style="display:flex;justify-content:space-between;font-family:'Segoe UI',Arial,sans-serif;font-size:14px"><b>${c.title}</b><span style="color:var(--grey)">${prog(c.id).length}/${c.modules.length} modules${qm?` · ${pm}/${qm} passed`:''}</span></div>
+     <div class="progress-outer" style="margin-top:6px"><div class="progress-inner" style="width:${pct(c)}%"></div></div></div>`;}).join('')}</div>`:''}`;
+}
+function printCert(cid,modIdx){
+  const c=courseCache[cid]||COURSES.find(x=>x.id===cid);
+  const sc=(progress[session.user]&&progress[session.user]['scores_'+cid])||{};
+  const isModule=(typeof modIdx==='number');
+  let title,score,subline,certId;
+  const now=new Date();
+  const dateStr=now.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  if(isModule){
+    title=c.modules[modIdx].t;
+    score=sc[modIdx]||0;
+    subline='Module '+(modIdx+1)+' of '+c.modules.length+' \u00b7 '+c.title;
+    certId='T21-'+cid.toUpperCase()+'-M'+(modIdx+1)+'-'+session.user.toUpperCase()+'-'+now.getFullYear();
+  }else{
+    title=c.title;
+    const v=Object.values(sc);score=v.length?Math.round(v.reduce((a,b)=>a+b,0)/v.length):0;
+    subline=c.len+' \u00b7 Full programme completion';
+    certId='T21-'+cid.toUpperCase()+'-FULL-'+session.user.toUpperCase()+'-'+now.getFullYear();
+  }
+  const qrPayload='mailto:team21online@gmail.com?subject=Verify%20Certificate%20'+encodeURIComponent(certId)+'&body=Please%20verify%20certificate%20'+encodeURIComponent(certId)+'%20issued%20to%20'+encodeURIComponent(session.name)+'.';
+  const qrSVG=(typeof makeQRSVG==='function')?makeQRSVG(qrPayload,120):'';
+  const w=window.open('','_blank');
+  w.document.write('<html><head><meta charset="utf-8"><title>Certificate \u2014 '+title+'</title>'+
+   '<style>@page{size:A4 landscape;margin:0}*{box-sizing:border-box}body{margin:0;font-family:Georgia,"Times New Roman",serif;background:#eef2f8}'+
+   '.sheet{width:1122px;height:793px;margin:0 auto;background:#fff;position:relative;overflow:hidden}'+
+   '.frame{position:absolute;inset:22px;border:3px solid #0F2A5C}'+
+   '.frame:after{content:"";position:absolute;inset:8px;border:1px solid #C9A227}'+
+   '.wm{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:Arial;font-weight:900;font-size:340px;color:#0F2A5C;opacity:.035;letter-spacing:-10px}'+
+   '.inner{position:absolute;inset:60px;text-align:center;display:flex;flex-direction:column;align-items:center}'+
+   '.brandrow{display:flex;align-items:center;gap:14px;margin-bottom:6px}'+
+   '.logo{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,#0C0F14,#FF5714);color:#fff;display:flex;align-items:center;justify-content:center;font-family:Arial;font-weight:900;font-size:17px}'+
+   '.bt{font-family:Arial;letter-spacing:5px;color:#0F2A5C;font-size:15px;font-weight:bold;text-align:left;line-height:1.2}'+
+   '.bt small{display:block;letter-spacing:3px;color:#FF5714;font-size:10px}'+
+   'h1{color:#0F2A5C;font-weight:400;font-size:52px;margin:18px 0 4px}'+
+   '.rule{width:130px;height:3px;background:#FF5714;margin:0 auto 20px}'+
+   '.small{font-size:17px;color:#333;margin:2px 0}'+
+   '.name{font-size:40px;color:#0F2A5C;margin:14px 0 6px;border-bottom:1.5px solid #C9A227;display:inline-block;padding:0 46px 8px;font-style:italic}'+
+   '.ctitle{font-size:26px;color:#FF5714;margin:14px 0 2px;font-family:Arial;font-weight:700}'+
+   '.meta{font-size:13.5px;color:#555;font-family:Arial;margin-top:4px}'+
+   '.footrow{position:absolute;left:60px;right:60px;bottom:56px;display:flex;justify-content:space-between;align-items:flex-end}'+
+   '.sig{text-align:center;width:300px}'+
+   '.sign{font-family:"Brush Script MT","Segoe Script",cursive;font-size:36px;color:#0F2A5C;margin-bottom:2px}'+
+   '.sigline{border-top:1.5px solid #333;padding-top:6px;font-family:Arial;font-size:12.5px}'+
+   '.seal{width:104px;height:104px;border:3px double #0F2A5C;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#0F2A5C;font-family:Arial;font-size:9px;font-weight:bold;letter-spacing:1px}'+
+   '.seal b{font-size:24px;margin:2px 0}'+
+   '.qrbox{text-align:center;width:300px}'+
+   '.qrbox svg{width:96px;height:96px;border:1px solid #ddd}'+
+   '.qrbox div{font-family:Arial;font-size:10px;color:#666;margin-top:4px}'+
+   '.cid{position:absolute;left:60px;bottom:30px;font-family:Arial;font-size:10px;color:#999}'+
+   '.verse{position:absolute;right:60px;bottom:30px;font-family:Arial;font-size:10px;color:#bbb;font-style:italic}'+
+   '@media print{body{background:#fff}}</style></head><body>'+
+   '<div class="sheet"><div class="frame"></div><div class="wm">T21</div><div class="inner">'+
+   '<div class="brandrow"><div class="logo">T21</div><div class="bt">TEAM21 ACADEMY<small>AI UNLOCKED PROGRAMME</small></div></div>'+
+   '<h1>'+(isModule?'Certificate of Achievement':'Certificate of Completion')+'</h1>'+
+   '<div class="rule"></div>'+
+   '<p class="small">This is proudly presented to</p>'+
+   '<div class="name">'+session.name+'</div>'+
+   '<p class="small">for '+(isModule?'successfully passing the graded assessment for':'completing all modules and assessments of')+'</p>'+
+   '<div class="ctitle">'+title+'</div>'+
+   '<div class="meta">'+subline+' \u00b7 Score achieved: <b>'+score+'%</b> \u00b7 '+dateStr+'</div>'+
+   '<div class="footrow">'+
+     '<div class="sig"><div class="sign">Innocent Forteh</div><div class="sigline"><b>Innocent Forteh, PMP\u00ae</b><br/>Program Director, Team21 Academy</div></div>'+
+     '<div class="seal">TEAM21<b>T21</b>VERIFIED</div>'+
+     '<div class="qrbox">'+qrSVG+'<div>Scan to validate<br/>team21online@gmail.com</div></div>'+
+   '</div>'+
+   '<div class="cid">Certificate ID: '+certId+'</div>'+
+   '<div class="verse">\u201cThey shall mount up with wings as eagles\u201d \u2014 Isaiah 40:31 \u00b7 \u00a9 Team21 Academy</div>'+
+   '</div></div>'+
+   '<div style="text-align:center;margin:20px"><button onclick="window.print()" style="padding:10px 24px;font-size:15px;background:#0F2A5C;color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:Arial">\u2b07 Print / Save as PDF</button></div>'+
+   '</body></html>');
+}
+
+/* ---------- ADMIN ---------- */
+function enterAdmin(){show('admin');admTab('a-over');}
+function admTab(t){
+  document.querySelectorAll('#admin .ptab').forEach(b=>b.classList.toggle('active',b.dataset.t===t));
+  ['a-over','a-gen','a-students','a-enrol','a-analytics','a-inq','a-sync'].forEach(x=>document.getElementById('p-'+x).classList.toggle('hidden',x!==t));
+  ({'a-over':renderOver,'a-gen':renderGen,'a-students':renderStudents,'a-enrol':renderEnrol,'a-analytics':renderAnalytics,'a-inq':renderInq,'a-sync':renderSync})[t]();
+}
+function renderOver(){
+  document.getElementById('p-a-over').innerHTML=`
+  <div class="panel" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;${gsConnected()?'border-left:4px solid var(--green)':'border-left:4px solid var(--amber)'}">
+    <div><b style="font-family:'Segoe UI',Arial,sans-serif;color:var(--navy)">${gsConnected()?'🟢 Connected to Google Sheets':'🟡 Google Sheets not yet linked'}</b>
+    <p style="font-size:13px;color:var(--grey);margin-top:2px">${gsConnected()?'The platform is permanently connected — every enrolment, score, and inquiry syncs automatically. No link needed.':'Set your Apps Script URL once in the Sync tab (or hardwire it in the code) to enable permanent sync.'}</p></div>
+    <button class="btn sm ${gsConnected()?'ghost':''}" onclick="admTab('a-sync')">${gsConnected()?'Sync settings':'Connect now'}</button></div>
+  <div class="kpis">
+    <div class="kpi"><b>${students.length}</b><span>Registered students</span></div>
+    <div class="kpi"><b>${students.filter(s=>s.status==='active').length}</b><span>Active accounts</span></div>
+    <div class="kpi"><b>${students.reduce((a,s)=>a+(s.courses?s.courses.length:0),0)}</b><span>Total enrolments</span></div>
+    <div class="kpi"><b>${inquiries.length}</b><span>Open inquiries</span></div>
+    <div class="kpi"><b>${CATALOG.length}</b><span>Published courses</span></div>
+    <div class="kpi"><b>${CATALOG.reduce((a,c)=>a+(c.mods||0),0)}</b><span>Total modules</span></div>
+  </div>
+  <div class="panel"><h3>Quick actions</h3>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn sm" onclick="admTab('a-gen')">＋ New student</button>
+      <button class="btn sm ghost" onclick="admTab('a-enrol')">Enrol in courses</button>
+      <button class="btn sm ghost" onclick="admTab('a-analytics')">View analytics</button>
+      <button class="btn sm ghost" onclick="admTab('a-inq')">Inquiries</button>
+      <button class="btn sm ghost" onclick="exportCSV()">Export CSV</button>
+      <button class="btn sm ghost" onclick="exportBackup()">Full JSON backup</button>
+    </div></div>`;
+}
+/* Credential generation engine */
+function genUsername(name){
+  const base=name.toLowerCase().replace(/[^a-z ]/g,'').trim().split(/\s+/);
+  let u=(base[0]?.slice(0,1)||'t')+(base[base.length-1]||'21');
+  let cand=u,n=1;while(students.some(s=>s.username===cand)){cand=u+(++n);}
+  return cand;
+}
+function genPassword(){
+  const A='ABCDEFGHJKLMNPQRSTUVWXYZ',a='abcdefghijkmnpqrstuvwxyz',d='23456789',s='!@#$%';
+  const pick=x=>x[Math.floor(Math.random()*x.length)];
+  let p=pick(A)+pick(a)+pick(d)+pick(s);
+  const all=A+a+d+s; for(let i=0;i<6;i++)p+=pick(all);
+  return p.split('').sort(()=>Math.random()-.5).join('');
+}
+function renderGen(){
+  document.getElementById('p-a-gen').innerHTML=`
+  <div class="panel"><h3>Credential Generator</h3>
+   <p style="font-size:14px;color:var(--grey);margin-bottom:6px">Create an account for a student who has registered and paid. Username is auto-derived from the name; password is a strong 10-character random. You can override both before saving.</p>
+   <div class="field"><label>Student full name</label><input id="g-name" placeholder="Jane Doe" oninput="document.getElementById('g-user').value=genUsername(this.value)"/></div>
+   <div class="field"><label>Student email</label><input id="g-email" type="email" placeholder="jane@email.com"/></div>
+   <div class="field"><label>Assign courses (Ctrl/Cmd-click for multiple)</label>
+     <select id="g-courses" multiple size="6">${COURSES.map(c=>`<option value="${c.id}">${c.title}</option>`).join('')}</select></div>
+   <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end">
+     <div class="field"><label>Username</label><input id="g-user"/></div>
+     <div class="field"><label>Password</label><input id="g-pass"/></div>
+     <button class="btn sm ghost" style="margin-bottom:2px" onclick="document.getElementById('g-pass').value=genPassword()">↻ Regenerate</button>
+   </div>
+   <button class="btn" style="margin-top:18px" onclick="createStudent()">Create account & issue credentials</button>
+   <div id="g-out" class="hidden" style="margin-top:18px" class="panel"></div>
+  </div>`;
+  document.getElementById('g-pass').value=genPassword();
+}
+function createStudent(){
+  const name=v('g-name'),email=v('g-email'),user=v('g-user'),pass=v('g-pass');
+  const courses=[...document.getElementById('g-courses').selectedOptions].map(o=>o.value);
+  if(!name||!user||!pass){toast('Name, username and password are required.');return;}
+  if(students.some(s=>s.username===user)){toast('Username already exists.');return;}
+  const st={id:Date.now(),name,email,username:user,password:pass,courses:courses.length?courses:['ai1'],status:'active',created:new Date().toISOString().slice(0,10)};
+  students.push(st);save(LS_KEYS.students,students);
+  gsPost('student_create',st);
+  const out=document.getElementById('g-out');out.classList.remove('hidden');
+  out.innerHTML=`<div class="callout" style="border-left-color:var(--green);background:#EFFBF3">
+   <b>✓ Account created.</b> Send these to the student (copy button below):<br/><br/>
+   Portal: <span class="cred">${location.href.split('#')[0]}</span><br/>
+   Username: <span class="cred">${user}</span> &nbsp; Password: <span class="cred">${pass}</span><br/><br/>
+   <button class="btn sm" onclick="navigator.clipboard.writeText('Team21 Academy Learner Portal\\n${location.href.split('#')[0]}\\nUsername: ${user}\\nPassword: ${pass}').then(()=>toast('Copied ✓'))">Copy credentials message</button></div>`;
+  toast('Student account created ✓');
+}
+function renderEnrol(){
+  const opts=students.map(s=>`<option value="${s.username}">${s.name} (${s.username}) — ${s.courses?s.courses.length:0} course(s)</option>`).join('');
+  document.getElementById('p-a-enrol').innerHTML=`
+  <div class="panel"><h3>Enrol an existing student in new courses</h3>
+   <p style="font-size:14px;color:var(--grey);margin-bottom:6px">Add one or more courses to a student who already has an account (e.g. after they buy an additional programme). Their existing courses and progress are preserved.</p>
+   <div class="field"><label>Select student</label><select id="en-user" onchange="enShow()">${opts||'<option>No students yet</option>'}</select></div>
+   <div id="en-current" style="font-size:13px;color:var(--grey);font-family:'Segoe UI',Arial,sans-serif;margin:8px 0"></div>
+   <div class="field"><label>Add courses (Ctrl/Cmd-click for multiple)</label>
+     <select id="en-courses" multiple size="8">${CATALOG.map(c=>`<option value="${c.id}">${c.title} — ${c.price}</option>`).join('')}</select></div>
+   <button class="btn" style="margin-top:14px" onclick="enrolAdd()">Add selected courses</button>
+   <button class="btn ghost" style="margin-top:14px" onclick="enrolAll()">Grant ALL courses (bundle)</button>
+   <p id="en-msg" class="hidden" style="color:var(--green);font-family:'Segoe UI',Arial,sans-serif;font-size:14px;margin-top:10px"></p>
+  </div>
+  <div class="panel"><h3>Remove a course from a student</h3>
+   <div id="en-remove"></div></div>`;
+  enShow();
+}
+function enShow(){
+  const u=document.getElementById('en-user').value;const s=students.find(x=>x.username===u);
+  const cur=document.getElementById('en-current');const rem=document.getElementById('en-remove');
+  if(!s){cur.textContent='';rem.innerHTML='';return;}
+  cur.innerHTML='<b>Currently enrolled:</b> '+((s.courses||[]).map(id=>{const c=CATALOG.find(x=>x.id===id);return c?c.title:id;}).join(', ')||'none');
+  rem.innerHTML=(s.courses||[]).length?(s.courses.map(id=>{const c=CATALOG.find(x=>x.id===id);return `<span class="cred" style="margin:4px;display:inline-block">${c?c.title:id} <a href="#" onclick="enrolRemove('${s.username}','${id}');return false" style="color:var(--red);font-weight:700">✕</a></span>`;}).join('')):'<p style="color:var(--grey);font-size:13px">No courses to remove.</p>';
+}
+function enrolAdd(){
+  const u=document.getElementById('en-user').value;const s=students.find(x=>x.username===u);if(!s)return;
+  const add=[...document.getElementById('en-courses').selectedOptions].map(o=>o.value);
+  if(!add.length){toast('Select at least one course.');return;}
+  s.courses=Array.from(new Set([...(s.courses||[]),...add]));
+  save(LS_KEYS.students,students);gsPost('student_update',s);
+  const m=document.getElementById('en-msg');m.classList.remove('hidden');m.textContent='✓ Added '+add.length+' course(s) to '+s.name+'. They can access them at next login.';
+  toast('Enrolment updated ✓');enShow();
+}
+function enrolAll(){
+  const u=document.getElementById('en-user').value;const s=students.find(x=>x.username===u);if(!s)return;
+  if(!confirm('Grant ALL '+CATALOG.length+' courses to '+s.name+'?'))return;
+  s.courses=CATALOG.map(c=>c.id);save(LS_KEYS.students,students);gsPost('student_update',s);
+  toast('Full bundle granted ✓');renderEnrol();
+}
+function enrolRemove(u,cid){
+  const s=students.find(x=>x.username===u);if(!s)return;
+  s.courses=(s.courses||[]).filter(x=>x!==cid);save(LS_KEYS.students,students);gsPost('student_update',s);
+  toast('Course removed');enShow();
+}
+function renderAnalytics(){
+  const totalEnrol=students.reduce((a,s)=>a+(s.courses?s.courses.length:0),0);
+  const byCourse=CATALOG.map(c=>({t:c.title,n:students.filter(s=>(s.courses||[]).includes(c.id)).length})).sort((a,b)=>b.n-a.n);
+  const maxN=Math.max(1,...byCourse.map(x=>x.n));
+  document.getElementById('p-a-analytics').innerHTML=`
+  <div class="kpis">
+    <div class="kpi"><b>${students.length}</b><span>Students</span></div>
+    <div class="kpi"><b>${totalEnrol}</b><span>Enrolments</span></div>
+    <div class="kpi"><b>${(students.length?(totalEnrol/students.length):0).toFixed(1)}</b><span>Avg courses/student</span></div>
+    <div class="kpi"><b>${inquiries.length}</b><span>Inquiries</span></div>
+  </div>
+  <div class="panel"><h3>Enrolments by course</h3>
+   ${byCourse.filter(x=>x.n>0).map(x=>`<div style="margin:8px 0"><div style="display:flex;justify-content:space-between;font-family:'Segoe UI',Arial,sans-serif;font-size:13px"><span>${x.t}</span><b>${x.n}</b></div><div class="progress-outer" style="height:9px"><div class="progress-inner" style="width:${Math.round(100*x.n/maxN)}%"></div></div></div>`).join('')||'<p style="color:var(--grey)">No enrolments yet.</p>'}
+  </div>
+  <div class="panel"><h3>Inquiry sources</h3>
+   ${(()=>{const by={};inquiries.forEach(q=>{by[q.type]=(by[q.type]||0)+1;});const ks=Object.keys(by);return ks.length?ks.map(k=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-family:'Segoe UI',Arial,sans-serif;font-size:14px"><span>${k}</span><b>${by[k]}</b></div>`).join(''):'<p style="color:var(--grey)">No inquiries yet.</p>';})()}
+  </div>
+  <div class="panel"><h3>Live learning analytics</h3><p style="font-size:14px;color:var(--grey)">Per-student module scores and completion sync to your Google Sheet via the <span class="cred">quiz_score</span> and <span class="cred">progress</span> events. Build cohort dashboards there, or in Looker Studio connected to the sheet, for pass rates and time-on-module.</p>
+   <label class="btn sm ghost" style="margin-top:8px;cursor:pointer">Restore from JSON backup<input type="file" accept="application/json" onchange="importBackup(event)" style="display:none"/></label>
+  </div>`;
+}
+function exportBackup(){
+  const data={students,inquiries,progress,exported:new Date().toISOString()};
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));
+  a.download='Team21_backup_'+new Date().toISOString().slice(0,10)+'.json';a.click();toast('Backup downloaded ✓');
+}
+function importBackup(ev){
+  const f=ev.target.files[0];if(!f)return;const r=new FileReader();
+  r.onload=()=>{try{const d=JSON.parse(r.result);if(d.students)students=d.students;if(d.inquiries)inquiries=d.inquiries;if(d.progress)progress=d.progress;
+    save(LS_KEYS.students,students);save(LS_KEYS.inquiries,inquiries);save(LS_KEYS.progress,progress);
+    toast('Backup restored ✓');admTab('a-over');}catch(e){toast('Invalid backup file');}};r.readAsText(f);
+}
+function renderStudents(){
+  document.getElementById('p-a-students').innerHTML=`
+  <div class="panel"><h3>Registered Students (${students.length})</h3>
+   <div style="overflow-x:auto"><table class="dt"><tr><th>Name</th><th>Email</th><th>Username</th><th>Password</th><th>Courses</th><th>Status</th><th>Created</th><th></th></tr>
+   ${students.map(s=>`<tr>
+     <td>${s.name}</td><td>${s.email||'—'}</td>
+     <td><span class="cred">${s.username}</span></td><td><span class="cred">${s.password}</span></td>
+     <td style="font-size:12px">${s.courses.map(id=>COURSES.find(c=>c.id===id)?.title.split(':')[0]||id).join(', ')}</td>
+     <td>${s.status==='active'?'🟢 active':'🔴 suspended'}</td><td>${s.created}</td>
+     <td style="white-space:nowrap">
+       <button class="btn sm ghost" onclick="toggleStudent(${s.id})">${s.status==='active'?'Suspend':'Activate'}</button>
+       <button class="btn sm ghost" onclick="resetPass(${s.id})">Reset PW</button>
+       <button class="btn sm ghost" style="border-color:var(--red);color:var(--red)" onclick="delStudent(${s.id})">Delete</button>
+     </td></tr>`).join('')||'<tr><td colspan="8" style="color:var(--grey)">No students yet — use the Credential Generator.</td></tr>'}
+   </table></div>
+   <button class="btn sm ghost" style="margin-top:16px" onclick="exportCSV()">⬇ Export CSV</button></div>`;
+}
+function toggleStudent(id){const s=students.find(x=>x.id===id);s.status=s.status==='active'?'suspended':'active';save(LS_KEYS.students,students);gsPost('student_update',s);renderStudents();toast('Status updated');}
+function resetPass(id){const s=students.find(x=>x.id===id);s.password=genPassword();save(LS_KEYS.students,students);gsPost('student_update',s);renderStudents();toast('New password: '+s.password);}
+function delStudent(id){if(!confirm('Delete this student account?'))return;students=students.filter(x=>x.id!==id);save(LS_KEYS.students,students);renderStudents();toast('Deleted');}
+function exportCSV(){
+  const rows=[['Name','Email','Username','Password','Courses','Status','Created'],...students.map(s=>[s.name,s.email,s.username,s.password,s.courses.join('|'),s.status,s.created])];
+  const csv=rows.map(r=>r.map(x=>`"${String(x??'').replace(/"/g,'""')}"`).join(',')).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='Team21CM_Students.csv';a.click();
+}
+function renderInq(){
+  document.getElementById('p-a-inq').innerHTML=`
+  <div class="panel"><h3>Website Inquiries (${inquiries.length})</h3>
+   <div style="overflow-x:auto"><table class="dt"><tr><th>Date</th><th>Name</th><th>Email</th><th>Type</th><th>Program</th><th>Delivery</th><th>Message</th><th></th></tr>
+   ${inquiries.map(q=>`<tr><td>${q.date}</td><td>${q.name}</td><td>${q.email}</td><td>${q.type}</td><td>${q.course}</td><td>${q.mode}</td><td style="max-width:240px">${q.msg||'—'}</td>
+    <td><button class="btn sm ghost" style="border-color:var(--red);color:var(--red)" onclick="delInq(${q.id})">✕</button></td></tr>`).join('')||'<tr><td colspan="8" style="color:var(--grey)">No inquiries yet.</td></tr>'}
+   </table></div></div>`;
+}
+function delInq(id){inquiries=inquiries.filter(x=>x.id!==id);save(LS_KEYS.inquiries,inquiries);renderInq();}
+function renderSync(){
+  document.getElementById('p-a-sync').innerHTML=`
+  <div class="panel"><h3>Google Apps Script Sync</h3>
+   <p style="font-size:14.5px;color:var(--grey);margin-bottom:14px">Paste your deployed Apps Script Web App URL below. The platform will POST JSON to it for events: <span class="cred">student_create</span>, <span class="cred">student_update</span>, <span class="cred">inquiry</span>, <span class="cred">progress</span>, <span class="cred">mentor_request</span>. Each payload includes <span class="cred">{event, data}</span> — route them to Sheets tabs in your doPost.</p>
+   <div class="field"><label>Apps Script Web App URL</label><input id="gs-url" placeholder="https://script.google.com/macros/s/.../exec" value="${load(LS_KEYS.gs,'')}"/></div>
+   <button class="btn sm" style="margin-top:14px" onclick="save(LS_KEYS.gs,v('gs-url'));toast('Sync URL saved ✓')">Save URL</button>
+   <button class="btn sm ghost" style="margin-top:14px" onclick="gsPost('ping',{at:new Date().toISOString()});toast('Test event sent — check your Sheet')">Send test event</button>
+   <div class="callout" style="margin-top:20px"><b>Starter doPost for your Apps Script:</b><br/>
+   <pre style="font-size:12px;overflow-x:auto;margin-top:8px">function doPost(e){
+  var b=JSON.parse(e.postData.contents);
+  var ss=SpreadsheetApp.getActive();
+  var sh=ss.getSheetByName(b.event)||ss.insertSheet(b.event);
+  sh.appendRow([new Date(), JSON.stringify(b.data)]);
+  return ContentService.createTextOutput('ok');
+}</pre></div></div>`;
+}
+/* HARDWIRED Google Apps Script endpoint — deploy your Web App and set this once here.
+   Admin never needs to paste a link; the platform is permanently connected.
+   Replace the placeholder below with your /exec URL, or override in Settings. */
+const GS_ENDPOINT_DEFAULT = "https://script.google.com/macros/s/AKfycbw2iGs9Et5zvmVKmmxp8YMihllM4fKfPtEF522TtPBYCfyslOYLmehQadFW-hWBPOpixw/exec";
+function gsEndpoint(){ const o=load(LS_KEYS.gs,''); return (o&&o.indexOf('http')===0)?o:GS_ENDPOINT_DEFAULT; }
+function gsConnected(){ const u=gsEndpoint(); return u && u.indexOf('http')===0; }
+function gsPost(event,data){
+  const url=gsEndpoint(); if(!url||url.indexOf('http')!==0)return;
+  try{fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify({event,data})});}catch(e){}
+}
+
+/* ---------- INIT ---------- */
+loadCatalog().then(renderCatalog);
+</script>
+</body>
+</html>
