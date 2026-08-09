@@ -956,7 +956,7 @@ function renderGen(){
    <div class="field"><label>Student full name</label><input id="g-name" placeholder="Jane Doe" oninput="document.getElementById('g-user').value=genUsername(this.value)"/></div>
    <div class="field"><label>Student email</label><input id="g-email" type="email" placeholder="jane@email.com"/></div>
    <div class="field"><label>Assign courses (Ctrl/Cmd-click for multiple)</label>
-     <select id="g-courses" multiple size="6">${COURSES.map(c=>`<option value="${c.id}">${c.title}</option>`).join('')}</select></div>
+     <select id="g-courses" multiple size="6">${CATALOG.map(c=>`<option value="${c.id}">${c.title}</option>`).join('')}</select></div>
    <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end">
      <div class="field"><label>Username</label><input id="g-user"/></div>
      <div class="field"><label>Password</label><input id="g-pass"/></div>
@@ -1066,7 +1066,7 @@ function renderStudents(){
    ${students.map(s=>`<tr>
      <td>${s.name}</td><td>${s.email||'—'}</td>
      <td><span class="cred">${s.username}</span></td><td><span class="cred">${s.password}</span></td>
-     <td style="font-size:12px">${s.courses.map(id=>COURSES.find(c=>c.id===id)?.title.split(':')[0]||id).join(', ')}</td>
+     <td style="font-size:12px">${s.courses.map(id=>CATALOG.find(c=>c.id===id)?.title.split(':')[0]||id).join(', ')}</td>
      <td>${s.status==='active'?'🟢 active':'🔴 suspended'}</td><td>${s.created}</td>
      <td style="white-space:nowrap">
        <button class="btn sm ghost" onclick="toggleStudent(${s.id})">${s.status==='active'?'Suspend':'Activate'}</button>
