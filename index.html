@@ -623,21 +623,35 @@ let loginTab='student';
 function openLogin(t){document.getElementById('loginModal').classList.remove('hidden');setLoginTab(t==='admin'?'admin':'student');document.getElementById('lg-user').focus();}
 function closeLogin(){document.getElementById('loginModal').classList.add('hidden');document.getElementById('lg-err').classList.add('hidden');}
 function setLoginTab(t){loginTab=t;document.getElementById('lt-student').classList.toggle('active',t==='student');document.getElementById('lt-admin').classList.toggle('active',t==='admin');}
-function doLogin(){
+async function doLogin(){
   const u=v('lg-user'),p=document.getElementById('lg-pass').value;
   const err=document.getElementById('lg-err');
+  err.classList.add('hidden');
   if(loginTab==='admin'){
     if(u===ADMIN.user&&p===ADMIN.pass){session={role:'admin',user:u};enterAdmin();closeLogin();return;}
     err.textContent='Invalid administrator credentials.';err.classList.remove('hidden');return;
   }
-  const s=students.find(s=>s.username===u&&s.password===p&&s.status!=='suspended');
   if(u===ADMIN.user&&p===ADMIN.pass){ // admin can preview learner portal too
     session={role:'student',user:u,name:'Administrator (preview)',courses:CATALOG.map(c=>c.id)};
     loadCourses(session.courses).then(()=>{enterLMS();closeLogin();});return;
   }
+  // 1) fast path — this device already has the account cached locally
+  let s=students.find(s=>s.username===u&&s.password===p&&s.status!=='suspended');
   if(s){session={role:'student',user:s.username,name:s.name,courses:s.courses||[]};
-    loadCourses(session.courses).then(()=>{enterLMS();closeLogin();});}
-  else{err.textContent='Invalid credentials, or account not yet activated.';err.classList.remove('hidden');}
+    loadCourses(session.courses).then(()=>{enterLMS();closeLogin();});return;}
+  // 2) not found on this device — check the shared cloud roster before failing
+  //    (handles: account created on a different device/browser than this one)
+  if(u&&p&&gsConnected()){
+    const res=await gsGet({fn:'auth',u,p});
+    if(res&&res.ok&&res.student){
+      s=students.find(x=>x.username===res.student.username);
+      if(s){Object.assign(s,res.student,{id:s.id});} else {s=Object.assign({id:Date.now()},res.student);students.push(s);}
+      save(LS_KEYS.students,students);
+      session={role:'student',user:s.username,name:s.name,courses:s.courses||[]};
+      loadCourses(session.courses).then(()=>{enterLMS();closeLogin();});return;
+    }
+  }
+  err.textContent='Invalid credentials, or account not yet activated.';err.classList.remove('hidden');
 }
 function logout(){session=null;show('site');window.scrollTo(0,0);}
 function show(id){['site','lms','admin'].forEach(x=>document.getElementById(x).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');}
@@ -905,7 +919,7 @@ function printCert(cid,modIdx){
 }
 
 /* ---------- ADMIN ---------- */
-function enterAdmin(){show('admin');admTab('a-over');}
+function enterAdmin(){show('admin');admTab('a-over');syncRosterFromCloud(true);}
 function admTab(t){
   document.querySelectorAll('#admin .ptab').forEach(b=>b.classList.toggle('active',b.dataset.t===t));
   ['a-over','a-gen','a-students','a-enrol','a-analytics','a-inq','a-sync'].forEach(x=>document.getElementById('p-'+x).classList.toggle('hidden',x!==t));
@@ -1061,7 +1075,8 @@ function importBackup(ev){
 }
 function renderStudents(){
   document.getElementById('p-a-students').innerHTML=`
-  <div class="panel"><h3>Registered Students (${students.length})</h3>
+  <div class="panel"><h3>Registered Students (${students.length}) <button class="btn sm ghost" style="margin-left:10px" onclick="syncRosterFromCloud(false)">🔄 Sync from cloud</button></h3>
+   <p style="font-size:12.5px;color:var(--grey);margin:-6px 0 12px">Pulls every student registered on ANY device into this view — students created elsewhere won't show up here until you sync.</p>
    <div style="overflow-x:auto"><table class="dt"><tr><th>Name</th><th>Email</th><th>Username</th><th>Password</th><th>Courses</th><th>Status</th><th>Created</th><th></th></tr>
    ${students.map(s=>`<tr>
      <td>${s.name}</td><td>${s.email||'—'}</td>
@@ -1096,7 +1111,9 @@ function delInq(id){inquiries=inquiries.filter(x=>x.id!==id);save(LS_KEYS.inquir
 function renderSync(){
   document.getElementById('p-a-sync').innerHTML=`
   <div class="panel"><h3>Google Apps Script Sync</h3>
-   <p style="font-size:14.5px;color:var(--grey);margin-bottom:14px">Paste your deployed Apps Script Web App URL below. The platform will POST JSON to it for events: <span class="cred">student_create</span>, <span class="cred">student_update</span>, <span class="cred">inquiry</span>, <span class="cred">progress</span>, <span class="cred">mentor_request</span>. Each payload includes <span class="cred">{event, data}</span> — route them to Sheets tabs in your doPost.</p>
+   <p style="font-size:14.5px;color:var(--grey);margin-bottom:14px">Every registration, quiz score, and inquiry is POSTed to your Apps Script and logged to Sheets (<span class="cred">student_create</span>, <span class="cred">student_update</span>, <span class="cred">inquiry</span>, <span class="cred">progress</span>, <span class="cred">mentor_request</span>, each as <span class="cred">{event, data}</span>). That direction is one-way and automatic.</p>
+   <p style="font-size:14.5px;color:var(--grey);margin-bottom:14px"><b>Reading back:</b> a student created on one device won't show up on another device until that device pulls it from the Sheet. Students do this automatically the moment they try to log in and aren't found locally (silent fallback to the cloud). Admins do this by clicking <b>🔄 Sync from cloud</b> below or on the Students tab — do this whenever you expect to see students registered elsewhere.</p>
+   <button class="btn sm" style="margin-bottom:18px" onclick="syncRosterFromCloud(false)">🔄 Sync roster from cloud now</button>
    <div class="field"><label>Apps Script Web App URL</label><input id="gs-url" placeholder="https://script.google.com/macros/s/.../exec" value="${load(LS_KEYS.gs,'')}"/></div>
    <button class="btn sm" style="margin-top:14px" onclick="save(LS_KEYS.gs,v('gs-url'));toast('Sync URL saved ✓')">Save URL</button>
    <button class="btn sm ghost" style="margin-top:14px" onclick="gsPost('ping',{at:new Date().toISOString()});toast('Test event sent — check your Sheet')">Send test event</button>
@@ -1118,6 +1135,35 @@ function gsConnected(){ const u=gsEndpoint(); return u && u.indexOf('http')===0;
 function gsPost(event,data){
   const url=gsEndpoint(); if(!url||url.indexOf('http')!==0)return;
   try{fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify({event,data})});}catch(e){}
+}
+/* GET reads (unlike gsPost, these need to READ the response, so no no-cors here).
+   Used for: student login fallback across devices, and admin roster sync. */
+async function gsGet(params){
+  const url=gsEndpoint(); if(!url||url.indexOf('http')!==0)return null;
+  try{
+    const qs=new URLSearchParams(params).toString();
+    const r=await fetch(url+'?'+qs);
+    if(!r.ok)return null;
+    return await r.json();
+  }catch(e){return null;}
+}
+/* Pull the full student roster from the Sheet and merge it into local storage,
+   so every device's admin panel shows every student — not just the ones
+   created on this browser. silent=true suppresses toasts (used on auto-sync). */
+async function syncRosterFromCloud(silent){
+  if(!gsConnected())return;
+  if(!silent)toast('Syncing roster from cloud…');
+  const res=await gsGet({fn:'roster',au:ADMIN.user,ap:ADMIN.pass});
+  if(!res||!res.ok){ if(!silent)toast('Cloud sync unavailable — check the connection.'); return; }
+  (res.students||[]).forEach(cs=>{
+    const existing=students.find(x=>x.username===cs.username);
+    if(existing)Object.assign(existing,cs,{id:existing.id});
+    else students.push(Object.assign({id:Date.now()+Math.random()},cs));
+  });
+  save(LS_KEYS.students,students);
+  if(document.getElementById('p-a-students')&&!document.getElementById('p-a-students').classList.contains('hidden'))renderStudents();
+  if(document.getElementById('p-a-over')&&!document.getElementById('p-a-over').classList.contains('hidden'))renderOver();
+  if(!silent)toast('Synced '+(res.students||[]).length+' student(s) from cloud ✓');
 }
 
 /* ---------- INIT ---------- */
