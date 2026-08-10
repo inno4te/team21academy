@@ -924,6 +924,7 @@ function admTab(t){
   document.querySelectorAll('#admin .ptab').forEach(b=>b.classList.toggle('active',b.dataset.t===t));
   ['a-over','a-gen','a-students','a-enrol','a-analytics','a-inq','a-sync'].forEach(x=>document.getElementById('p-'+x).classList.toggle('hidden',x!==t));
   ({'a-over':renderOver,'a-gen':renderGen,'a-students':renderStudents,'a-enrol':renderEnrol,'a-analytics':renderAnalytics,'a-inq':renderInq,'a-sync':renderSync})[t]();
+  if(t==='a-inq')syncInquiriesFromCloud(true);
 }
 function renderOver(){
   document.getElementById('p-a-over').innerHTML=`
@@ -1075,8 +1076,8 @@ function importBackup(ev){
 }
 function renderStudents(){
   document.getElementById('p-a-students').innerHTML=`
-  <div class="panel"><h3>Registered Students (${students.length}) <button class="btn sm ghost" style="margin-left:10px" onclick="syncRosterFromCloud(false)">🔄 Sync from cloud</button></h3>
-   <p style="font-size:12.5px;color:var(--grey);margin:-6px 0 12px">Pulls every student registered on ANY device into this view — students created elsewhere won't show up here until you sync.</p>
+  <div class="panel"><h3>Registered Students (${students.length}) <button class="btn sm ghost" style="margin-left:10px" onclick="syncRosterFromCloud(false)">🔄 Sync from cloud</button> <button class="btn sm ghost" onclick="pushLocalRosterToCloud()">⬆ Push local accounts to cloud</button></h3>
+   <p style="font-size:12.5px;color:var(--grey);margin:-6px 0 12px">Sync pulls every student registered on ANY device into this view. Push re-sends accounts already known to THIS device/browser up to the cloud — use this once if you suspect earlier registrations never actually saved server-side.</p>
    <div style="overflow-x:auto"><table class="dt"><tr><th>Name</th><th>Email</th><th>Username</th><th>Password</th><th>Courses</th><th>Status</th><th>Created</th><th></th></tr>
    ${students.map(s=>`<tr>
      <td>${s.name}</td><td>${s.email||'—'}</td>
@@ -1101,7 +1102,8 @@ function exportCSV(){
 }
 function renderInq(){
   document.getElementById('p-a-inq').innerHTML=`
-  <div class="panel"><h3>Website Inquiries (${inquiries.length})</h3>
+  <div class="panel"><h3>Website Inquiries (${inquiries.length}) <button class="btn sm ghost" style="margin-left:10px" onclick="syncInquiriesFromCloud(false)">🔄 Sync from cloud</button></h3>
+   <p style="font-size:12.5px;color:var(--grey);margin:-6px 0 12px">Inquiries are submitted from a VISITOR's own device — this list only fills in once synced from the shared Sheet.</p>
    <div style="overflow-x:auto"><table class="dt"><tr><th>Date</th><th>Name</th><th>Email</th><th>Type</th><th>Program</th><th>Delivery</th><th>Message</th><th></th></tr>
    ${inquiries.map(q=>`<tr><td>${q.date}</td><td>${q.name}</td><td>${q.email}</td><td>${q.type}</td><td>${q.course}</td><td>${q.mode}</td><td style="max-width:240px">${q.msg||'—'}</td>
     <td><button class="btn sm ghost" style="border-color:var(--red);color:var(--red)" onclick="delInq(${q.id})">✕</button></td></tr>`).join('')||'<tr><td colspan="8" style="color:var(--grey)">No inquiries yet.</td></tr>'}
@@ -1164,6 +1166,34 @@ async function syncRosterFromCloud(silent){
   if(document.getElementById('p-a-students')&&!document.getElementById('p-a-students').classList.contains('hidden'))renderStudents();
   if(document.getElementById('p-a-over')&&!document.getElementById('p-a-over').classList.contains('hidden'))renderOver();
   if(!silent)toast('Synced '+(res.students||[]).length+' student(s) from cloud ✓');
+}
+/* Same idea as roster sync, but for inquiries — a visitor's contact-form
+   submission happens on THEIR device, so this is the only way admin ever
+   sees it. Merges by id, never deletes a local-only entry. */
+async function syncInquiriesFromCloud(silent){
+  if(!gsConnected())return;
+  if(!silent)toast('Syncing inquiries from cloud…');
+  const res=await gsGet({fn:'inquiries',au:ADMIN.user,ap:ADMIN.pass});
+  if(!res||!res.ok){ if(!silent)toast('Cloud sync unavailable — check the connection.'); return; }
+  (res.inquiries||[]).forEach(cq=>{
+    const existing=inquiries.find(x=>String(x.id)===String(cq.id));
+    if(existing)Object.assign(existing,cq);
+    else inquiries.unshift(cq);
+  });
+  save(LS_KEYS.inquiries,inquiries);
+  if(document.getElementById('p-a-inq')&&!document.getElementById('p-a-inq').classList.contains('hidden'))renderInq();
+  if(!silent)toast('Synced '+(res.inquiries||[]).length+' inquiry(ies) from cloud ✓');
+}
+/* Recovery tool: re-sends every LOCALLY known student (this browser's cache)
+   up to the cloud. Use this once after fixing a backend that was previously
+   failing silently — it re-uploads accounts that never actually made it to
+   the Sheet the first time, without needing to recreate them by hand. */
+async function pushLocalRosterToCloud(){
+  if(!gsConnected()){toast('Not connected to a backend.');return;}
+  if(!students.length){toast('No local students to push.');return;}
+  toast('Pushing '+students.length+' local account(s) to the cloud…');
+  for(const s of students){ gsPost('student_update',s); await new Promise(r=>setTimeout(r,150)); }
+  toast('Pushed. Wait a few seconds, then click "Sync from cloud" to confirm they landed.');
 }
 
 /* ---------- INIT ---------- */
