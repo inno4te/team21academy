@@ -493,6 +493,7 @@ function makeQRSVG(text,size){try{var q=qrcode(0,1);q.addData(text);q.make();ret
     <div id="p-mentor" class="hidden"></div>
     <div id="p-prompts" class="hidden"></div>
     <div id="p-certs" class="hidden"></div>
+    <div id="p-exam" class="hidden"></div>
   </div>
 </div>
 
@@ -506,6 +507,7 @@ function makeQRSVG(text,size){try{var q=qrcode(0,1);q.addData(text);q.make();ret
     <button class="ptab active" data-t="a-over" onclick="admTab('a-over')">Overview</button>
     <button class="ptab" data-t="a-gen" onclick="admTab('a-gen')">Credential Generator</button>
     <button class="ptab" data-t="a-students" onclick="admTab('a-students')">Students</button>
+    <button class="ptab" data-t="a-progress" onclick="admTab('a-progress')">Learner Progress</button>
     <button class="ptab" data-t="a-enrol" onclick="admTab('a-enrol')">Enrolments</button>
     <button class="ptab" data-t="a-analytics" onclick="admTab('a-analytics')">Analytics</button>
     <button class="ptab" data-t="a-inq" onclick="admTab('a-inq')">Inquiries</button>
@@ -517,6 +519,7 @@ function makeQRSVG(text,size){try{var q=qrcode(0,1);q.addData(text);q.make();ret
     <div id="p-a-analytics" class="hidden"></div>
     <div id="p-a-gen" class="hidden"></div>
     <div id="p-a-students" class="hidden"></div>
+    <div id="p-a-progress" class="hidden"></div>
     <div id="p-a-inq" class="hidden"></div>
     <div id="p-a-sync" class="hidden"></div>
   </div>
@@ -632,13 +635,13 @@ async function doLogin(){
     err.textContent='Invalid administrator credentials.';err.classList.remove('hidden');return;
   }
   if(u===ADMIN.user&&p===ADMIN.pass){ // admin can preview learner portal too
-    session={role:'student',user:u,name:'Administrator (preview)',courses:CATALOG.map(c=>c.id)};
-    loadCourses(session.courses).then(()=>{enterLMS();closeLogin();});return;
+    session={role:'student',user:u,name:'Administrator (preview)',courses:CATALOG.map(c=>c.id),pass:p};
+    loadCourses(session.courses).then(async()=>{await pullProgressFromCloud();enterLMS();closeLogin();});return;
   }
   // 1) fast path — this device already has the account cached locally
   let s=students.find(s=>s.username===u&&s.password===p&&s.status!=='suspended');
-  if(s){session={role:'student',user:s.username,name:s.name,courses:s.courses||[]};
-    loadCourses(session.courses).then(()=>{enterLMS();closeLogin();});return;}
+  if(s){session={role:'student',user:s.username,name:s.name,courses:s.courses||[],pass:p};
+    loadCourses(session.courses).then(async()=>{await pullProgressFromCloud();enterLMS();closeLogin();});return;}
   // 2) not found on this device — check the shared cloud roster before failing
   //    (handles: account created on a different device/browser than this one)
   if(u&&p&&gsConnected()){
@@ -647,8 +650,8 @@ async function doLogin(){
       s=students.find(x=>x.username===res.student.username);
       if(s){Object.assign(s,res.student,{id:s.id});} else {s=Object.assign({id:Date.now()},res.student);students.push(s);}
       save(LS_KEYS.students,students);
-      session={role:'student',user:s.username,name:s.name,courses:s.courses||[]};
-      loadCourses(session.courses).then(()=>{enterLMS();closeLogin();});return;
+      session={role:'student',user:s.username,name:s.name,courses:s.courses||[],pass:p};
+      loadCourses(session.courses).then(async()=>{await pullProgressFromCloud();enterLMS();closeLogin();});return;
     }
   }
   err.textContent='Invalid credentials, or account not yet activated.';err.classList.remove('hidden');
@@ -661,7 +664,7 @@ let curCourse=null,curMod=0;
 function enterLMS(){show('lms');document.getElementById('lms-user').textContent=session.name+' · '+session.user;lmsTab('dash');}
 function lmsTab(t){
   document.querySelectorAll('#lms .ptab').forEach(b=>b.classList.toggle('active',b.dataset.t===t));
-  ['dash','courses','lesson','mentor','prompts','certs'].forEach(x=>document.getElementById('p-'+x).classList.toggle('hidden',x!==t));
+  ['dash','courses','lesson','mentor','prompts','certs','exam'].forEach(x=>document.getElementById('p-'+x).classList.toggle('hidden',x!==t));
   if(t==='dash')renderDash(); if(t==='courses')renderMyCourses(); if(t==='mentor')renderMentor(); if(t==='prompts')renderPrompts(); if(t==='certs')renderCerts();
 }
 const myCourses=()=>COURSES.filter(c=>session.courses.includes(c.id));
@@ -715,16 +718,20 @@ function renderLesson(){
    </div>`;
   window.scrollTo(0,0);
 }
-function renderQuiz(q){
+function renderQuiz(q,opts){
+  opts=opts||{};
   const qs=Array.isArray(q)?q:[q];
-  const secs=Math.max(qs.length*45,300); // 45s/question, min 5 min
-  window._qz={qs,sel:Array(qs.length).fill(null),graded:false,secs,left:secs,timer:null,started:false};
+  const secs=opts.secs||Math.max(qs.length*45,300); // default: 45s/question, min 5 min
+  const gradeFn=opts.gradeFn||'gradeQuiz';
+  const heading=opts.heading||(qs.length+' questions \\u00b7 pass mark 75%');
+  const startLabel=opts.startLabel||'Start timed assessment \\u2192';
+  window._qz={qs,sel:Array(qs.length).fill(null),graded:false,secs,left:secs,timer:null,started:false,gradeFn};
   return '<div class="qz" id="qzbox">'+
    '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">'+
-   '<b>Graded assessment \u2014 '+qs.length+' questions \u00b7 pass mark 75%</b>'+
+   '<b>Graded assessment \u2014 '+heading+'</b>'+
    '<span id="qz-timer" style="font-family:ui-monospace,Consolas,monospace;font-weight:800;font-size:15px;color:var(--navy);background:var(--sky);padding:4px 12px;border-radius:8px">\u23f1 '+fmtT(secs)+'</span></div>'+
    '<p style="font-size:13px;color:var(--grey);font-family:\'Segoe UI\',Arial,sans-serif;margin:6px 0 12px">Timed: '+Math.round(secs/60)+' minutes. The clock starts when you press Start. Answer all questions, then submit \u2014 or it auto-submits at zero.</p>'+
-   '<div id="qz-startwrap"><button class="btn sm" onclick="startQuiz()">Start timed assessment \u2192</button></div>'+
+   '<div id="qz-startwrap"><button class="btn sm" onclick="startQuiz()">'+startLabel+'</button></div>'+
    '<div id="qz-body" class="hidden">'+
    qs.map((it,qi)=>{
      const opts=it.opts||it.o;
@@ -732,7 +739,7 @@ function renderQuiz(q){
      opts.map((o,oi)=>'<button class="opt" id="qz-'+qi+'-'+oi+'" onclick="selOpt('+qi+','+oi+')">'+o+'</button>').join('')+
      '<p class="hidden" id="qzx-'+qi+'" style="font-size:13px;color:var(--grey);margin:8px 0 2px;font-family:\'Segoe UI\',Arial,sans-serif;padding:8px 10px;background:var(--sky);border-radius:6px"></p></div>';
    }).join('')+
-   '<button class="btn" style="margin-top:16px" onclick="gradeQuiz()">Submit assessment</button>'+
+   '<button class="btn" style="margin-top:16px" onclick="'+gradeFn+'()">Submit assessment</button>'+
    '<p id="qz-msg" style="font-family:\'Segoe UI\',Arial,sans-serif;font-weight:700;margin-top:12px;font-size:15px"></p>'+
    '<div id="qz-cert" class="hidden" style="margin-top:14px"></div>'+
    '</div></div>';
@@ -745,7 +752,7 @@ function startQuiz(){
   z.timer=setInterval(()=>{
     z.left--;const t=document.getElementById('qz-timer');
     if(t){t.textContent='\u23f1 '+fmtT(z.left);if(z.left<=30)t.style.color='var(--red)';}
-    if(z.left<=0){clearInterval(z.timer);if(!z.graded)gradeQuiz(true);}
+    if(z.left<=0){clearInterval(z.timer);if(!z.graded)window[z.gradeFn](true);}
   },1000);
 }
 function selOpt(qi,oi){
@@ -783,10 +790,14 @@ function gradeQuiz(auto){
     if(session&&curCourse&&!prog(curCourse.id).includes(curMod)){
       const arr=progress[session.user][curCourse.id]=progress[session.user][curCourse.id]||[];arr.push(curMod);save(LS_KEYS.progress,progress);
     }
+    syncProgressToCloud(curCourse.id);
     cbox.classList.remove('hidden');
-    cbox.innerHTML='<div class="callout" style="border-left-color:var(--green);background:#EFFBF3"><b>\ud83c\udf89 Congratulations, '+session.name.split(' ')[0]+'!</b> You passed this module\u2019s assessment with '+pct+'%. Your module certificate is ready.<br/><button class="btn sm" style="margin-top:10px" onclick="printCert(curCourse.id,curMod)">\u2b07 Download module certificate (PDF)</button></div>';
-    toast('Module passed \u2014 '+pct+'% \u2713 Certificate unlocked');
+    const allDone=modulesComplete(curCourse);
+    cbox.innerHTML='<div class="callout" style="border-left-color:var(--green);background:#EFFBF3"><b>\ud83c\udf89 Congratulations, '+session.name.split(' ')[0]+'!</b> You passed this module\u2019s assessment with '+pct+'%. Your module certificate is ready.<br/><button class="btn sm" style="margin-top:10px" onclick="printCert(curCourse.id,curMod)">\u2b07 Download module certificate (PDF)</button>'+
+      (allDone?' <button class="btn sm" style="margin-top:10px" onclick="lmsTab(\'certs\')">\ud83c\udf93 All modules complete \u2014 take your Certification Exam \u2192</button>':'')+'</div>';
+    toast(allDone?'Final module passed \u2014 Certification Exam unlocked \ud83c\udf93':('Module passed \u2014 '+pct+'% \u2713 Certificate unlocked'));
   }else{
+    syncProgressToCloud(curCourse.id);
     cbox.classList.remove('hidden');
     cbox.innerHTML='<button class="btn sm ghost" onclick="renderLesson()">Review module & retake</button>';
     toast('Score '+pct+'% \u2014 75% needed to pass');
@@ -798,6 +809,7 @@ function markDone(){
   if(!arr.includes(curMod))arr.push(curMod);
   save(LS_KEYS.progress,progress);
   gsPost('progress',{user:session.user,course:curCourse.id,module:curMod+1,date:new Date().toISOString()});
+  syncProgressToCloud(curCourse.id);
   toast('Module marked complete ✓');
   renderLesson();
 }
@@ -831,41 +843,160 @@ async function renderPrompts(){
 function avgScore(c){const sc=(progress[session.user]&&progress[session.user]['scores_'+c.id])||{};const v=Object.values(sc);return v.length?Math.round(v.reduce((a,b)=>a+b,0)/v.length):0;}
 function quizzedMods(c){return c.modules.filter(m=>Array.isArray(m.quiz)||m.quiz).length;}
 function passedMods(c){const sc=(progress[session.user]&&progress[session.user]['scores_'+c.id])||{};return Object.values(sc).filter(s=>s>=75).length;}
-function certReady(c){return pct(c)===100 && (quizzedMods(c)===0 || passedMods(c)>=quizzedMods(c));}
+/* Every module done + every graded module passed at 75%+ — this is what unlocks the Certification Exam. */
+function modulesComplete(c){return pct(c)===100 && (quizzedMods(c)===0 || passedMods(c)>=quizzedMods(c));}
+function examResult(c){return (progress[session.user]&&progress[session.user]['exam_'+c.id])||null;}
+function examPassed(c){const r=examResult(c);return !!(r&&r.passed);}
+/* The full programme certificate now requires passing the 20-question, 40-minute Certification Exam — not just an average of module scores. */
+function certReady(c){return modulesComplete(c) && examPassed(c);}
 function renderCerts(){
   const cs=myCourses();
-  const ready=cs.filter(certReady);
-  const inprog=cs.filter(c=>!certReady(c));
+  const certified=cs.filter(certReady);
+  const awaitingExam=cs.filter(c=>modulesComplete(c)&&!examPassed(c));
+  const inprog=cs.filter(c=>!modulesComplete(c));
   document.getElementById('p-certs').innerHTML=`<div class="panel"><h3>Certificates of Completion</h3>
-   <p style="color:var(--grey);font-size:14px;margin-bottom:8px">To earn a certificate: complete every module <b>and</b> pass every graded assessment (75%+). Every passed module earns its own certificate; completing all modules unlocks the full programme certificate. All are print-ready PDFs with a validation QR code, signed by Innocent Forteh, Program Director.</p>
-   ${ready.length?ready.map(c=>`
-     <div class="mode"><div class="ic">🎓</div><div><b>${c.title}</b><p>Full programme complete · assessment average ${avgScore(c)}% · signed &amp; ready.</p></div>
-     <button class="btn sm" onclick="printCert('${c.id}')">Full certificate PDF</button></div>`).join('')
-   :'<p style="color:var(--grey)">No full-programme certificate yet — pass every module below to unlock it. Passed modules already have their own certificates.</p>'}</div>
+   <p style="color:var(--grey);font-size:14px;margin-bottom:8px">To earn a certificate: complete every module <b>and</b> pass every graded assessment (75%+). Every passed module earns its own certificate. Completing all modules unlocks a 20-question, 40-minute Certification Exam covering the whole programme — pass it to earn your full programme certificate. All are print-ready PDFs with a validation QR code, signed by Innocent Forteh, Program Director.</p>
+   ${certified.length?certified.map(c=>{const r=examResult(c);return `
+     <div class="mode"><div class="ic">🎓</div><div><b>${c.title}</b><p>Full programme complete · Certification Exam passed at ${r.pct}% · signed &amp; ready.</p></div>
+     <button class="btn sm" onclick="printCert('${c.id}')">Full certificate PDF</button></div>`;}).join('')
+   :'<p style="color:var(--grey)">No full-programme certificate yet — complete every module below, then pass the Certification Exam to unlock it.</p>'}</div>
+   ${awaitingExam.length?`<div class="panel"><h3>🎓 Ready for your Certification Exam</h3>
+   <p style="color:var(--grey);font-size:14px;margin-bottom:10px">You've completed every module in these programmes. Sit the 20-question, 40-minute Certification Exam to earn your full programme certificate.</p>
+   ${awaitingExam.map(c=>{const r=examResult(c);return `
+     <div class="mode"><div class="ic">📝</div><div><b>${c.title}</b><p>${r?('Last attempt: '+r.pct+'% \u2014 75% needed. You can retake it.'):'All modules complete \u2014 not yet attempted.'}</p></div>
+     <button class="btn sm" onclick="startExamFlow('${c.id}')">${r?'Retake Certification Exam':'Start Certification Exam'} \u2192</button></div>`;}).join('')}</div>`:''}
    <div class="panel"><h3>Module certificates earned</h3>${(()=>{let out='';cs.forEach(c=>{const sc=(progress[session.user]&&progress[session.user]['scores_'+c.id])||{};const passed=Object.keys(sc).filter(k=>sc[k]>=75);if(passed.length){out+=`<p style="font-family:'Segoe UI',Arial,sans-serif;font-weight:700;color:var(--navy);margin:12px 0 6px;font-size:14px">${c.title}</p>`;passed.forEach(k=>{const i=+k;out+=`<div class="mode" style="padding:8px 0"><div class="ic">📜</div><div style="flex:1"><b style="font-size:14px">${c.modules[i].t}</b><small style="display:block;color:var(--grey)">Module ${i+1} · ${sc[k]}%</small></div><button class="btn sm ghost" onclick="printCert('${c.id}',${i})">Certificate</button></div>`;});}});return out||'<p style="color:var(--grey)">Pass a module assessment (75%) to earn your first module certificate.</p>';})()}</div>
    ${inprog.length?`<div class="panel"><h3>Programme progress</h3>${inprog.map(c=>{const qm=quizzedMods(c),pm=passedMods(c);return `
      <div style="padding:10px 0;border-bottom:1px solid var(--line)"><div style="display:flex;justify-content:space-between;font-family:'Segoe UI',Arial,sans-serif;font-size:14px"><b>${c.title}</b><span style="color:var(--grey)">${prog(c.id).length}/${c.modules.length} modules${qm?` · ${pm}/${qm} passed`:''}</span></div>
      <div class="progress-outer" style="margin-top:6px"><div class="progress-inner" style="width:${pct(c)}%"></div></div></div>`;}).join('')}</div>`:''}`;
 }
-function printCert(cid,modIdx){
+/* ---- Certification Exam: 20 Qs sampled evenly across every completed module, 40-minute single countdown ---- */
+function buildExamPool(c){
+  const bank=[]; // {q,opts,a,x,modIdx}
+  c.modules.forEach((m,mi)=>{ if(Array.isArray(m.quiz)) m.quiz.forEach(q=>bank.push(Object.assign({modIdx:mi},q))); });
+  // shuffle
+  for(let i=bank.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[bank[i],bank[j]]=[bank[j],bank[i]];}
+  const target=Math.min(20,bank.length);
+  // spread as evenly as possible across modules, then fill any remainder randomly
+  const byMod={}; bank.forEach(q=>{(byMod[q.modIdx]=byMod[q.modIdx]||[]).push(q);});
+  const modIdxs=Object.keys(byMod);
+  const picked=[]; let idx=0;
+  while(picked.length<target && modIdxs.some(mi=>byMod[mi].length)){
+    const mi=modIdxs[idx%modIdxs.length];
+    if(byMod[mi].length)picked.push(byMod[mi].shift());
+    idx++;
+  }
+  return picked.slice(0,target);
+}
+function startExamFlow(cid){
   const c=courseCache[cid]||COURSES.find(x=>x.id===cid);
+  const pool=buildExamPool(c);
+  window._examCourseId=cid;
+  document.getElementById('p-exam').innerHTML=`<div class="panel">
+    <p class="eyebrow">${c.title}</p>
+    <h3 style="font-size:24px">🎓 Certification Exam</h3>
+    <p style="color:var(--grey);font-size:14.5px;margin-bottom:14px">${pool.length} questions drawn from every module you completed · 40 minutes · pass mark 75%. Passing unlocks your full programme certificate.</p>
+    ${renderQuiz(pool,{secs:2400,gradeFn:'gradeExam',heading:pool.length+' questions \u00b7 40 minutes \u00b7 pass mark 75%',startLabel:'Start Certification Exam \u2192'})}
+    <button class="btn ghost sm" style="margin-top:14px" onclick="lmsTab('certs')">\u2190 Back to Certificates</button>
+   </div>`;
+  lmsTab('exam');
+}
+function gradeExam(auto){
+  const z=window._qz;if(z.graded)return;
+  if(!auto && z.sel.some(s=>s===null)){
+    const m=document.getElementById('qz-msg');m.textContent='Please answer all '+z.qs.length+' questions before submitting.';m.style.color='var(--amber)';return;
+  }
+  z.graded=true;if(z.timer)clearInterval(z.timer);
+  let correct=0;
+  z.qs.forEach((it,qi)=>{
+    const opts=it.opts||it.o;
+    opts.forEach((_,oi)=>{const el=document.getElementById('qz-'+qi+'-'+oi);if(el){if(oi===it.a)el.classList.add('ok');else if(z.sel[qi]===oi)el.classList.add('bad');el.disabled=true;}});
+    if(z.sel[qi]===it.a)correct++;
+    if(it.x){const xp=document.getElementById('qzx-'+qi);if(xp){xp.textContent='\u2192 '+it.x;xp.classList.remove('hidden');}}
+  });
+  const pct=Math.round(100*correct/z.qs.length),pass=pct>=75;
+  const msg=document.getElementById('qz-msg');
+  msg.textContent=(auto?'\u23f0 Time up. ':'')+(pass?'\u2713 PASSED \u2014 ':'\u2717 Below 75% \u2014 ')+correct+'/'+z.qs.length+' correct ('+pct+'%).';
+  msg.style.color=pass?'var(--green)':'var(--red)';
+  const cid=window._examCourseId,c=courseCache[cid]||COURSES.find(x=>x.id===cid);
+  if(session&&cid){
+    progress[session.user]=progress[session.user]||{};
+    const prev=progress[session.user]['exam_'+cid];
+    if(!prev||pct>prev.pct){progress[session.user]['exam_'+cid]={pct,passed:pass,date:new Date().toISOString(),questions:z.qs.length};save(LS_KEYS.progress,progress);}
+    gsPost('quiz_score',{user:session.user,name:session.name,course:cid,module:'EXAM',title:'Certification Exam',score:pct,passed:pass,date:new Date().toISOString()});
+    syncProgressToCloud(cid);
+  }
+  const cbox=document.getElementById('qz-cert');
+  cbox.classList.remove('hidden');
+  if(pass){
+    cbox.innerHTML='<div class="callout" style="border-left-color:var(--green);background:#EFFBF3"><b>\ud83c\udf89 Congratulations, '+session.name.split(' ')[0]+'!</b> You passed the Certification Exam with '+pct+'%. Your full programme certificate is ready.<br/><button class="btn sm" style="margin-top:10px" onclick="printCert(\''+cid+'\')">\u2b07 Download programme certificate (PDF)</button> <button class="btn sm ghost" style="margin-top:10px" onclick="lmsTab(\'certs\')">Back to Certificates</button></div>';
+    toast('Certification Exam passed \u2014 '+pct+'% \ud83c\udf93 Full certificate unlocked');
+  }else{
+    cbox.innerHTML='<button class="btn sm ghost" onclick="startExamFlow(\''+cid+'\')">Retake Certification Exam</button> <button class="btn sm ghost" onclick="lmsTab(\'certs\')">Back to Certificates</button>';
+    toast('Score '+pct+'% \u2014 75% needed to pass');
+  }
+}
+/* ---- Cloud progress sync: so a student can resume on ANY device, and admin can see it ---- */
+function buildProgressSnapshot(cid){
+  return {
+    course:cid,
+    doneModules:prog(cid),
+    scores:(progress[session.user]&&progress[session.user]['scores_'+cid])||{},
+    exam:(progress[session.user]&&progress[session.user]['exam_'+cid])||null
+  };
+}
+function syncProgressToCloud(cid){
+  if(!session||session.role!=='student'||!cid)return;
+  const snap=buildProgressSnapshot(cid);
+  gsPost('progress_state',Object.assign({user:session.user,name:session.name,updated:new Date().toISOString()},snap));
+}
+async function pullProgressFromCloud(){
+  if(!session||!session.pass||!gsConnected())return;
+  const res=await gsGet({fn:'myprogress',u:session.user,p:session.pass});
+  if(!res||!res.ok)return;
+  (res.rows||[]).forEach(r=>{
+    if(!r.course)return;
+    progress[session.user]=progress[session.user]||{};
+    const local=progress[session.user][r.course]||[];
+    progress[session.user][r.course]=Array.from(new Set([...local,...(r.doneModules||[])]));
+    const sk='scores_'+r.course;
+    progress[session.user][sk]=progress[session.user][sk]||{};
+    Object.keys(r.scores||{}).forEach(k=>{
+      progress[session.user][sk][k]=Math.max(progress[session.user][sk][k]||0,r.scores[k]||0);
+    });
+    const ek='exam_'+r.course;
+    const existing=progress[session.user][ek];
+    if(r.exam&&(!existing||r.exam.pct>existing.pct))progress[session.user][ek]=r.exam;
+  });
+  save(LS_KEYS.progress,progress);
+}
+function printCert(cid,modIdx){
   const sc=(progress[session.user]&&progress[session.user]['scores_'+cid])||{};
+  const exam=(progress[session.user]&&progress[session.user]['exam_'+cid])||null;
+  printCertCore(session.user,session.name,cid,modIdx,sc,exam);
+}
+/* Generalized cert renderer — used by students for their own certs, and by admin to
+   view/reprint ANY student's earned certificate from the Learner Progress tab. */
+function printCertCore(username,name,cid,modIdx,scoresObj,examObj){
+  const c=courseCache[cid]||COURSES.find(x=>x.id===cid)||CATALOG.find(x=>x.id===cid);
+  const sc=scoresObj||{};
   const isModule=(typeof modIdx==='number');
   let title,score,subline,certId;
   const now=new Date();
   const dateStr=now.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
   if(isModule){
-    title=c.modules[modIdx].t;
+    title=(c.modules&&c.modules[modIdx])?c.modules[modIdx].t:('Module '+(modIdx+1));
     score=sc[modIdx]||0;
-    subline='Module '+(modIdx+1)+' of '+c.modules.length+' \u00b7 '+c.title;
-    certId='T21-'+cid.toUpperCase()+'-M'+(modIdx+1)+'-'+session.user.toUpperCase()+'-'+now.getFullYear();
+    subline='Module '+(modIdx+1)+' of '+(c.modules?c.modules.length:'?')+' \u00b7 '+c.title;
+    certId='T21-'+cid.toUpperCase()+'-M'+(modIdx+1)+'-'+username.toUpperCase()+'-'+now.getFullYear();
   }else{
     title=c.title;
-    const v=Object.values(sc);score=v.length?Math.round(v.reduce((a,b)=>a+b,0)/v.length):0;
-    subline=c.len+' \u00b7 Full programme completion';
-    certId='T21-'+cid.toUpperCase()+'-FULL-'+session.user.toUpperCase()+'-'+now.getFullYear();
+    score=(examObj&&examObj.pct)||0;
+    const examDate=examObj&&examObj.date?new Date(examObj.date).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}):dateStr;
+    subline=(c.len?c.len+' \u00b7 ':'')+'Certification Exam passed '+examDate;
+    certId='T21-'+cid.toUpperCase()+'-CERT-'+username.toUpperCase()+'-'+now.getFullYear();
   }
-  const qrPayload='mailto:team21online@gmail.com?subject=Verify%20Certificate%20'+encodeURIComponent(certId)+'&body=Please%20verify%20certificate%20'+encodeURIComponent(certId)+'%20issued%20to%20'+encodeURIComponent(session.name)+'.';
+  const qrPayload='mailto:team21online@gmail.com?subject=Verify%20Certificate%20'+encodeURIComponent(certId)+'&body=Please%20verify%20certificate%20'+encodeURIComponent(certId)+'%20issued%20to%20'+encodeURIComponent(name)+'.';
   const qrSVG=(typeof makeQRSVG==='function')?makeQRSVG(qrPayload,120):'';
   const w=window.open('','_blank');
   w.document.write('<html><head><meta charset="utf-8"><title>Certificate \u2014 '+title+'</title>'+
@@ -902,7 +1033,7 @@ function printCert(cid,modIdx){
    '<h1>'+(isModule?'Certificate of Achievement':'Certificate of Completion')+'</h1>'+
    '<div class="rule"></div>'+
    '<p class="small">This is proudly presented to</p>'+
-   '<div class="name">'+session.name+'</div>'+
+   '<div class="name">'+name+'</div>'+
    '<p class="small">for '+(isModule?'successfully passing the graded assessment for':'completing all modules and assessments of')+'</p>'+
    '<div class="ctitle">'+title+'</div>'+
    '<div class="meta">'+subline+' \u00b7 Score achieved: <b>'+score+'%</b> \u00b7 '+dateStr+'</div>'+
@@ -919,12 +1050,13 @@ function printCert(cid,modIdx){
 }
 
 /* ---------- ADMIN ---------- */
-function enterAdmin(){show('admin');admTab('a-over');syncRosterFromCloud(true);}
+function enterAdmin(){show('admin');admTab('a-over');syncRosterFromCloud(true);syncAllProgressFromCloud(true);}
 function admTab(t){
   document.querySelectorAll('#admin .ptab').forEach(b=>b.classList.toggle('active',b.dataset.t===t));
-  ['a-over','a-gen','a-students','a-enrol','a-analytics','a-inq','a-sync'].forEach(x=>document.getElementById('p-'+x).classList.toggle('hidden',x!==t));
-  ({'a-over':renderOver,'a-gen':renderGen,'a-students':renderStudents,'a-enrol':renderEnrol,'a-analytics':renderAnalytics,'a-inq':renderInq,'a-sync':renderSync})[t]();
+  ['a-over','a-gen','a-students','a-progress','a-enrol','a-analytics','a-inq','a-sync'].forEach(x=>document.getElementById('p-'+x).classList.toggle('hidden',x!==t));
+  ({'a-over':renderOver,'a-gen':renderGen,'a-students':renderStudents,'a-progress':renderProgress,'a-enrol':renderEnrol,'a-analytics':renderAnalytics,'a-inq':renderInq,'a-sync':renderSync})[t]();
   if(t==='a-inq')syncInquiriesFromCloud(true);
+  if(t==='a-progress')syncAllProgressFromCloud(true);
 }
 function renderOver(){
   document.getElementById('p-a-over').innerHTML=`
@@ -936,9 +1068,9 @@ function renderOver(){
     <div class="kpi"><b>${students.length}</b><span>Registered students</span></div>
     <div class="kpi"><b>${students.filter(s=>s.status==='active').length}</b><span>Active accounts</span></div>
     <div class="kpi"><b>${students.reduce((a,s)=>a+(s.courses?s.courses.length:0),0)}</b><span>Total enrolments</span></div>
+    <div class="kpi"><b>${adminProgress.filter(r=>r.exam&&r.exam.passed).length}</b><span>Full certificates issued</span></div>
     <div class="kpi"><b>${inquiries.length}</b><span>Open inquiries</span></div>
     <div class="kpi"><b>${CATALOG.length}</b><span>Published courses</span></div>
-    <div class="kpi"><b>${CATALOG.reduce((a,c)=>a+(c.mods||0),0)}</b><span>Total modules</span></div>
   </div>
   <div class="panel"><h3>Quick actions</h3>
     <div style="display:flex;gap:10px;flex-wrap:wrap">
@@ -1087,6 +1219,7 @@ function renderStudents(){
      <td style="white-space:nowrap">
        <button class="btn sm ghost" onclick="toggleStudent(${s.id})">${s.status==='active'?'Suspend':'Activate'}</button>
        <button class="btn sm ghost" onclick="resetPass(${s.id})">Reset PW</button>
+       <button class="btn sm ghost" onclick="viewStudentProgress('${s.name.replace(/'/g,"\\'")}')">📊 Progress</button>
        <button class="btn sm ghost" style="border-color:var(--red);color:var(--red)" onclick="delStudent(${s.id})">Delete</button>
      </td></tr>`).join('')||'<tr><td colspan="8" style="color:var(--grey)">No students yet — use the Credential Generator.</td></tr>'}
    </table></div>
@@ -1194,6 +1327,54 @@ async function pushLocalRosterToCloud(){
   toast('Pushing '+students.length+' local account(s) to the cloud…');
   for(const s of students){ gsPost('student_update',s); await new Promise(r=>setTimeout(r,150)); }
   toast('Pushed. Wait a few seconds, then click "Sync from cloud" to confirm they landed.');
+}
+
+/* ---- Admin: Learner Progress tab — real cross-device visibility into every
+   registered student's module completion, quiz scores, exam status, and
+   earned certificates. Pulled fresh from the cloud ProgressState store. ---- */
+let adminProgress=[]; // [{user,name,course,doneModules,scores,exam,updated}]
+async function syncAllProgressFromCloud(silent){
+  if(!gsConnected())return;
+  if(!silent)toast('Syncing learner progress from cloud…');
+  const res=await gsGet({fn:'allprogress',au:ADMIN.user,ap:ADMIN.pass});
+  if(!res||!res.ok){ if(!silent)toast('Cloud sync unavailable — check the connection.'); return; }
+  adminProgress=res.rows||[];
+  if(document.getElementById('p-a-progress')&&!document.getElementById('p-a-progress').classList.contains('hidden'))renderProgress();
+  if(!silent)toast('Synced '+adminProgress.length+' progress record(s) from cloud ✓');
+}
+function renderProgress(){
+  const q=(document.getElementById('prog-search')?.value||'').trim().toLowerCase();
+  const rows=adminProgress.filter(r=>!q||(r.name||'').toLowerCase().includes(q)||(r.user||'').toLowerCase().includes(q));
+  window._progRows=rows; // indexed lookup so cert buttons never have to embed raw JSON/names in onclick attributes
+  const body=rows.map((r,i)=>{
+    const c=CATALOG.find(x=>x.id===r.course);
+    const title=c?c.title:r.course;
+    const totalMods=c?c.mods:'?';
+    const doneN=(r.doneModules||[]).length;
+    const scores=r.scores||{};
+    const scoreVals=Object.values(scores);
+    const avg=scoreVals.length?Math.round(scoreVals.reduce((a,b)=>a+b,0)/scoreVals.length):0;
+    const modCertN=Object.values(scores).filter(s=>s>=75).length;
+    const exam=r.exam;
+    const examCell=exam?(exam.passed?`<b style="color:var(--green)">✓ Passed ${exam.pct}%</b><br><small style="color:var(--grey)">${exam.date?new Date(exam.date).toLocaleDateString():''}</small>`:`<span style="color:var(--red)">✗ ${exam.pct}%</span>`):'<span style="color:var(--grey)">Not attempted</span>';
+    const certBtn=exam&&exam.passed?`<button class="btn sm ghost" onclick="printCertFromProgressRow(${i})">🎓 View certificate</button>`:'';
+    return `<tr><td>${r.name||r.user}</td><td>${title}</td><td>${doneN}/${totalMods}</td><td>${avg}% avg · ${modCertN} module cert(s)</td><td>${examCell}</td><td>${certBtn}</td></tr>`;
+  }).join('');
+  document.getElementById('p-a-progress').innerHTML=`
+  <div class="panel"><h3>Learner Progress &amp; Certificates <button class="btn sm ghost" style="margin-left:10px" onclick="syncAllProgressFromCloud(false)">🔄 Sync from cloud</button></h3>
+   <p style="font-size:12.5px;color:var(--grey);margin:-6px 0 12px">Every module completion, quiz score, and Certification Exam result — pulled from every device a student has used. Use this to track any registered user's progress and reprint their earned certificates.</p>
+   <div class="field" style="max-width:320px"><input id="prog-search" placeholder="Search by student name…" oninput="renderProgress()" value="${q}"/></div>
+   <div style="overflow-x:auto;margin-top:12px"><table class="dt"><tr><th>Student</th><th>Course</th><th>Modules</th><th>Scores</th><th>Certification Exam</th><th></th></tr>
+   ${body||'<tr><td colspan="6" style="color:var(--grey)">No progress records yet — they appear once a student starts a course, or click Sync from cloud.</td></tr>'}
+   </table></div></div>`;
+}
+function printCertFromProgressRow(i){
+  const r=(window._progRows||[])[i]; if(!r)return;
+  printCertCore(r.user,r.name,r.course,null,r.scores||{},r.exam||null);
+}
+function viewStudentProgress(name){
+  admTab('a-progress');
+  setTimeout(()=>{const inp=document.getElementById('prog-search');if(inp){inp.value=name;renderProgress();}},0);
 }
 
 /* ---------- INIT ---------- */
