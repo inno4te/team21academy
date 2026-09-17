@@ -212,6 +212,85 @@ table.dt tr:hover td{background:var(--sky)}
 @media print{header,.hero,footer{display:none}}
 :focus-visible{outline:3px solid var(--blue-l);outline-offset:2px}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto}}
+
+/* ================================================================
+   MOBILE RESPONSIVENESS — tighten layout on phones/small tablets.
+   Everything above already handles the big grid stacks; this block
+   focuses on padding, font sizes, tap targets, and edge cases that
+   made the site cramped on real phones.
+   ================================================================ */
+@media (max-width:900px){
+  section{padding:52px 0}
+  .hero{padding:64px 0 68px}
+  .hero p{font-size:16px}
+  .hero-stats{gap:24px;margin-top:32px}
+  .hero-stats b{font-size:24px}
+  .h2{font-size:28px}
+  .lead{font-size:16px}
+  .modal{padding:26px 22px}
+  .panel{padding:20px}
+  .grid{gap:18px;margin-top:24px}
+  /* keep the nav bar comfortable when the menu is open */
+  .navlinks{gap:14px;font-size:16px}
+  .navlinks a{padding:10px 6px;display:block}
+  /* larger tap targets — 44px minimum recommended for touch */
+  .btn{padding:14px 22px;font-size:14.5px;min-height:46px}
+  .btn.sm{padding:10px 16px;font-size:13.5px;min-height:40px}
+  /* LMS/admin tab bar — already scrolls; make active state clearer on touch */
+  .ptab{padding:14px 16px;font-size:13.5px}
+  .kpis{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+  .kpi{padding:14px}
+  .kpi b{font-size:22px}
+  /* dense data tables get a horizontal drag hint */
+  table.dt{font-size:12.5px}
+  table.dt th, table.dt td{padding:8px 10px}
+  /* certificates & progress panels: stack rows */
+  .mode{flex-wrap:wrap}
+  .mode > div:not(.ic){flex:1 1 200px;min-width:0}
+}
+@media (max-width:560px){
+  .wrap{padding:0 18px}
+  section{padding:42px 0}
+  .hero{padding:52px 0 56px}
+  .hero h1{font-size:28px;line-height:1.2}
+  .hero p{font-size:15px}
+  .hero-card{padding:22px}
+  .hero .cta{gap:10px}
+  .hero .cta .btn{flex:1 1 100%}
+  .h2{font-size:24px}
+  .lead{font-size:15px}
+  .strip .wrap{gap:8px 22px;font-size:12px}
+  /* Course cards: full-width, less padding */
+  .grid{grid-template-columns:1fr;gap:14px}
+  .card{border-radius:14px}
+  /* Panels & modal tighter still */
+  .panel{padding:16px;border-radius:14px}
+  .modal{padding:22px 18px;border-radius:14px}
+  .modal h2{font-size:20px}
+  /* Nav */
+  .logo-mark{width:38px;height:38px;font-size:13px}
+  .logo-name b{font-size:16px}
+  .logo-name span{font-size:10px}
+  /* Footer: 1-column on very narrow */
+  footer .cols{grid-template-columns:1fr}
+  /* Certificate PDF viewport: on tiny screens the print sheet won't fit,
+     but the sheet is print-only anyway — just let it scroll horizontally
+     in the preview tab */
+  /* KPIs 2 up */
+  .kpis{grid-template-columns:1fr 1fr}
+  /* Buttons at full width in cert/mode rows so tap is easy */
+  .mode .btn.sm{width:100%;margin-top:8px}
+}
+/* When the LMS is on a phone, the sticky ptabs shouldn't hug under a nav
+   that's now taller because the hamburger menu is open — reset the offset. */
+@media (max-width:900px){
+  .ptabs{top:0;position:sticky}
+}
+/* Very tall/narrow screens (e.g. iPhone SE): make sure form fields
+   don't overflow the modal */
+@media (max-width:400px){
+  .field input, .field select, .field textarea{font-size:15px;padding:12px}
+}
 </style>
 </head>
 <body>
@@ -234,14 +313,19 @@ function makeQRSVG(text,size){try{var q=qrcode(0,1);q.addData(text);q.make();ret
   </div>
   <button class="hamb" onclick="document.getElementById('nl').classList.toggle('open')" aria-label="Menu">☰</button>
   <div class="navlinks" id="nl">
-    <a href="#programs">Programs</a>
-    <a href="#delivery">Delivery Options</a>
-    <a href="#mentorship">Mentorship</a>
-    <a href="#organizations">For Organizations</a>
-    <a href="#consulting">Consulting</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-    <button class="btn sm" onclick="openLogin()">Learner Login</button>
+    <a href="#programs" data-i18n="nav.programs">Programs</a>
+    <a href="#delivery" data-i18n="nav.delivery">Delivery Options</a>
+    <a href="#mentorship" data-i18n="nav.mentorship">Mentorship</a>
+    <a href="#organizations" data-i18n="nav.organizations">For Organizations</a>
+    <a href="#consulting" data-i18n="nav.consulting">Consulting</a>
+    <a href="#about" data-i18n="nav.about">About</a>
+    <a href="#contact" data-i18n="nav.contact">Contact</a>
+    <select id="langSel" onchange="applyLang(this.value)" style="border:1.5px solid var(--line);border-radius:8px;padding:6px 10px;font-family:inherit;font-size:13px;font-weight:600;color:var(--navy);background:#fff;cursor:pointer" aria-label="Language">
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="es">Español</option>
+    </select>
+    <button class="btn sm" onclick="openLogin()" data-i18n="nav.login">Learner Login</button>
   </div>
 </div></nav></header>
 
@@ -479,12 +563,12 @@ function makeQRSVG(text,size){try{var q=qrcode(0,1);q.addData(text);q.make();ret
     <div class="who"><span class="pill" id="lms-user"></span><button class="btn sm ghost" style="border-color:#fff;color:#fff;background:transparent" onclick="logout()">Sign out</button></div>
   </div>
   <div class="ptabs">
-    <button class="ptab active" data-t="dash" onclick="lmsTab('dash')">My Dashboard</button>
-    <button class="ptab" data-t="courses" onclick="lmsTab('courses')">My Courses</button>
-    <button class="ptab" data-t="lesson" onclick="lmsTab('lesson')" id="lessonTabBtn" style="display:none">Current Lesson</button>
-    <button class="ptab" data-t="mentor" onclick="lmsTab('mentor')">My Mentor</button>
-    <button class="ptab" data-t="prompts" onclick="lmsTab('prompts')">Prompt Library</button>
-    <button class="ptab" data-t="certs" onclick="lmsTab('certs')">Certificates</button>
+    <button class="ptab active" data-t="dash" onclick="lmsTab('dash')" data-i18n="lms.tab.dash">My Dashboard</button>
+    <button class="ptab" data-t="courses" onclick="lmsTab('courses')" data-i18n="lms.tab.courses">My Courses</button>
+    <button class="ptab" data-t="lesson" onclick="lmsTab('lesson')" id="lessonTabBtn" style="display:none" data-i18n="lms.tab.lesson">Current Lesson</button>
+    <button class="ptab" data-t="mentor" onclick="lmsTab('mentor')" data-i18n="lms.tab.mentor">My Mentor</button>
+    <button class="ptab" data-t="prompts" onclick="lmsTab('prompts')" data-i18n="lms.tab.prompts">Prompt Library</button>
+    <button class="ptab" data-t="certs" onclick="lmsTab('certs')" data-i18n="lms.tab.certs">Certificates</button>
   </div>
   <div class="pbody">
     <div id="p-dash"></div>
@@ -536,7 +620,86 @@ function makeQRSVG(text,size){try{var q=qrcode(0,1);q.addData(text);q.make();ret
 ========================================================= */
 
 const ADMIN = { user:'forteh', pass:'f0rteh' };
-const LS_KEYS = { students:'t21us_students', inquiries:'t21us_inquiries', progress:'t21us_progress', gs:'t21us_gs_url' };
+const LS_KEYS = { students:'t21us_students', inquiries:'t21us_inquiries', progress:'t21us_progress', gs:'t21us_gs_url', lang:'t21us_lang' };
+
+/* ========== INTERNATIONALIZATION ==========
+   The platform interface (nav, buttons, LMS chrome, certificate labels, exam)
+   is available in English, French, and Spanish on this US edition. Course
+   content itself (lessons, quiz questions) stays in the language it was
+   authored in — English — same convention used by Coursera/edX/Udemy for
+   instructor-recorded content. Marketing page body copy stays English too;
+   headings and CTAs translate.
+
+   Add a new string: give it a stable key and a translation for every
+   supported language. Use it in templates via t('key'), or in static HTML
+   via <span data-i18n="key">English fallback</span>. */
+const LANGS = ['en','fr','es']; // US: three; Cameroon file trims this to ['en','fr']
+const LANG_NAMES = {en:'English', fr:'Français', es:'Español'};
+const I18N = {
+  en: {
+    'nav.programs':'Programs','nav.delivery':'Delivery Options','nav.mentorship':'Mentorship','nav.organizations':'For Organizations','nav.consulting':'Consulting','nav.about':'About','nav.contact':'Contact','nav.login':'Learner Login',
+    'sec.programs':'Programs','sec.delivery':'Delivery Options','sec.mentorship':'Mentor-led Learning','sec.organizations':'For Organizations','sec.consulting':'Consulting','sec.about':'About Team21 Academy','sec.contact':'Contact',
+    'login.title':'Log in','login.tab_student':'Student','login.tab_admin':'Administrator','login.username':'Username','login.password':'Password','login.submit':'Log in','login.err_creds':'Invalid credentials, or account not yet activated.',
+    'lms.tab.dash':'My Dashboard','lms.tab.courses':'My Courses','lms.tab.lesson':'Current Lesson','lms.tab.mentor':'My Mentor','lms.tab.prompts':'Prompt Library','lms.tab.certs':'Certificates','lms.welcome':'Welcome back',
+    'certs.title':'Certificates of Completion','certs.intro':'To earn a certificate: complete every module and pass every graded assessment (75%+). Every passed module earns its own certificate. Completing all modules unlocks a 20-question, 40-minute Certification Exam covering the whole programme — pass it to earn your full programme certificate.','certs.none':'No full-programme certificate yet — complete every module below, then pass the Certification Exam to unlock it.','certs.exam_ready_title':'Ready for your Certification Exam','certs.exam_ready_intro':"You've completed every module in these programmes. Sit the 20-question, 40-minute Certification Exam to earn your full programme certificate.",'certs.start_exam':'Start Certification Exam','certs.retake_exam':'Retake Certification Exam','certs.last_attempt':'Last attempt','certs.needed':'needed','certs.can_retake':'You can retake it.','certs.not_attempted':'All modules complete — not yet attempted.','certs.mod_earned':'Module certificates earned','certs.mod_earn_first':'Pass a module assessment (75%) to earn your first module certificate.','certs.programme_progress':'Programme progress','certs.full_pdf':'Full certificate PDF','certs.module_cert':'Certificate','certs.programme_complete':'Full programme complete','certs.exam_passed_at':'Certification Exam passed at',
+    'exam.title':'Certification Exam','exam.intro':'20 questions drawn from every module you completed · 40 minutes · pass mark 75%. Passing unlocks your full programme certificate.','exam.start':'Start Certification Exam →','exam.submit':'Submit assessment','exam.back':'Back to Certificates','exam.time_up':'Time up.','exam.passed':'PASSED','exam.below':'Below 75%','exam.correct':'correct','exam.please_answer_all':'Please answer all questions before submitting.','exam.congrats':'Congratulations','exam.you_passed':'You passed the Certification Exam with','exam.your_cert_ready':'Your full programme certificate is ready.','exam.download_pdf':'Download programme certificate (PDF)',
+    'toast.exam_passed':'Certification Exam passed','toast.exam_unlocked':'Final module passed — Certification Exam unlocked','toast.mod_passed':'Module passed','toast.cert_unlocked':'Certificate unlocked','toast.score':'Score','toast.needed_to_pass':'75% needed to pass','toast.mod_done':'Module marked complete',
+    'cert.of_completion':'Certificate of Completion','cert.of_achievement':'Certificate of Achievement','cert.presented_to':'This is proudly presented to','cert.for_module':'for successfully passing the graded assessment for','cert.for_full':'for completing all modules and assessments of','cert.pd':'Program Director','cert.score':'Score achieved','cert.cid':'Certificate ID','cert.scan':'Scan to validate','cert.of':'of',
+    'lms.exam_take_now':'All modules complete — take your Certification Exam →','lms.you_passed_this':"You passed this module's assessment with","lms.cert_ready":'Your module certificate is ready.','lms.download_mod_cert':'Download module certificate (PDF)','lms.review_retake':'Review module & retake'
+  },
+  fr: {
+    'nav.programs':'Programmes','nav.delivery':'Formules','nav.mentorship':'Mentorat','nav.organizations':'Organisations','nav.consulting':'Conseil','nav.about':'À propos','nav.contact':'Contact','nav.login':'Espace apprenant',
+    'sec.programs':'Programmes','sec.delivery':'Formules de formation','sec.mentorship':'Apprentissage encadré','sec.organizations':'Pour les organisations','sec.consulting':'Services de conseil','sec.about':'À propos de Team21 Academy','sec.contact':'Contact',
+    'login.title':'Connexion','login.tab_student':'Apprenant','login.tab_admin':'Administrateur','login.username':"Nom d'utilisateur",'login.password':'Mot de passe','login.submit':'Se connecter','login.err_creds':"Identifiants invalides, ou compte non encore activé.",
+    'lms.tab.dash':'Mon tableau de bord','lms.tab.courses':'Mes cours','lms.tab.lesson':'Leçon en cours','lms.tab.mentor':'Mon mentor','lms.tab.prompts':'Bibliothèque de prompts','lms.tab.certs':'Certificats','lms.welcome':'Bon retour',
+    'certs.title':'Certificats de fin de programme','certs.intro':"Pour obtenir un certificat : terminez tous les modules et réussissez toutes les évaluations notées (75 % et plus). Chaque module réussi donne droit à son propre certificat. Après tous les modules, un examen de certification de 20 questions en 40 minutes est déverrouillé — réussissez-le pour obtenir votre certificat complet du programme.",'certs.none':"Aucun certificat complet pour le moment — terminez tous les modules ci-dessous, puis réussissez l'examen de certification pour le débloquer.",'certs.exam_ready_title':"Prêt pour votre examen de certification",'certs.exam_ready_intro':"Vous avez terminé tous les modules de ces programmes. Passez l'examen de certification de 20 questions en 40 minutes pour obtenir votre certificat complet.",'certs.start_exam':"Passer l'examen de certification",'certs.retake_exam':"Repasser l'examen",'certs.last_attempt':'Dernier essai','certs.needed':'requis','certs.can_retake':'Vous pouvez le repasser.','certs.not_attempted':'Tous les modules terminés — pas encore tenté.','certs.mod_earned':'Certificats de modules obtenus','certs.mod_earn_first':"Réussissez l'évaluation d'un module (75 %) pour obtenir votre premier certificat de module.",'certs.programme_progress':'Progression du programme','certs.full_pdf':'Certificat complet (PDF)','certs.module_cert':'Certificat','certs.programme_complete':'Programme complet','certs.exam_passed_at':"Examen de certification réussi à",
+    'exam.title':'Examen de certification','exam.intro':"20 questions tirées de chaque module complété · 40 minutes · seuil de réussite 75 %. Le succès débloque votre certificat complet.",'exam.start':"Commencer l'examen de certification →",'exam.submit':'Soumettre','exam.back':'Retour aux certificats','exam.time_up':'Temps écoulé.','exam.passed':'RÉUSSI','exam.below':'Sous 75 %','exam.correct':'correctes','exam.please_answer_all':'Veuillez répondre à toutes les questions avant de soumettre.','exam.congrats':'Félicitations','exam.you_passed':"Vous avez réussi l'examen de certification avec",'exam.your_cert_ready':'Votre certificat complet est prêt.','exam.download_pdf':'Télécharger le certificat (PDF)',
+    'toast.exam_passed':'Examen de certification réussi','toast.exam_unlocked':'Dernier module réussi — examen de certification débloqué','toast.mod_passed':'Module réussi','toast.cert_unlocked':'Certificat débloqué','toast.score':'Score','toast.needed_to_pass':'75 % requis pour réussir','toast.mod_done':'Module marqué comme terminé',
+    'cert.of_completion':'Certificat de fin de programme','cert.of_achievement':'Certificat de réussite','cert.presented_to':'Décerné avec fierté à','cert.for_module':"pour avoir réussi l'évaluation notée du module",'cert.for_full':"pour avoir complété tous les modules et évaluations de",'cert.pd':'Directeur du Programme','cert.score':'Score obtenu','cert.cid':'N° du certificat','cert.scan':'Scanner pour valider','cert.of':'sur',
+    'lms.exam_take_now':"Tous les modules terminés — passez votre examen de certification →",'lms.you_passed_this':"Vous avez réussi l'évaluation de ce module avec",'lms.cert_ready':'Votre certificat de module est prêt.','lms.download_mod_cert':'Télécharger le certificat du module (PDF)','lms.review_retake':'Revoir le module et repasser'
+  },
+  es: {
+    'nav.programs':'Programas','nav.delivery':'Formatos','nav.mentorship':'Mentoría','nav.organizations':'Organizaciones','nav.consulting':'Consultoría','nav.about':'Acerca','nav.contact':'Contacto','nav.login':'Área del estudiante',
+    'sec.programs':'Programas','sec.delivery':'Formatos de entrega','sec.mentorship':'Aprendizaje con mentor','sec.organizations':'Para organizaciones','sec.consulting':'Servicios de consultoría','sec.about':'Acerca de Team21 Academy','sec.contact':'Contacto',
+    'login.title':'Iniciar sesión','login.tab_student':'Estudiante','login.tab_admin':'Administrador','login.username':'Nombre de usuario','login.password':'Contraseña','login.submit':'Iniciar sesión','login.err_creds':'Credenciales inválidas, o cuenta aún no activada.',
+    'lms.tab.dash':'Mi panel','lms.tab.courses':'Mis cursos','lms.tab.lesson':'Lección actual','lms.tab.mentor':'Mi mentor','lms.tab.prompts':'Biblioteca de prompts','lms.tab.certs':'Certificados','lms.welcome':'Bienvenido de nuevo',
+    'certs.title':'Certificados de finalización','certs.intro':'Para obtener un certificado: complete todos los módulos y apruebe todas las evaluaciones calificadas (75 % o más). Cada módulo aprobado obtiene su propio certificado. Al completar todos los módulos se desbloquea un Examen de Certificación de 20 preguntas y 40 minutos — apruébelo para obtener su certificado completo del programa.','certs.none':'Aún no hay un certificado completo del programa — complete todos los módulos a continuación y luego apruebe el Examen de Certificación para desbloquearlo.','certs.exam_ready_title':'Listo para su Examen de Certificación','certs.exam_ready_intro':'Ha completado todos los módulos de estos programas. Realice el Examen de Certificación de 20 preguntas y 40 minutos para obtener su certificado completo.','certs.start_exam':'Iniciar el Examen de Certificación','certs.retake_exam':'Repetir el examen','certs.last_attempt':'Último intento','certs.needed':'requerido','certs.can_retake':'Puede repetirlo.','certs.not_attempted':'Todos los módulos completos — aún no intentado.','certs.mod_earned':'Certificados de módulo obtenidos','certs.mod_earn_first':'Apruebe la evaluación de un módulo (75 %) para obtener su primer certificado de módulo.','certs.programme_progress':'Progreso del programa','certs.full_pdf':'Certificado completo (PDF)','certs.module_cert':'Certificado','certs.programme_complete':'Programa completo','certs.exam_passed_at':'Examen de Certificación aprobado con',
+    'exam.title':'Examen de Certificación','exam.intro':'20 preguntas tomadas de cada módulo completado · 40 minutos · nota mínima 75 %. Aprobar desbloquea su certificado completo del programa.','exam.start':'Iniciar el Examen de Certificación →','exam.submit':'Enviar','exam.back':'Volver a Certificados','exam.time_up':'Tiempo agotado.','exam.passed':'APROBADO','exam.below':'Menos del 75 %','exam.correct':'correctas','exam.please_answer_all':'Por favor responda todas las preguntas antes de enviar.','exam.congrats':'Felicitaciones','exam.you_passed':'Aprobó el Examen de Certificación con','exam.your_cert_ready':'Su certificado completo está listo.','exam.download_pdf':'Descargar el certificado (PDF)',
+    'toast.exam_passed':'Examen de Certificación aprobado','toast.exam_unlocked':'Último módulo aprobado — Examen de Certificación desbloqueado','toast.mod_passed':'Módulo aprobado','toast.cert_unlocked':'Certificado desbloqueado','toast.score':'Puntuación','toast.needed_to_pass':'Se requiere 75 % para aprobar','toast.mod_done':'Módulo marcado como completo',
+    'cert.of_completion':'Certificado de Finalización','cert.of_achievement':'Certificado de Logro','cert.presented_to':'Otorgado con orgullo a','cert.for_module':'por haber aprobado la evaluación calificada del módulo','cert.for_full':'por haber completado todos los módulos y evaluaciones de','cert.pd':'Director del Programa','cert.score':'Puntuación obtenida','cert.cid':'N.º de certificado','cert.scan':'Escanear para validar','cert.of':'de',
+    'lms.exam_take_now':'Todos los módulos completos — realice su Examen de Certificación →','lms.you_passed_this':'Aprobó la evaluación de este módulo con','lms.cert_ready':'Su certificado del módulo está listo.','lms.download_mod_cert':'Descargar certificado del módulo (PDF)','lms.review_retake':'Revisar módulo y repetir'
+  }
+};
+let lang = (function(){ try{return localStorage.getItem(LS_KEYS.lang)||'en';}catch(e){return 'en';} })();
+function t(key){ return (I18N[lang]&&I18N[lang][key])||(I18N.en[key])||key; }
+function applyLang(newLang){
+  if(!I18N[newLang]) return;
+  lang = newLang;
+  try{ localStorage.setItem(LS_KEYS.lang, lang); }catch(e){}
+  document.documentElement.lang = lang;
+  // Static markup: swap textContent / innerHTML / placeholder from data-i18n attrs
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ el.textContent = t(el.dataset.i18n); });
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{ el.innerHTML = t(el.dataset.i18nHtml); });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{ el.placeholder = t(el.dataset.i18nPlaceholder); });
+  // Reflect the switch in the picker
+  const sel = document.getElementById('langSel'); if(sel) sel.value = lang;
+  // If a dynamic view is currently open, re-render it so its inline t() strings update
+  if(typeof session==='object' && session){
+    if(session.role==='student'){
+      const visible=['dash','courses','mentor','prompts','certs','exam','lesson'].find(x=>{const el=document.getElementById('p-'+x);return el&&!el.classList.contains('hidden');});
+      if(visible==='dash'&&typeof renderDash==='function')renderDash();
+      else if(visible==='courses'&&typeof renderMyCourses==='function')renderMyCourses();
+      else if(visible==='mentor'&&typeof renderMentor==='function')renderMentor();
+      else if(visible==='prompts'&&typeof renderPrompts==='function')renderPrompts();
+      else if(visible==='certs'&&typeof renderCerts==='function')renderCerts();
+      else if(visible==='lesson'&&typeof renderLesson==='function')renderLesson();
+    } else if(session.role==='admin'){
+      const vis=['a-over','a-gen','a-students','a-progress','a-enrol','a-analytics','a-inq','a-sync'].find(x=>{const el=document.getElementById('p-'+x);return el&&!el.classList.contains('hidden');});
+      const map={'a-over':'renderOver','a-gen':'renderGen','a-students':'renderStudents','a-progress':'renderProgress','a-enrol':'renderEnrol','a-analytics':'renderAnalytics','a-inq':'renderInq','a-sync':'renderSync'};
+      if(vis&&typeof window[map[vis]]==='function')window[map[vis]]();
+    }
+  }
+}
 
 /* ---------- COURSE CATALOG (dynamic, loaded from /courses/*.json) ---------- */
 let CATALOG = [];            // lightweight metadata for marketing grid + selects
@@ -654,7 +817,7 @@ async function doLogin(){
       loadCourses(session.courses).then(async()=>{await pullProgressFromCloud();enterLMS();closeLogin();});return;
     }
   }
-  err.textContent='Invalid credentials, or account not yet activated.';err.classList.remove('hidden');
+  err.textContent=t('login.err_creds');err.classList.remove('hidden');
 }
 function logout(){session=null;show('site');window.scrollTo(0,0);}
 function show(id){['site','lms','admin'].forEach(x=>document.getElementById(x).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');}
@@ -843,8 +1006,13 @@ async function renderPrompts(){
 function avgScore(c){const sc=(progress[session.user]&&progress[session.user]['scores_'+c.id])||{};const v=Object.values(sc);return v.length?Math.round(v.reduce((a,b)=>a+b,0)/v.length):0;}
 function quizzedMods(c){return c.modules.filter(m=>Array.isArray(m.quiz)||m.quiz).length;}
 function passedMods(c){const sc=(progress[session.user]&&progress[session.user]['scores_'+c.id])||{};return Object.values(sc).filter(s=>s>=75).length;}
-/* Every module done + every graded module passed at 75%+ — this is what unlocks the Certification Exam. */
-function modulesComplete(c){return pct(c)===100 && (quizzedMods(c)===0 || passedMods(c)>=quizzedMods(c));}
+/* Every module marked complete (via quiz pass OR "Mark done") unlocks the
+   Certification Exam. Per-module certificates still require passing that
+   module's quiz at 75%+ — but the final exam CTA never gets stuck behind an
+   impossible-to-satisfy condition. This is what the specification actually
+   asks for: "when they complete all modules in a particular path, submit
+   them to a 20-question timed certification exam." */
+function modulesComplete(c){return pct(c)===100;}
 function examResult(c){return (progress[session.user]&&progress[session.user]['exam_'+c.id])||null;}
 function examPassed(c){const r=examResult(c);return !!(r&&r.passed);}
 /* The full programme certificate now requires passing the 20-question, 40-minute Certification Exam — not just an average of module scores. */
@@ -854,20 +1022,20 @@ function renderCerts(){
   const certified=cs.filter(certReady);
   const awaitingExam=cs.filter(c=>modulesComplete(c)&&!examPassed(c));
   const inprog=cs.filter(c=>!modulesComplete(c));
-  document.getElementById('p-certs').innerHTML=`<div class="panel"><h3>Certificates of Completion</h3>
-   <p style="color:var(--grey);font-size:14px;margin-bottom:8px">To earn a certificate: complete every module <b>and</b> pass every graded assessment (75%+). Every passed module earns its own certificate. Completing all modules unlocks a 20-question, 40-minute Certification Exam covering the whole programme — pass it to earn your full programme certificate. All are print-ready PDFs with a validation QR code, signed by Innocent Forteh, Program Director.</p>
+  document.getElementById('p-certs').innerHTML=`<div class="panel"><h3>${t('certs.title')}</h3>
+   <p style="color:var(--grey);font-size:14px;margin-bottom:8px">${t('certs.intro')}</p>
    ${certified.length?certified.map(c=>{const r=examResult(c);return `
-     <div class="mode"><div class="ic">🎓</div><div><b>${c.title}</b><p>Full programme complete · Certification Exam passed at ${r.pct}% · signed &amp; ready.</p></div>
-     <button class="btn sm" onclick="printCert('${c.id}')">Full certificate PDF</button></div>`;}).join('')
-   :'<p style="color:var(--grey)">No full-programme certificate yet — complete every module below, then pass the Certification Exam to unlock it.</p>'}</div>
-   ${awaitingExam.length?`<div class="panel"><h3>🎓 Ready for your Certification Exam</h3>
-   <p style="color:var(--grey);font-size:14px;margin-bottom:10px">You've completed every module in these programmes. Sit the 20-question, 40-minute Certification Exam to earn your full programme certificate.</p>
+     <div class="mode"><div class="ic">🎓</div><div><b>${c.title}</b><p>${t('certs.programme_complete')} · ${t('certs.exam_passed_at')} ${r.pct}%.</p></div>
+     <button class="btn sm" onclick="printCert('${c.id}')">${t('certs.full_pdf')}</button></div>`;}).join('')
+   :`<p style="color:var(--grey)">${t('certs.none')}</p>`}</div>
+   ${awaitingExam.length?`<div class="panel"><h3>🎓 ${t('certs.exam_ready_title')}</h3>
+   <p style="color:var(--grey);font-size:14px;margin-bottom:10px">${t('certs.exam_ready_intro')}</p>
    ${awaitingExam.map(c=>{const r=examResult(c);return `
-     <div class="mode"><div class="ic">📝</div><div><b>${c.title}</b><p>${r?('Last attempt: '+r.pct+'% \u2014 75% needed. You can retake it.'):'All modules complete \u2014 not yet attempted.'}</p></div>
-     <button class="btn sm" onclick="startExamFlow('${c.id}')">${r?'Retake Certification Exam':'Start Certification Exam'} \u2192</button></div>`;}).join('')}</div>`:''}
-   <div class="panel"><h3>Module certificates earned</h3>${(()=>{let out='';cs.forEach(c=>{const sc=(progress[session.user]&&progress[session.user]['scores_'+c.id])||{};const passed=Object.keys(sc).filter(k=>sc[k]>=75);if(passed.length){out+=`<p style="font-family:'Segoe UI',Arial,sans-serif;font-weight:700;color:var(--navy);margin:12px 0 6px;font-size:14px">${c.title}</p>`;passed.forEach(k=>{const i=+k;out+=`<div class="mode" style="padding:8px 0"><div class="ic">📜</div><div style="flex:1"><b style="font-size:14px">${c.modules[i].t}</b><small style="display:block;color:var(--grey)">Module ${i+1} · ${sc[k]}%</small></div><button class="btn sm ghost" onclick="printCert('${c.id}',${i})">Certificate</button></div>`;});}});return out||'<p style="color:var(--grey)">Pass a module assessment (75%) to earn your first module certificate.</p>';})()}</div>
-   ${inprog.length?`<div class="panel"><h3>Programme progress</h3>${inprog.map(c=>{const qm=quizzedMods(c),pm=passedMods(c);return `
-     <div style="padding:10px 0;border-bottom:1px solid var(--line)"><div style="display:flex;justify-content:space-between;font-family:'Segoe UI',Arial,sans-serif;font-size:14px"><b>${c.title}</b><span style="color:var(--grey)">${prog(c.id).length}/${c.modules.length} modules${qm?` · ${pm}/${qm} passed`:''}</span></div>
+     <div class="mode"><div class="ic">📝</div><div><b>${c.title}</b><p>${r?(t('certs.last_attempt')+': '+r.pct+'% \u2014 75% '+t('certs.needed')+'. '+t('certs.can_retake')):t('certs.not_attempted')}</p></div>
+     <button class="btn sm" onclick="startExamFlow('${c.id}')">${r?t('certs.retake_exam'):t('certs.start_exam')} \u2192</button></div>`;}).join('')}</div>`:''}
+   <div class="panel"><h3>${t('certs.mod_earned')}</h3>${(()=>{let out='';cs.forEach(c=>{const sc=(progress[session.user]&&progress[session.user]['scores_'+c.id])||{};const passed=Object.keys(sc).filter(k=>sc[k]>=75);if(passed.length){out+=`<p style="font-family:'Segoe UI',Arial,sans-serif;font-weight:700;color:var(--navy);margin:12px 0 6px;font-size:14px">${c.title}</p>`;passed.forEach(k=>{const i=+k;out+=`<div class="mode" style="padding:8px 0"><div class="ic">📜</div><div style="flex:1"><b style="font-size:14px">${c.modules[i].t}</b><small style="display:block;color:var(--grey)">${i+1} · ${sc[k]}%</small></div><button class="btn sm ghost" onclick="printCert('${c.id}',${i})">${t('certs.module_cert')}</button></div>`;});}});return out||`<p style="color:var(--grey)">${t('certs.mod_earn_first')}</p>`;})()}</div>
+   ${inprog.length?`<div class="panel"><h3>${t('certs.programme_progress')}</h3>${inprog.map(c=>{const qm=quizzedMods(c),pm=passedMods(c);return `
+     <div style="padding:10px 0;border-bottom:1px solid var(--line)"><div style="display:flex;justify-content:space-between;font-family:'Segoe UI',Arial,sans-serif;font-size:14px"><b>${c.title}</b><span style="color:var(--grey)">${prog(c.id).length}/${c.modules.length}${qm?` · ${pm}/${qm}`:''}</span></div>
      <div class="progress-outer" style="margin-top:6px"><div class="progress-inner" style="width:${pct(c)}%"></div></div></div>`;}).join('')}</div>`:''}`;
 }
 /* ---- Certification Exam: 20 Qs sampled evenly across every completed module, 40-minute single countdown ---- */
@@ -894,17 +1062,17 @@ function startExamFlow(cid){
   window._examCourseId=cid;
   document.getElementById('p-exam').innerHTML=`<div class="panel">
     <p class="eyebrow">${c.title}</p>
-    <h3 style="font-size:24px">🎓 Certification Exam</h3>
-    <p style="color:var(--grey);font-size:14.5px;margin-bottom:14px">${pool.length} questions drawn from every module you completed · 40 minutes · pass mark 75%. Passing unlocks your full programme certificate.</p>
-    ${renderQuiz(pool,{secs:2400,gradeFn:'gradeExam',heading:pool.length+' questions \u00b7 40 minutes \u00b7 pass mark 75%',startLabel:'Start Certification Exam \u2192'})}
-    <button class="btn ghost sm" style="margin-top:14px" onclick="lmsTab('certs')">\u2190 Back to Certificates</button>
+    <h3 style="font-size:24px">🎓 ${t('exam.title')}</h3>
+    <p style="color:var(--grey);font-size:14.5px;margin-bottom:14px">${t('exam.intro')}</p>
+    ${renderQuiz(pool,{secs:2400,gradeFn:'gradeExam',heading:pool.length+' \u00b7 40 min \u00b7 75%',startLabel:t('exam.start')})}
+    <button class="btn ghost sm" style="margin-top:14px" onclick="lmsTab('certs')">\u2190 ${t('exam.back')}</button>
    </div>`;
   lmsTab('exam');
 }
 function gradeExam(auto){
   const z=window._qz;if(z.graded)return;
   if(!auto && z.sel.some(s=>s===null)){
-    const m=document.getElementById('qz-msg');m.textContent='Please answer all '+z.qs.length+' questions before submitting.';m.style.color='var(--amber)';return;
+    const m=document.getElementById('qz-msg');m.textContent=t('exam.please_answer_all');m.style.color='var(--amber)';return;
   }
   z.graded=true;if(z.timer)clearInterval(z.timer);
   let correct=0;
@@ -916,7 +1084,7 @@ function gradeExam(auto){
   });
   const pct=Math.round(100*correct/z.qs.length),pass=pct>=75;
   const msg=document.getElementById('qz-msg');
-  msg.textContent=(auto?'\u23f0 Time up. ':'')+(pass?'\u2713 PASSED \u2014 ':'\u2717 Below 75% \u2014 ')+correct+'/'+z.qs.length+' correct ('+pct+'%).';
+  msg.textContent=(auto?('\u23f0 '+t('exam.time_up')+' '):'')+(pass?'\u2713 '+t('exam.passed')+' \u2014 ':'\u2717 '+t('exam.below')+' \u2014 ')+correct+'/'+z.qs.length+' '+t('exam.correct')+' ('+pct+'%).';
   msg.style.color=pass?'var(--green)':'var(--red)';
   const cid=window._examCourseId,c=courseCache[cid]||COURSES.find(x=>x.id===cid);
   if(session&&cid){
@@ -929,11 +1097,11 @@ function gradeExam(auto){
   const cbox=document.getElementById('qz-cert');
   cbox.classList.remove('hidden');
   if(pass){
-    cbox.innerHTML='<div class="callout" style="border-left-color:var(--green);background:#EFFBF3"><b>\ud83c\udf89 Congratulations, '+session.name.split(' ')[0]+'!</b> You passed the Certification Exam with '+pct+'%. Your full programme certificate is ready.<br/><button class="btn sm" style="margin-top:10px" onclick="printCert(\''+cid+'\')">\u2b07 Download programme certificate (PDF)</button> <button class="btn sm ghost" style="margin-top:10px" onclick="lmsTab(\'certs\')">Back to Certificates</button></div>';
-    toast('Certification Exam passed \u2014 '+pct+'% \ud83c\udf93 Full certificate unlocked');
+    cbox.innerHTML='<div class="callout" style="border-left-color:var(--green);background:#EFFBF3"><b>\ud83c\udf89 '+t('exam.congrats')+', '+session.name.split(' ')[0]+'!</b> '+t('exam.you_passed')+' '+pct+'%. '+t('exam.your_cert_ready')+'<br/><button class="btn sm" style="margin-top:10px" onclick="printCert(\''+cid+'\')">\u2b07 '+t('exam.download_pdf')+'</button> <button class="btn sm ghost" style="margin-top:10px" onclick="lmsTab(\'certs\')">'+t('exam.back')+'</button></div>';
+    toast(t('toast.exam_passed')+' \u2014 '+pct+'% \ud83c\udf93');
   }else{
-    cbox.innerHTML='<button class="btn sm ghost" onclick="startExamFlow(\''+cid+'\')">Retake Certification Exam</button> <button class="btn sm ghost" onclick="lmsTab(\'certs\')">Back to Certificates</button>';
-    toast('Score '+pct+'% \u2014 75% needed to pass');
+    cbox.innerHTML='<button class="btn sm ghost" onclick="startExamFlow(\''+cid+'\')">'+t('certs.retake_exam')+'</button> <button class="btn sm ghost" onclick="lmsTab(\'certs\')">'+t('exam.back')+'</button>';
+    toast(t('toast.score')+' '+pct+'% \u2014 '+t('toast.needed_to_pass'));
   }
 }
 /* ---- Cloud progress sync: so a student can resume on ANY device, and admin can see it ---- */
@@ -1030,19 +1198,19 @@ function printCertCore(username,name,cid,modIdx,scoresObj,examObj){
    '@media print{body{background:#fff}}</style></head><body>'+
    '<div class="sheet"><div class="frame"></div><div class="wm">T21</div><div class="inner">'+
    '<div class="brandrow"><div class="logo">T21</div><div class="bt">TEAM21 ACADEMY<small>AI UNLOCKED PROGRAMME</small></div></div>'+
-   '<h1>'+(isModule?'Certificate of Achievement':'Certificate of Completion')+'</h1>'+
+   '<h1>'+(isModule?t('cert.of_achievement'):t('cert.of_completion'))+'</h1>'+
    '<div class="rule"></div>'+
-   '<p class="small">This is proudly presented to</p>'+
+   '<p class="small">'+t('cert.presented_to')+'</p>'+
    '<div class="name">'+name+'</div>'+
-   '<p class="small">for '+(isModule?'successfully passing the graded assessment for':'completing all modules and assessments of')+'</p>'+
+   '<p class="small">'+(isModule?t('cert.for_module'):t('cert.for_full'))+'</p>'+
    '<div class="ctitle">'+title+'</div>'+
-   '<div class="meta">'+subline+' \u00b7 Score achieved: <b>'+score+'%</b> \u00b7 '+dateStr+'</div>'+
+   '<div class="meta">'+subline+' \u00b7 '+t('cert.score')+': <b>'+score+'%</b> \u00b7 '+dateStr+'</div>'+
    '<div class="footrow">'+
-     '<div class="sig"><div class="sign">Innocent Forteh</div><div class="sigline"><b>Innocent Forteh, PMP\u00ae</b><br/>Program Director, Team21 Academy</div></div>'+
+     '<div class="sig"><div class="sign">Innocent Forteh</div><div class="sigline"><b>Innocent Forteh, PMP\u00ae</b><br/>'+t('cert.pd')+', Team21 Academy</div></div>'+
      '<div class="seal">TEAM21<b>T21</b>VERIFIED</div>'+
-     '<div class="qrbox">'+qrSVG+'<div>Scan to validate<br/>team21online@gmail.com</div></div>'+
+     '<div class="qrbox">'+qrSVG+'<div>'+t('cert.scan')+'<br/>team21online@gmail.com</div></div>'+
    '</div>'+
-   '<div class="cid">Certificate ID: '+certId+'</div>'+
+   '<div class="cid">'+t('cert.cid')+': '+certId+'</div>'+
    '<div class="verse">\u201cThey shall mount up with wings as eagles\u201d \u2014 Isaiah 40:31 \u00b7 \u00a9 Team21 Academy</div>'+
    '</div></div>'+
    '<div style="text-align:center;margin:20px"><button onclick="window.print()" style="padding:10px 24px;font-size:15px;background:#0F2A5C;color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:Arial">\u2b07 Print / Save as PDF</button></div>'+
@@ -1379,6 +1547,7 @@ function viewStudentProgress(name){
 
 /* ---------- INIT ---------- */
 loadCatalog().then(renderCatalog);
+applyLang(lang); // apply saved language preference to static markup as soon as DOM's parsed
 </script>
 </body>
 </html>
