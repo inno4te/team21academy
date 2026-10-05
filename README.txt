@@ -346,3 +346,14 @@ KEEPING IT UPDATED LATER
 
 — Built for Innocent Forteh · inno4te / Team21 Academy
   team21online@gmail.com
+
+------------------------------------------------------------
+UPDATE — Practice Studio (October 2026)
+------------------------------------------------------------
+Replace ALL files this time: index.html, index_cameroon.html and the courses/ folder.
+- Every module now ends with a Practice Studio: 4 quick-fact flip cards, 2 hands-on labs
+  (sort, put-in-order, match, or spot-the-problems) and 1 plAIbox playground
+  (prompt builder, live calculator, or branching decision simulation).
+- Works with tap on phones and drag on computers; progress per module is saved in the browser.
+- Activities live in each course JSON as "facts", "labs" and "plaibox" per module.
+- Fix: certificate QR codes were silently blank (broken QR library) — replaced; now render.
