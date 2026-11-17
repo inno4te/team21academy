@@ -132,10 +132,37 @@ var TABS = {
   ProgressState: [
     'timestamp','user','name','course','doneModules','scores','examPct','examPassed','examDate','updated'
   ],
+  /* Register-form submissions (separate from information-request Inquiries) */
+  Registrations: [
+    'timestamp','id','date','edition','name','email','phone','country','city','org','role',
+    'courses','mode','pay','payref','heard','msg','status','username','password','approved'
+  ],
+  /* Admin-posted "What's New" items (public read) */
+  News: [
+    'timestamp','id','date','title','summary','why','source','url','tags','status'
+  ],
+  /* US site: calls booked online and skills-check leads */
+  Bookings: [
+    'timestamp','id','created','name','email','phone','type','typeName','startIso','endIso','guestTz','topic','status','eventId'
+  ],
+  Assessments: [
+    'timestamp','id','date','email','score','level','field','goal','format','skills','path'
+  ],
   Log: [
     'timestamp','event','payload'
   ]
 };
+/* ---- Online booking (US site) ----
+   Calls are created on the default Google Calendar of the account that owns this script.
+   Optional Script Property MEETING_LINK = your permanent Zoom / Google Meet room link. */
+var BOOKING_HORIZON_DAYS = 28;
+
+/* ---- Where new-registration alerts are emailed (leave '' to disable) ---- */
+var ADMIN_EMAIL = 'team21online@gmail.com';
+/* ---- plAIbox Live AI (optional): set Script Properties
+        GEMINI_API_KEY = your key from aistudio.google.com/apikey
+        GEMINI_MODEL   = e.g. gemini-flash-latest   (optional)
+        AI_DAILY_LIMIT = e.g. 40 prompts per student per day (optional) ---- */
 
 
 /* ---- Main entry point: the platform POSTs here (writes) ---- */
@@ -145,6 +172,8 @@ function doPost(e) {
     var msg = JSON.parse(body);
     var event = (msg && msg.event) || 'unknown';
     var data = (msg && msg.data) || {};
+    if (event === 'ai') return handleAI(data);
+    if (event === 'booking') return handleBooking(data);
     handleEvent(event, data);
     return json({ ok: true, event: event });
   } catch (err) {
@@ -164,6 +193,10 @@ function doGet(e) {
     if (p.fn === 'inquiries') return handleInquiries(p);
     if (p.fn === 'myprogress') return handleMyProgress(p);
     if (p.fn === 'allprogress') return handleAllProgress(p);
+    if (p.fn === 'registrations') return handleRegistrations(p);
+    if (p.fn === 'news') return handleNews(p);
+    if (p.fn === 'slots') return handleSlots(p);
+    if (p.fn === 'bookings') return handleBookingsAdmin(p);
     return json({ ok: true, service: 'Team21 backend', time: new Date().toISOString() });
   } catch (err) {
     return json({ ok: false, error: String(err) });
@@ -312,6 +345,20 @@ function handleEvent(event, data) {
       break;
     case 'inquiry':
       appendRow('Inquiries', data);
+      break;
+    case 'registration':
+      appendRow('Registrations', data);
+      notifyRegistration(data);
+      break;
+    case 'registration_update':
+      upsertById('Registrations', data);
+      break;
+    case 'assessment':
+      appendRow('Assessments', data);
+      notifyAssessment(data);
+      break;
+    case 'news_post':
+      upsertById('News', data);
       break;
     case 'quiz_score':
       appendRow('QuizScores', data);
@@ -544,4 +591,141 @@ function dailyInquiryDigest() {
   MailApp.sendEmail(TO,
     'Team21: ' + recent.length + ' new inquiry(ies) today',
     'New inquiries in the last 24h:\n\n' + lines.join('\n\n'));
+}
+
+
+/* ================= PLATFORM 2 HANDLERS ================= */
+function handleRegistrations(p) {
+  if (String(p.au || '') !== ADMIN_USER || String(p.ap || '') !== ADMIN_PASS) return json({ ok: false, error: 'unauthorized' });
+  var rows = readTabAsObjects('Registrations').filter(function (r) { return r.status !== 'deleted'; });
+  var list = rows.map(function (r) {
+    var o = {}; TABS.Registrations.forEach(function (h) { if (h !== 'timestamp') o[h] = r[h]; });
+    o.courses = splitCourses(r.courses); return o;
+  });
+  return json({ ok: true, registrations: list });
+}
+function handleNews(p) {
+  var rows = readTabAsObjects('News').filter(function (r) { return r.status !== 'deleted' && r.title; });
+  var list = rows.map(function (r) {
+    return { id: String(r.id), date: (r.date instanceof Date) ? Utilities.formatDate(r.date, 'GMT', 'yyyy-MM-dd') : String(r.date),
+      title: r.title, summary: r.summary, why: r.why, source: r.source, url: r.url, tags: splitCourses(r.tags) };
+  });
+  // deleted ids are returned too so every device hides them
+  readTabAsObjects('News').filter(function (r) { return r.status === 'deleted'; }).forEach(function (r) { list.push({ id: String(r.id), status: 'deleted' }); });
+  return json({ ok: true, news: list });
+}
+/* Update the row whose id matches (only the fields provided); append if absent. */
+function upsertById(tabName, data) {
+  var sheet = getTab(tabName), headers = TABS[tabName];
+  var idCol = headers.indexOf('id'), last = sheet.getLastRow();
+  if (last >= 2) {
+    var ids = sheet.getRange(2, idCol + 1, last - 1, 1).getValues();
+    for (var i = 0; i < ids.length; i++) {
+      if (String(ids[i][0]) === String(data.id)) {
+        headers.forEach(function (h, c) {
+          if (h === 'timestamp') return;
+          if (data[h] !== undefined && data[h] !== null) sheet.getRange(i + 2, c + 1).setValue(Array.isArray(data[h]) ? data[h].join(', ') : data[h]);
+        });
+        return;
+      }
+    }
+  }
+  appendRow(tabName, data);
+}
+function notifyRegistration(d) {
+  if (!ADMIN_EMAIL) return;
+  try {
+    MailApp.sendEmail(ADMIN_EMAIL, 'Team21: new registration — ' + d.name,
+      'A new registration was submitted (' + String(d.edition || '').toUpperCase() + ' edition).\n\n' +
+      'Name: ' + d.name + '\nEmail: ' + d.email + '\nPhone/WhatsApp: ' + d.phone +
+      '\nLocation: ' + [d.city, d.country].filter(String).join(', ') + '\nOrganisation/role: ' + [d.org, d.role].filter(String).join(' · ') +
+      '\nProgrammes: ' + d.courses + '\nDelivery: ' + d.mode + '\nPayment: ' + d.pay + (d.payref ? ' (ref ' + d.payref + ')' : '') +
+      '\nMessage: ' + (d.msg || '—') +
+      '\n\nOpen the Admin dashboard → Registrations → Sync from cloud → Generate credentials & activate.');
+  } catch (e) { logRow('mail_error', { message: String(e) }); }
+}
+/* plAIbox Live AI proxy — only for valid student (or admin) logins, with a daily quota. */
+function handleAI(d) {
+  var props = PropertiesService.getScriptProperties();
+  var key = props.getProperty('GEMINI_API_KEY');
+  if (!key) return json({ ok: false, error: 'Live AI is not enabled on the Team21 cloud yet. Use your own free Gemini key in plAIbox ⚙️ setup, or the Open in buttons.' });
+  var u = String(d.u || ''), p = String(d.p || ''), allowed = (u === ADMIN_USER && p === ADMIN_PASS);
+  if (!allowed) {
+    var rows = readTabAsObjects('Students');
+    for (var i = 0; i < rows.length; i++) if (String(rows[i].username) === u && String(rows[i].password) === p && rows[i].status !== 'suspended') { allowed = true; break; }
+  }
+  if (!allowed) return json({ ok: false, error: 'Please log in again to use Live AI.' });
+  var limit = Number(props.getProperty('AI_DAILY_LIMIT') || 40);
+  var cache = CacheService.getScriptCache(), ck = 'ai_' + u + '_' + Utilities.formatDate(new Date(), 'GMT', 'yyyyMMdd');
+  var used = Number(cache.get(ck) || 0);
+  if (used >= limit) return json({ ok: false, error: 'Daily Live AI limit reached (' + limit + '). Try again tomorrow or use your own key.' });
+  var prompt = String(d.prompt || '').slice(0, 12000);
+  if (!prompt) return json({ ok: false, error: 'Empty prompt.' });
+  var model = props.getProperty('GEMINI_MODEL') || 'gemini-flash-latest';
+  var body = { contents: [{ role: 'user', parts: [{ text: prompt }] }] };
+  if (d.sys) body.systemInstruction = { parts: [{ text: String(d.sys).slice(0, 4000) }] };
+  var res = UrlFetchApp.fetch('https://generativelanguage.googleapis.com/v1beta/models/' + encodeURIComponent(model) + ':generateContent?key=' + encodeURIComponent(key),
+    { method: 'post', contentType: 'application/json', payload: JSON.stringify(body), muteHttpExceptions: true });
+  var j = {}; try { j = JSON.parse(res.getContentText()); } catch (e) {}
+  if (res.getResponseCode() !== 200) return json({ ok: false, error: (j.error && j.error.message) || ('AI service error ' + res.getResponseCode()) });
+  cache.put(ck, String(used + 1), 60 * 60 * 26);
+  var parts = (((j.candidates || [])[0] || {}).content || {}).parts || [];
+  var text = parts.map(function (x) { return x.text || ''; }).join('') || '(No text returned — the request may have been blocked by safety filters.)';
+  return json({ ok: true, text: text, used: used + 1, limit: limit });
+}
+
+
+/* ================= US SITE: BOOKING + SKILLS-CHECK LEADS ================= */
+/* Public: returns only busy time ranges (no event details) so the site can hide taken slots. */
+function handleSlots(p) {
+  var now = new Date(), end = new Date(now.getTime() + BOOKING_HORIZON_DAYS * 864e5), busy = [];
+  try {
+    CalendarApp.getDefaultCalendar().getEvents(now, end).forEach(function (ev) {
+      if (ev.isAllDayEvent()) return;
+      busy.push([ev.getStartTime().getTime(), ev.getEndTime().getTime()]);
+    });
+  } catch (e) { logRow('calendar_error', { message: String(e) }); }
+  return json({ ok: true, busy: busy });
+}
+function handleBooking(d) {
+  var lock = LockService.getScriptLock();
+  try { lock.waitLock(15000); } catch (e) { return json({ ok: false, error: 'busy' }); }
+  try {
+    var start = new Date(Number(d.start)), end = new Date(Number(d.end));
+    if (!d.name || !/^\S+@\S+\.\S+$/.test(String(d.email || '')) || isNaN(start.getTime()) || end <= start || start < new Date())
+      return json({ ok: false, error: 'invalid' });
+    if ((end - start) > 2 * 36e5) return json({ ok: false, error: 'invalid' });
+    var cal = CalendarApp.getDefaultCalendar();
+    var clash = cal.getEvents(start, end).filter(function (ev) { return !ev.isAllDayEvent(); });
+    if (clash.length) return json({ ok: false, error: 'taken' });
+    var link = PropertiesService.getScriptProperties().getProperty('MEETING_LINK') || '';
+    var desc = 'Booked on the Team21 Academy website.\n\nGuest: ' + d.name + ' <' + d.email + '>' + (d.phone ? '\nPhone: ' + d.phone : '') +
+      '\nGuest time zone: ' + (d.guestTz || '') + '\n\nTopic: ' + (d.topic || '—') + (link ? '\n\nJoin: ' + link : '');
+    var ev = cal.createEvent('Team21 Academy: ' + (d.typeName || 'Call') + ' with ' + d.name, start, end,
+      { description: desc, guests: String(d.email), sendInvites: true, location: link });
+    appendRow('Bookings', { id: d.id, created: d.created, name: d.name, email: d.email, phone: d.phone, type: d.type, typeName: d.typeName,
+      startIso: start.toISOString(), endIso: end.toISOString(), guestTz: d.guestTz, topic: d.topic, status: 'confirmed', eventId: ev.getId() });
+    if (ADMIN_EMAIL) {
+      try { MailApp.sendEmail(ADMIN_EMAIL, 'Team21: new call booked — ' + d.name, 'A call was booked on the website and added to your calendar.\n\n' +
+        (d.typeName || 'Call') + '\nWhen: ' + start.toString() + '\n' + desc); } catch (e2) { logRow('mail_error', { message: String(e2) }); }
+    }
+    return json({ ok: true });
+  } catch (e) {
+    logRow('booking_error', { message: String(e) });
+    return json({ ok: false, error: 'server' });
+  } finally { lock.releaseLock(); }
+}
+function handleBookingsAdmin(p) {
+  if (String(p.au || '') !== ADMIN_USER || String(p.ap || '') !== ADMIN_PASS) return json({ ok: false, error: 'unauthorized' });
+  var pick = function (tab) { return readTabAsObjects(tab).map(function (r) { var o = {}; TABS[tab].forEach(function (h) { if (h !== 'timestamp') o[h] = (r[h] instanceof Date) ? r[h].toISOString() : r[h]; }); return o; }); };
+  return json({ ok: true, bookings: pick('Bookings'), assessments: pick('Assessments') });
+}
+function notifyAssessment(d) {
+  try {
+    if (d.email) MailApp.sendEmail(String(d.email), 'Your Team21 Academy AI skills check: ' + d.score + '/100 (' + d.level + ')',
+      'Thanks for taking the Team21 Academy AI skills check.\n\nYour score: ' + d.score + '/100, level: ' + d.level +
+      '\n\nBy skill: ' + d.skills + '\n\nYour recommended path: ' + d.path +
+      '\n\nWant to talk it through? Book a free call on our website, or reply to this email.\n\nInnocent Forteh, PMP\nTeam21 Academy');
+    if (ADMIN_EMAIL) MailApp.sendEmail(ADMIN_EMAIL, 'Team21: skills-check lead — ' + d.email, 'Score ' + d.score + ' (' + d.level + ')\nField: ' + d.field + '\nGoal: ' + d.goal + '\nFormat: ' + d.format + '\nPath: ' + d.path);
+  } catch (e) { logRow('mail_error', { message: String(e) }); }
 }

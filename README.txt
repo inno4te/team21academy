@@ -357,3 +357,71 @@ Replace ALL files this time: index.html, index_cameroon.html and the courses/ fo
 - Works with tap on phones and drag on computers; progress per module is saved in the browser.
 - Activities live in each course JSON as "facts", "labs" and "plaibox" per module.
 - Fix: certificate QR codes were silently blank (broken QR library) — replaced; now render.
+
+------------------------------------------------------------
+UPDATE — Registrations, What's New, Prompt Bank, plAIbox Sandbox (October 2026)
+------------------------------------------------------------
+Replace EVERYTHING: index.html, index_cameroon.html, the courses/ folder AND team21_backend.gs.
+
+1) BACKEND (required for registrations/news to reach you from other devices)
+   - Open your Apps Script project, replace the code with the new team21_backend.gs.
+   - Deploy -> Manage deployments -> edit the existing deployment -> Version: New version -> Deploy
+     (same URL, nothing to change in the HTML).
+   - New Sheet tabs "Registrations" and "News" are created automatically.
+   - New registrations are emailed to ADMIN_EMAIL (top of the script; default team21online@gmail.com).
+     The first time, Google will ask you to authorise "send email" — accept.
+
+2) REGISTER vs INFORMATION REQUEST
+   - "Register" (nav, hero card, every course "Enroll" button) opens the registration form.
+     Submissions land in Admin -> Registrations. Click "Generate credentials & activate":
+     the student account is created, enrolled in the chosen courses, and a ready-to-send
+     message appears with Copy / Email / WhatsApp buttons.
+   - The Contact form is now clearly an information request (Admin -> Info Requests).
+
+3) WHAT'S NEW — curated items ship in courses/_news.json. Post your own in Admin -> What's New.
+
+4) PROMPT BANK — 133 template forms across 22 domains (courses/_prompt_bank.json) + the classics.
+
+5) plAIbox SANDBOX — purple button on every learner page, banner in every lesson,
+   "Test in plAIbox" on every lab prompt and builder.
+   Works offline as a Prompt Coach (score, fix list, auto-improve, A/B compare, challenges).
+   Live AI answers — either:
+   a) each learner adds their own free Gemini key in plAIbox -> Live AI setup, or
+   b) YOU enable it for everyone: Apps Script -> Project Settings -> Script properties:
+        GEMINI_API_KEY = key from https://aistudio.google.com/apikey
+        GEMINI_MODEL   = gemini-flash-latest   (optional)
+        AI_DAILY_LIMIT = 40                    (optional, prompts per student per day)
+      Only logged-in students can use it; usage is capped per day. Check Google's current
+      pricing/free-tier terms for your key.
+
+6) QUIZZES — all 1,650 questions rewritten so answer length/wording no longer gives the answer away.
+
+------------------------------------------------------------
+UPDATE — US / Canada site rebuild (November 2026)
+------------------------------------------------------------
+Replace: index.html, index_cameroon.html, the courses/ folder and team21_backend.gs.
+
+SETTINGS (top of the last <script> in index.html, the block "const T21US = {")
+  phone        your US number. It is blank now, so the phone is hidden everywhere until you add it.
+  tz           your time zone for calls (default America/New_York)
+  callDays / callHours / closed    when people can book you
+  cohorts      AI Foundations start dates (proposed dates are in place; edit them)
+  intro        prices: live 399, early 349, self-paced 199, team 329
+
+WHAT IS NEW
+  1. Skills check in the hero: 10 questions, score across 5 skills, recommended 3-step path.
+     If the visitor asks for the result by email it is saved in the "Assessments" sheet tab,
+     emailed to them, and shown in Admin -> Calls & Leads.
+  2. AI Foundations (courses/found1.json): 6 classes, full lessons, labs, quizzes. US edition only.
+  3. Book a call: visitors pick a slot in their own time zone. With the backend redeployed,
+     the call is created on your Google Calendar, the guest gets an invitation, you get an email,
+     and busy times on your calendar are hidden from the picker. Until then, bookings arrive
+     as requests in Admin -> Info Requests.
+  4. All courses are presented as live virtual or self-paced. No onsite options.
+  5. Privacy and Terms pages (footer). Have them reviewed before launch.
+
+BACKEND (required for booking and skills-check emails)
+  - Paste the new team21_backend.gs, then Deploy -> Manage deployments -> edit -> New version.
+  - Google will ask for two new permissions: Calendar and Send email. Accept both.
+  - Optional Script property MEETING_LINK = your Zoom or Google Meet room link
+    (added to every calendar invitation).

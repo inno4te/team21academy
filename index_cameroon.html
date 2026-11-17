@@ -360,6 +360,75 @@ table.dt tr:hover td{background:var(--sky)}
 .ddchip.sel{background:var(--navy);color:#fff}
 .lab .labp,.pb-out,.spot-text{overflow-wrap:anywhere;word-break:break-word}
 
+/* ---------- PLATFORM 2: registration · what's new · prompt bank · plAIbox sandbox ---------- */
+.modal2{position:fixed;inset:0;background:rgba(10,20,40,.55);z-index:200;display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:30px 12px}
+.modal2.hidden{display:none}
+.modal2 .box{background:#fff;border-radius:16px;max-width:760px;width:100%;padding:26px;box-shadow:0 30px 80px rgba(0,0,0,.35);position:relative}
+.modal2 .x{position:absolute;top:12px;right:14px;border:none;background:var(--sky);border-radius:8px;width:34px;height:34px;font-size:18px;cursor:pointer;color:var(--navy)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:640px){.g2{grid-template-columns:1fr}.modal2 .box{padding:18px}}
+.ckgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px;max-height:230px;overflow:auto;border:1.5px solid var(--line);border-radius:10px;padding:10px}
+.ckgrid label{display:flex;gap:8px;align-items:flex-start;font-family:'Segoe UI',Arial,sans-serif;font-size:13px;cursor:pointer;line-height:1.35}
+.reg-cta{display:inline-flex;align-items:center;gap:6px}
+.badge2{display:inline-block;background:var(--red);color:#fff;border-radius:10px;font-size:11px;font-weight:800;padding:1px 7px;margin-left:6px;font-family:'Segoe UI',Arial,sans-serif}
+.regcard{border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;margin:10px 0;background:#fff}
+.regcard.new{border-left:5px solid var(--orange,#FF5714)}.regcard.approved{border-left:5px solid var(--green)}.regcard.rejected{border-left:5px solid var(--grey);opacity:.75}
+.regcard .meta{font-family:'Segoe UI',Arial,sans-serif;font-size:13px;color:var(--grey);display:flex;flex-wrap:wrap;gap:6px 16px;margin:6px 0}
+.regcard .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.pill2{display:inline-block;font-family:'Segoe UI',Arial,sans-serif;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;border-radius:6px;padding:2px 8px;background:var(--sky);color:var(--navy)}
+.credbox{background:#EFFBF3;border:1.5px solid #BFE3CD;border-radius:10px;padding:12px;margin-top:10px;font-family:ui-monospace,Consolas,monospace;font-size:13px;white-space:pre-wrap}
+/* news */
+.newsgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.newscard{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;box-shadow:var(--shadow-s)}
+.newscard .d{font-family:'Segoe UI',Arial,sans-serif;font-size:12px;color:var(--grey);font-weight:700}
+.newscard h4{font-size:17px;margin:6px 0 8px;color:var(--navy);line-height:1.3}
+.newscard p{font-size:14px;margin:0 0 8px}
+.newscard .why{background:#FFF8EC;border-left:4px solid var(--amber);padding:8px 10px;border-radius:0 8px 8px 0;font-size:13.5px}
+.newscard .src{margin-top:auto;padding-top:8px;font-family:'Segoe UI',Arial,sans-serif;font-size:12.5px}
+.newtag{background:var(--green);color:#fff;border-radius:5px;padding:1px 6px;font-size:10.5px;margin-left:6px}
+/* prompt bank */
+.pb-doms{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 16px}
+.pb-dom{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:7px 13px;font-family:'Segoe UI',Arial,sans-serif;font-size:13px;font-weight:700;color:var(--navy);cursor:pointer}
+.pb-dom.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.pb-dom small{opacity:.7;font-weight:600;margin-left:4px}
+.tplgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.tpl{border:1.5px solid var(--line);border-radius:12px;padding:14px;background:#fff;cursor:pointer;transition:.15s}
+.tpl:hover{border-color:var(--blue);box-shadow:var(--shadow-s)}
+.tpl b{display:block;color:var(--navy);font-size:15px;margin:4px 0}
+.tpl p{font-size:13.5px;color:var(--grey);margin:0}
+.tplform{border:2px solid var(--blue);border-radius:14px;padding:18px;background:#fff;margin:14px 0}
+/* plAIbox FAB + sandbox */
+.fab2{position:fixed;right:18px;bottom:18px;z-index:120;background:linear-gradient(135deg,#6D28D9,#2563EB);color:#fff;border:none;border-radius:30px;padding:13px 18px;font-family:'Segoe UI',Arial,sans-serif;font-weight:800;font-size:14.5px;box-shadow:0 10px 30px rgba(76,29,149,.45);cursor:pointer}
+.fab2:hover{transform:translateY(-2px)}
+.fab2.hidden{display:none}
+.pbx-banner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:linear-gradient(135deg,#F3EDFF,#EAF1FB);border:1.5px solid #DDD0FA;border-radius:14px;padding:14px 16px;margin:6px 0 18px}
+.pbx-banner b{color:#5B21B6;font-family:'Segoe UI',Arial,sans-serif}
+.pbx-banner span{font-size:14px;color:var(--ink)}
+.labtest{margin-left:8px}
+.sbx{display:grid;grid-template-columns:1.15fr 1fr;gap:18px}
+@media(max-width:900px){.sbx{grid-template-columns:1fr}}
+.sbx textarea{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:12px;font-family:ui-monospace,Consolas,monospace;font-size:13.5px;line-height:1.5;resize:vertical;background:#fff}
+.sbx .bar{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.sbx-modes{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.sbx-mode{border:1.5px solid #DDD0FA;background:#fff;color:#5B21B6;border-radius:20px;padding:7px 14px;font-family:'Segoe UI',Arial,sans-serif;font-weight:800;font-size:13px;cursor:pointer}
+.sbx-mode.on{background:#5B21B6;color:#fff;border-color:#5B21B6}
+.sbx-out{background:#1E1B2E;color:#EDE9FE;border-radius:12px;padding:14px;min-height:220px;max-height:520px;overflow:auto;font-size:14px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
+.sbx-out.light{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.sbx-score{display:flex;align-items:center;gap:14px;margin:4px 0 10px}
+.sbx-ring{width:74px;height:74px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Segoe UI',Arial,sans-serif;font-weight:900;font-size:20px;color:var(--navy);flex:none}
+.sbx-ck{list-style:none;padding:0;margin:0;font-family:'Segoe UI',Arial,sans-serif;font-size:13.5px}
+.sbx-ck li{padding:5px 0;border-bottom:1px dashed var(--line)}
+.sbx-ck li.y b{color:var(--green)}.sbx-ck li.n b{color:var(--red)}.sbx-ck li.w b{color:var(--amber)}
+.sbx-ck li small{display:block;color:var(--grey);font-size:12.5px;margin-left:20px}
+.sbx-set{font-family:'Segoe UI',Arial,sans-serif;font-size:13px;background:var(--sky);border-radius:10px;padding:12px;margin-top:12px}
+.sbx-set input,.sbx-set select{border:1.5px solid var(--line);border-radius:8px;padding:7px 9px;font-size:13px;width:100%;margin-top:4px}
+.sbx-hist{font-family:'Segoe UI',Arial,sans-serif;font-size:12.5px;max-height:180px;overflow:auto}
+.sbx-hist div{padding:6px 8px;border-bottom:1px solid var(--line);cursor:pointer}
+.sbx-hist div:hover{background:var(--sky)}
+.sbx>div{min-width:0}.sbx textarea,.sbx select,.tplform textarea,.pb-field textarea,.pb-field input{box-sizing:border-box;max-width:100%}.sbx .bar select{flex:1 1 220px;min-width:0}
+.ckgrid label{display:flex!important;text-transform:none!important;letter-spacing:0!important;font-weight:500!important;color:var(--ink)!important;margin:0!important}.ckgrid input,#rg-consent{width:auto!important;flex:none;margin-top:3px}
+.engine-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:middle}
+
 </style>
 </head>
 <body>
@@ -753,7 +822,7 @@ let COURSES = [];            // full course objects, loaded on demand (enrolled 
 const courseCache = {};      // id -> full course object
 const COURSES_BASE = 'courses/';
 async function loadCatalog(){
-  try{ const r=await fetch(COURSES_BASE+'_catalog.json'); CATALOG=await r.json(); }
+  try{ const r=await fetch(COURSES_BASE+'_catalog.json'); CATALOG=(await r.json()).filter(x=>x.only!=='us'); }
   catch(e){ CATALOG=[]; console.warn('Catalog load failed — serve over http/GitHub Pages, not file://',e); }
 }
 async function loadCourse(id){
@@ -1604,7 +1673,7 @@ function gsEndpoint(){ const o=load(LS_KEYS.gs,''); return (o&&o.indexOf('http')
 function gsConnected(){ const u=gsEndpoint(); return u && u.indexOf('http')===0; }
 function gsPost(event,data){
   const url=gsEndpoint(); if(!url||url.indexOf('http')!==0)return;
-  try{fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify({event,data})});}catch(e){}
+  try{fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify({event,data})}).catch(()=>{});}catch(e){}
 }
 /* GET reads (unlike gsPost, these need to READ the response, so no no-cors here).
    Used for: student login fallback across devices, and admin roster sync. */
@@ -1715,6 +1784,455 @@ function viewStudentProgress(name){
 /* ---------- INIT ---------- */
 loadCatalog().then(renderCatalog);
 applyLang(lang);
+</script>
+<script>
+/* ================= PLATFORM 2 =================
+   1) Registration → admin inbox → one-click credentials
+   2) What's New (curated + admin-posted news)
+   3) Prompt Bank by domain with template forms
+   4) plAIbox sandbox (live AI via own key or backend, offline Prompt Coach, challenges, compare, open-in)
+   =============================================== */
+const P2_ED = (typeof LS_KEYS!=='undefined' && String(LS_KEYS.students).indexOf('t21cm')===0) ? 'cm' : 'us';
+const P2K = { regs:'t21'+P2_ED+'_registrations', news:'t21'+P2_ED+'_news_local', key:'t21_gemini_key', model:'t21_gemini_model', hist:'t21_pbx_history', draft:'t21_pbx_draft' };
+const p2esc = s => String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const p2el = id => document.getElementById(id);
+let registrations = load(P2K.regs, []);
+const P2L = {
+ en:{register:'Register',regTitle:'Register for a programme',regSub:'Complete this form to enrol. Your registration goes straight to our admissions team, who will confirm payment and send your username and password.',name:'Full name',email:'Email',phone:'Phone / WhatsApp',country:'Country',city:'City',org:'Organisation (optional)',role:'Profession / role',courses:'Programme(s) you are registering for',mode:'Preferred delivery',pay:'Payment method',payref:'Payment reference (if already paid)',heard:'How did you hear about us?',msg:'Anything we should know? (goals, schedule, accessibility needs)',consent:'I agree that Team21 Academy may store these details to process my enrolment and contact me about it.',submit:'Submit registration',regOk:'✓ Registration received! Our team will confirm and send your login credentials (usually within one business day).',need:'Please complete name, email, phone, at least one programme and the consent box.',news:"What's New",newsSub:'Curated developments in AI, policy and professional practice — and what each one means for you.',plaibox:'plAIbox',infoNote:'Ready to enrol instead? Use the Register form →'},
+ fr:{register:"S'inscrire",regTitle:'Inscription à un programme',regSub:"Remplissez ce formulaire pour vous inscrire. Votre demande arrive directement à notre équipe d'admission, qui confirmera le paiement et vous enverra vos identifiants.",name:'Nom complet',email:'E-mail',phone:'Téléphone / WhatsApp',country:'Pays',city:'Ville',org:'Organisation (facultatif)',role:'Profession / fonction',courses:'Programme(s) choisi(s)',mode:'Mode de formation',pay:'Mode de paiement',payref:'Référence de paiement (si déjà payé)',heard:'Comment nous avez-vous connus ?',msg:'Informations utiles (objectifs, disponibilités, besoins)',consent:"J'accepte que Team21 Academy conserve ces informations pour traiter mon inscription et me contacter à ce sujet.",submit:"Envoyer l'inscription",regOk:'✓ Inscription reçue ! Notre équipe vous enverra vos identifiants (généralement sous un jour ouvrable).',need:'Veuillez renseigner nom, e-mail, téléphone, au moins un programme et cocher le consentement.',news:'Quoi de neuf',newsSub:"Les évolutions clés de l'IA, des politiques et des pratiques — et ce qu'elles signifient pour vous.",plaibox:'plAIbox',infoNote:"Prêt à vous inscrire ? Utilisez le formulaire d'inscription →"},
+ es:{register:'Inscribirse',regTitle:'Inscripción a un programa',regSub:'Complete este formulario para inscribirse. Su solicitud llega directamente a admisiones, que confirmará el pago y le enviará usuario y contraseña.',name:'Nombre completo',email:'Correo',phone:'Teléfono / WhatsApp',country:'País',city:'Ciudad',org:'Organización (opcional)',role:'Profesión / cargo',courses:'Programa(s)',mode:'Modalidad preferida',pay:'Método de pago',payref:'Referencia de pago (si ya pagó)',heard:'¿Cómo nos conoció?',msg:'¿Algo que debamos saber?',consent:'Acepto que Team21 Academy guarde estos datos para procesar mi inscripción y contactarme.',submit:'Enviar inscripción',regOk:'✓ ¡Inscripción recibida! Le enviaremos sus credenciales (normalmente en un día hábil).',need:'Complete nombre, correo, teléfono, al menos un programa y el consentimiento.',news:'Novedades',newsSub:'Avances seleccionados en IA, políticas y práctica profesional — y lo que significan para usted.',plaibox:'plAIbox',infoNote:'¿Listo para inscribirse? Use el formulario de inscripción →'}};
+function p2t(k){const d=P2L[(typeof lang!=='undefined'&&P2L[lang])?lang:'en'];return d[k]||P2L.en[k];}
+
+/* ---------- 1. REGISTRATION ---------- */
+function p2RegModal(){
+  if(p2el('regModal'))return;
+  const pays = P2_ED==='cm' ? ['MTN Mobile Money','Orange Money','Bank transfer','Cash at office','Sponsor / organisation pays'] : ['Credit / debit card','PayPal','Zelle','Bank transfer / ACH','Invoice my organisation'];
+  const countries = P2_ED==='cm' ? ['Cameroon','Chad','Nigeria','Gabon','Congo','Côte d’Ivoire','Other'] : ['United States','Canada','Cameroon','Nigeria','United Kingdom','Other'];
+  const d=document.createElement('div');d.id='regModal';d.className='modal2 hidden';d.setAttribute('role','dialog');
+  d.innerHTML=`<div class="box"><button class="x" onclick="p2CloseReg()" aria-label="Close">✕</button>
+   <p class="eyebrow">${p2t('register')}</p><h3 style="margin:0 0 6px">${p2t('regTitle')}</h3>
+   <p style="font-size:14px;color:var(--grey);margin:0 0 14px">${p2t('regSub')}</p>
+   <div class="g2">
+    <div class="field"><label>${p2t('name')} *</label><input id="rg-name" autocomplete="name"></div>
+    <div class="field"><label>${p2t('email')} *</label><input id="rg-email" type="email" autocomplete="email"></div>
+    <div class="field"><label>${p2t('phone')} *</label><input id="rg-phone" type="tel" placeholder="${P2_ED==='cm'?'+237 6XX XXX XXX':'+1 (555) 000-0000'}"></div>
+    <div class="field"><label>${p2t('role')}</label><input id="rg-role" placeholder="e.g. Nurse, Teacher, Pastor, Founder"></div>
+    <div class="field"><label>${p2t('country')}</label><select id="rg-country">${countries.map(c=>`<option>${c}</option>`).join('')}</select></div>
+    <div class="field"><label>${p2t('city')}</label><input id="rg-city"></div>
+    <div class="field"><label>${p2t('org')}</label><input id="rg-org"></div>
+    <div class="field"><label>${p2t('mode')}</label><select id="rg-mode"><option>Online (self-paced)</option><option>Virtual (live cohort)</option><option>Onsite</option><option>Blended</option></select></div>
+   </div>
+   <div class="field"><label>${p2t('courses')} *</label><div class="ckgrid" id="rg-courses"></div></div>
+   <div class="g2">
+    <div class="field"><label>${p2t('pay')}</label><select id="rg-pay">${pays.map(c=>`<option>${c}</option>`).join('')}</select></div>
+    <div class="field"><label>${p2t('payref')}</label><input id="rg-payref" placeholder="Transaction ID"></div>
+    <div class="field"><label>${p2t('heard')}</label><select id="rg-heard"><option>WhatsApp</option><option>Facebook</option><option>LinkedIn</option><option>Friend / colleague</option><option>Church / association</option><option>Employer</option><option>Search engine</option><option>Other</option></select></div>
+   </div>
+   <div class="field"><label>${p2t('msg')}</label><textarea id="rg-msg" rows="2"></textarea></div>
+   <label style="display:flex;gap:8px;align-items:flex-start;font-family:'Segoe UI',Arial,sans-serif;font-size:13px;margin-top:10px"><input type="checkbox" id="rg-consent" style="margin-top:3px"> ${p2t('consent')}</label>
+   <button class="btn" style="width:100%;margin-top:16px" onclick="submitRegistration()">${p2t('submit')}</button>
+   <p id="rg-ok" class="hidden" style="color:var(--green);font-family:'Segoe UI',Arial,sans-serif;font-size:14px;margin-top:10px">${p2t('regOk')}</p>
+  </div>`;
+  document.body.appendChild(d);
+  d.addEventListener('click',e=>{if(e.target===d)p2CloseReg();});
+}
+function openRegister(courseIdOrTitle){
+  p2RegModal();
+  const box=p2el('rg-courses');
+  box.innerHTML=CATALOG.map(c=>`<label><input type="checkbox" value="${c.id}" ${(courseIdOrTitle&&(c.id===courseIdOrTitle||c.title===courseIdOrTitle))?'checked':''}> <span>${p2esc(c.title)}<br><small style="color:var(--grey)">${p2esc(c.price||'')} ${p2esc(c.unit||'')}</small></span></label>`).join('');
+  p2el('rg-ok').classList.add('hidden');
+  p2el('regModal').classList.remove('hidden');document.body.style.overflow='hidden';
+}
+function p2CloseReg(){const m=p2el('regModal');if(m)m.classList.add('hidden');document.body.style.overflow='';}
+function submitRegistration(){
+  const g=id=>(p2el(id).value||'').trim();
+  const courses=[...document.querySelectorAll('#rg-courses input:checked')].map(i=>i.value);
+  const r={id:Date.now(),date:new Date().toISOString().slice(0,16).replace('T',' '),edition:P2_ED,name:g('rg-name'),email:g('rg-email'),phone:g('rg-phone'),country:g('rg-country'),city:g('rg-city'),org:g('rg-org'),role:g('rg-role'),courses,mode:g('rg-mode'),pay:g('rg-pay'),payref:g('rg-payref'),heard:g('rg-heard'),msg:g('rg-msg'),status:'new',username:'',password:''};
+  if(!r.name||!r.email||!r.phone||!courses.length||!p2el('rg-consent').checked){toast(p2t('need'));return;}
+  if(!/^\S+@\S+\.\S+$/.test(r.email)){toast('Please check the email address.');return;}
+  registrations.unshift(r);save(P2K.regs,registrations);
+  gsPost('registration',Object.assign({},r,{courses:courses.join(', ')}));
+  p2el('rg-ok').classList.remove('hidden');
+  ['rg-name','rg-email','rg-phone','rg-city','rg-org','rg-role','rg-payref','rg-msg'].forEach(i=>p2el(i).value='');
+  p2el('rg-consent').checked=false;
+  toast('Registration sent ✓');
+}
+async function syncRegistrationsFromCloud(silent){
+  if(!gsConnected()){if(!silent)toast('Connect the Google Script first (Sync tab).');return;}
+  const res=await gsGet({fn:'registrations',au:ADMIN.user,ap:ADMIN.pass});
+  if(!res||!res.ok){if(!silent)toast('Could not reach the cloud — showing this device only.');return;}
+  (res.registrations||[]).forEach(cr=>{
+    cr.courses=Array.isArray(cr.courses)?cr.courses:String(cr.courses||'').split(',').map(s=>s.trim()).filter(Boolean);
+    const ex=registrations.find(x=>String(x.id)===String(cr.id));
+    if(ex)Object.assign(ex,cr);else registrations.push(cr);
+  });
+  registrations.sort((a,b)=>Number(b.id)-Number(a.id));
+  save(P2K.regs,registrations);p2RegBadge();
+  if(p2el('p-a-reg')&&!p2el('p-a-reg').classList.contains('hidden'))renderRegs();
+  if(!silent)toast('Synced '+(res.registrations||[]).length+' registration(s) ✓');
+}
+function p2RegBadge(){const n=registrations.filter(r=>r.status==='new').length;const b=document.querySelector('#admin .ptab[data-t="a-reg"]');if(b)b.innerHTML='Registrations'+(n?`<span class="badge2">${n}</span>`:'');}
+let p2RegFilter='new';
+function renderRegs(){
+  const list=registrations.filter(r=>p2RegFilter==='all'||r.status===p2RegFilter);
+  const cnt=s=>registrations.filter(r=>s==='all'||r.status===s).length;
+  const cname=id=>{const c=CATALOG.find(x=>x.id===id);return c?c.title:id;};
+  p2el('p-a-reg').innerHTML=`<div class="panel"><h3>Registrations <button class="btn sm ghost" style="margin-left:10px" onclick="syncRegistrationsFromCloud(false)">🔄 Sync from cloud</button></h3>
+   <p style="font-size:13px;color:var(--grey);margin:-4px 0 12px">Every Register form submission lands here (separate from information requests in Inquiries). Click <b>Generate credentials</b> to create the student account from the registration, enrol them in the courses they chose, and get a ready-to-send message.</p>
+   <div class="pb-doms">${['new','approved','rejected','all'].map(s=>`<button class="pb-dom ${p2RegFilter===s?'on':''}" onclick="p2RegFilter='${s}';renderRegs()">${s[0].toUpperCase()+s.slice(1)} <small>${cnt(s)}</small></button>`).join('')}</div>
+   ${list.map(r=>`<div class="regcard ${r.status}" id="reg-${r.id}">
+     <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><b style="font-size:16px;color:var(--navy)">${p2esc(r.name)}</b><span class="pill2">${p2esc(r.status)}${r.edition?' · '+p2esc(String(r.edition).toUpperCase()):''}</span></div>
+     <div class="meta"><span>📧 ${p2esc(r.email)}</span><span>📱 ${p2esc(r.phone)}</span><span>📍 ${p2esc([r.city,r.country].filter(Boolean).join(', '))}</span>${r.org?`<span>🏢 ${p2esc(r.org)}</span>`:''}${r.role?`<span>💼 ${p2esc(r.role)}</span>`:''}<span>🗓 ${p2esc(r.date)}</span></div>
+     <div style="font-size:14px"><b>Programmes:</b> ${(r.courses||[]).map(cname).map(p2esc).join(' · ')||'—'}</div>
+     <div class="meta"><span>Delivery: ${p2esc(r.mode)}</span><span>Payment: ${p2esc(r.pay)}${r.payref?' · ref '+p2esc(r.payref):''}</span><span>Heard via: ${p2esc(r.heard)}</span></div>
+     ${r.msg?`<div style="font-size:13.5px;background:var(--sky);border-radius:8px;padding:8px 10px">${p2esc(r.msg)}</div>`:''}
+     ${r.status==='approved'&&r.username?`<div class="credbox">Username: ${p2esc(r.username)}   Password: ${p2esc(r.password)}</div>`:''}
+     <div class="acts">
+      ${r.status!=='approved'?`<button class="btn sm" onclick="p2Approve('${r.id}')">✅ Generate credentials & activate</button>`:`<button class="btn sm ghost" onclick="p2ShowCred('${r.id}')">📋 Credentials message</button>`}
+      ${r.status==='new'?`<button class="btn sm ghost" onclick="p2SetReg('${r.id}','rejected')">Decline</button>`:''}
+      <a class="btn sm ghost" href="mailto:${encodeURIComponent(r.email)}?subject=${encodeURIComponent('Your Team21 Academy registration')}">✉️ Email</a>
+      <a class="btn sm ghost" target="_blank" rel="noopener" href="https://wa.me/${String(r.phone||'').replace(/\D/g,'')}">💬 WhatsApp</a>
+      <button class="btn sm ghost" style="border-color:var(--red);color:var(--red)" onclick="p2DelReg('${r.id}')">✕</button>
+     </div><div id="regout-${r.id}"></div></div>`).join('')||'<p style="color:var(--grey)">No registrations in this view yet.</p>'}
+  </div>`;
+  p2RegBadge();
+}
+function p2CredMsg(r){
+  const url=location.href.split('#')[0];
+  return `Welcome to Team21 Academy, ${r.name}!\n\nYour registration is confirmed. Log in to your learner portal:\n${url}\n(Use "Learner Login" at the top of the page)\n\nUsername: ${r.username}\nPassword: ${r.password}\n\nYour programme(s): ${(r.courses||[]).map(id=>{const c=CATALOG.find(x=>x.id===id);return c?c.title:id;}).join(', ')}\n\nTip: open any lesson and press the purple plAIbox button to practise your prompts.\n— Team21 Academy`;
+}
+function p2Approve(id){
+  const r=registrations.find(x=>String(x.id)===String(id));if(!r)return;
+  let user=r.username||genUsername(r.name);let n=2;const base=user;
+  while(students.some(s=>s.username===user&&s.email!==r.email)){user=base+n;n++;}
+  const pass=r.password||genPassword();
+  let st=students.find(s=>s.username===user);
+  if(st){st.courses=[...new Set([...(st.courses||[]),...(r.courses||[])])];st.status='active';gsPost('student_update',Object.assign({},st,{courses:st.courses.join(', ')}));}
+  else{st={id:Date.now(),name:r.name,email:r.email,username:user,password:pass,courses:(r.courses&&r.courses.length)?r.courses:['ai1'],status:'active',created:new Date().toISOString().slice(0,10)};students.push(st);gsPost('student_create',st);}
+  save(LS_KEYS.students,students);
+  r.status='approved';r.username=st.username;r.password=st.password;r.approved=new Date().toISOString().slice(0,10);
+  save(P2K.regs,registrations);
+  gsPost('registration_update',{id:r.id,status:r.status,username:r.username,password:r.password,approved:r.approved});
+  p2RegFilter='approved';renderRegs();p2ShowCred(r.id);
+  toast('Account created & enrolled ✓');
+}
+function p2ShowCred(id){
+  const r=registrations.find(x=>String(x.id)===String(id));if(!r)return;
+  const msg=p2CredMsg(r);const out=p2el('regout-'+r.id);if(!out)return;
+  out.innerHTML=`<div class="credbox">${p2esc(msg)}</div><div class="acts">
+   <button class="btn sm" onclick="navigator.clipboard.writeText(p2CredMsg(registrations.find(x=>String(x.id)==='${r.id}'))).then(()=>toast('Copied ✓'))">📋 Copy message</button>
+   <a class="btn sm ghost" href="mailto:${encodeURIComponent(r.email)}?subject=${encodeURIComponent('Your Team21 Academy login')}&body=${encodeURIComponent(msg)}">✉️ Send by email</a>
+   <a class="btn sm ghost" target="_blank" rel="noopener" href="https://wa.me/${String(r.phone||'').replace(/\D/g,'')}?text=${encodeURIComponent(msg)}">💬 Send on WhatsApp</a></div>`;
+  out.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function p2SetReg(id,s){const r=registrations.find(x=>String(x.id)===String(id));if(!r)return;r.status=s;save(P2K.regs,registrations);gsPost('registration_update',{id:r.id,status:s});renderRegs();}
+function p2DelReg(id){if(!confirm('Delete this registration from this device?'))return;registrations=registrations.filter(x=>String(x.id)!==String(id));save(P2K.regs,registrations);gsPost('registration_update',{id:id,status:'deleted'});renderRegs();}
+
+/* ---------- 2. WHAT'S NEW ---------- */
+let NEWS=[];
+async function p2LoadNews(){
+  let base=[];try{base=await (await fetch(COURSES_BASE+'_news.json',{cache:'no-cache'})).json();}catch(e){}
+  let cloud=[];try{if(gsConnected()){const r=await gsGet({fn:'news'});if(r&&r.ok)cloud=r.news||[];}}catch(e){}
+  const local=load(P2K.news,[]);
+  const all={};[...base,...cloud,...local].forEach(n=>{if(n&&n.id)all[n.id]=Object.assign(all[n.id]||{},n);});
+  NEWS=Object.values(all).filter(n=>n.status!=='deleted').map(n=>Object.assign(n,{tags:Array.isArray(n.tags)?n.tags:String(n.tags||'').split(',').map(s=>s.trim()).filter(Boolean)})).sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+  return NEWS;
+}
+function p2NewsCard(n){
+  const fresh=(Date.now()-new Date(n.date).getTime())<1000*60*60*24*21;
+  const tags=(n.tags||[]).map(id=>{const c=CATALOG.find(x=>x.id===id);return c?c.title.replace('AI Unlocked: ',''):null;}).filter(Boolean).slice(0,3);
+  return `<div class="newscard"><span class="d">${p2esc(n.date)}${fresh?'<span class="newtag">NEW</span>':''}</span><h4>${p2esc(n.title)}</h4><p>${p2esc(n.summary)}</p>${n.why?`<div class="why"><b>What it means for you:</b> ${p2esc(n.why)}</div>`:''}
+   ${tags.length?`<p style="font-family:'Segoe UI',Arial,sans-serif;font-size:12px;color:var(--grey);margin:8px 0 0">Related: ${tags.map(p2esc).join(' · ')}</p>`:''}
+   <div class="src">${n.url?`Source: <a href="${p2esc(n.url)}" target="_blank" rel="noopener">${p2esc(n.source||'link')}</a>`:p2esc(n.source||'')}</div></div>`;
+}
+async function p2RenderPublicNews(){const s=p2el('whatsnew-grid');if(!s)return;await p2LoadNews();s.innerHTML=NEWS.slice(0,6).map(p2NewsCard).join('')||'<p>No updates yet.</p>';}
+let p2NewsMine=true;
+async function renderNewsTab(){
+  const box=p2el('p-news');box.innerHTML='<div class="panel"><p>Loading…</p></div>';await p2LoadNews();
+  const mine=session&&session.courses?session.courses:[];
+  const list=p2NewsMine&&mine.length?NEWS.filter(n=>!n.tags||!n.tags.length||n.tags.some(t=>mine.includes(t))):NEWS;
+  box.innerHTML=`<div class="panel"><h3>🗞 ${p2t('news')}</h3><p style="color:var(--grey);font-size:14.5px;margin-top:-4px">${p2t('newsSub')}</p>
+   <div class="pb-doms"><button class="pb-dom ${p2NewsMine?'on':''}" onclick="p2NewsMine=true;renderNewsTab()">For my courses</button><button class="pb-dom ${!p2NewsMine?'on':''}" onclick="p2NewsMine=false;renderNewsTab()">All updates <small>${NEWS.length}</small></button></div>
+   <div class="newsgrid">${list.map(p2NewsCard).join('')||'<p>No updates for your courses yet — see All updates.</p>'}</div></div>`;
+}
+async function renderAdminNews(){
+  await p2LoadNews();
+  p2el('p-a-news').innerHTML=`<div class="panel"><h3>Post to What's New</h3>
+   <p style="font-size:13px;color:var(--grey);margin-top:-4px">Posts appear on the public site and in every learner's What's New tab (cloud-synced when the Google Script is connected). Always link a credible source.</p>
+   <div class="g2"><div class="field"><label>Title</label><input id="nw-title"></div><div class="field"><label>Date</label><input id="nw-date" type="date" value="${new Date().toISOString().slice(0,10)}"></div></div>
+   <div class="field"><label>Summary (facts)</label><textarea id="nw-sum" rows="3"></textarea></div>
+   <div class="field"><label>What it means for learners</label><textarea id="nw-why" rows="2"></textarea></div>
+   <div class="g2"><div class="field"><label>Source name</label><input id="nw-src"></div><div class="field"><label>Source URL</label><input id="nw-url" placeholder="https://"></div></div>
+   <div class="field"><label>Related courses</label><div class="ckgrid" id="nw-tags">${CATALOG.map(c=>`<label><input type="checkbox" value="${c.id}"> ${p2esc(c.title)}</label>`).join('')}</div></div>
+   <button class="btn" style="margin-top:12px" onclick="p2PostNews()">Publish update</button></div>
+   <div class="panel"><h3>Published (${NEWS.length})</h3>${NEWS.map(n=>`<div class="regcard" style="padding:10px 14px"><b>${p2esc(n.date)} — ${p2esc(n.title)}</b> <button class="btn sm ghost" style="float:right;border-color:var(--red);color:var(--red)" onclick="p2DelNews('${p2esc(n.id)}')">Remove</button></div>`).join('')}</div>`;
+}
+function p2PostNews(){
+  const g=id=>(p2el(id).value||'').trim();
+  const n={id:'n'+Date.now(),date:g('nw-date'),title:g('nw-title'),summary:g('nw-sum'),why:g('nw-why'),source:g('nw-src'),url:g('nw-url'),tags:[...document.querySelectorAll('#nw-tags input:checked')].map(i=>i.value)};
+  if(!n.title||!n.summary){toast('Title and summary are required.');return;}
+  const loc=load(P2K.news,[]);loc.unshift(n);save(P2K.news,loc);
+  gsPost('news_post',Object.assign({},n,{tags:n.tags.join(', ')}));
+  toast('Published ✓');renderAdminNews();p2RenderPublicNews();
+}
+function p2DelNews(id){const loc=load(P2K.news,[]);const ex=loc.find(x=>x.id===id);if(ex)ex.status='deleted';else loc.push({id,status:'deleted'});save(P2K.news,loc);gsPost('news_post',{id,status:'deleted'});renderAdminNews();p2RenderPublicNews();}
+
+/* ---------- 3. PROMPT BANK ---------- */
+let PBANK=null,p2Dom='all',p2Q='';
+async function p2LoadBank(){if(PBANK)return PBANK;try{PBANK=await (await fetch(COURSES_BASE+'_prompt_bank.json')).json();}catch(e){PBANK={domains:[],templates:[]};}return PBANK;}
+renderPrompts = async function(){
+  await p2LoadBank();await loadPrompts();
+  const B=PBANK,cnt=d=>B.templates.filter(t=>t.domain===d).length;
+  const q=p2Q.toLowerCase();
+  const list=B.templates.filter(t=>(p2Dom==='all'||t.domain===p2Dom)&&(!q||(t.title+' '+t.use+' '+t.prompt).toLowerCase().includes(q)));
+  const dn=id=>{const d=B.domains.find(x=>x.id===id);return d?d.icon+' '+d.name:id;};
+  p2el('p-prompts').innerHTML=`<div class="panel"><h3>📚 Team21 Prompt Bank</h3>
+   <p style="color:var(--grey);font-size:14.5px;margin-top:-4px">${B.templates.length} expert template forms across ${B.domains.length} domains. Pick a domain, open a template, fill the form — then copy it or <b>test it instantly in plAIbox</b>.</p>
+   <input id="pb-search" placeholder="🔎 Search templates (e.g. budget, lesson plan, grant, contract)…" value="${p2esc(p2Q)}" oninput="p2Q=this.value;clearTimeout(window._pbt);window._pbt=setTimeout(()=>{renderPrompts().then(()=>{const s=p2el('pb-search');s.focus();s.setSelectionRange(s.value.length,s.value.length);})},250)" style="width:100%;border:1.5px solid var(--line);border-radius:10px;padding:11px 13px;font-size:14px;margin-top:8px">
+   <div class="pb-doms"><button class="pb-dom ${p2Dom==='all'?'on':''}" onclick="p2Dom='all';renderPrompts()">All <small>${B.templates.length}</small></button>${B.domains.map(d=>`<button class="pb-dom ${p2Dom===d.id?'on':''}" onclick="p2Dom='${d.id}';renderPrompts()">${d.icon} ${p2esc(d.name)} <small>${cnt(d.id)}</small></button>`).join('')}<button class="pb-dom ${p2Dom==='classic'?'on':''}" onclick="p2Dom='classic';renderPrompts()">⭐ Team21 classics</button></div>
+   <div id="tplform-slot"></div>
+   ${p2Dom==='classic'?PROMPTS.map(g=>'<h4 style="margin:16px 0 8px">'+g.cat+'</h4>'+g.items.map((p,i)=>`<div class="qz" style="display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap"><p style="flex:1;min-width:220px;font-size:14px;font-family:'Segoe UI',Arial,sans-serif;margin:0">${p2esc(p)}</p><button class="btn sm ghost" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('p').textContent).then(()=>toast('Prompt copied ✓'))">Copy</button><button class="btn sm" onclick="pbxOpen(this.parentElement.querySelector('p').textContent)">▶ plAIbox</button></div>`).join('')).join(''):
+   `<div class="tplgrid">${list.map(t=>`<div class="tpl" onclick="p2OpenTpl('${t.id}')"><span class="pill2">${p2esc(dn(t.domain))}</span> ${t.level==='Advanced'?'<span class="pill2" style="background:#F3EDFF;color:#5B21B6">Advanced</span>':''}<b>${p2esc(t.title)}</b><p>${p2esc(t.use)}</p></div>`).join('')||'<p>No templates match.</p>'}</div>`}
+  </div>`;
+};
+function p2OpenTpl(id){
+  const t=PBANK.templates.find(x=>x.id===id);if(!t)return;
+  const slot=p2el('tplform-slot');
+  slot.innerHTML=`<div class="tplform"><div style="display:flex;justify-content:space-between;gap:10px"><div><span class="pill2">${p2esc((PBANK.domains.find(d=>d.id===t.domain)||{}).name||'')}</span><h4 style="margin:6px 0 2px">${p2esc(t.title)}</h4><p style="font-size:13.5px;color:var(--grey);margin:0">${p2esc(t.use)}</p></div><button class="x" style="position:static;border:none;background:var(--sky);border-radius:8px;width:34px;height:34px;cursor:pointer" onclick="p2el('tplform-slot').innerHTML=''">✕</button></div>
+   <div class="pb-grid" style="margin-top:12px"><div>${t.fields.map(f=>`<div class="pb-field"><label>${p2esc(f.label)}</label>${f.type==='select'?`<select id="tf-${f.k}" onchange="p2TplBuild('${t.id}')" style="width:100%;border:1.5px solid var(--line);border-radius:8px;padding:8px">${f.opts.map(o=>`<option>${p2esc(o)}</option>`).join('')}</select>`:f.type==='area'?`<textarea id="tf-${f.k}" rows="3" placeholder="${p2esc(f.ph||'')}" oninput="p2TplBuild('${t.id}')"></textarea>`:`<input id="tf-${f.k}" placeholder="${p2esc(f.ph||'')}" oninput="p2TplBuild('${t.id}')">`}</div>`).join('')}
+    <p style="font-size:12.5px;color:var(--grey);font-family:'Segoe UI',Arial,sans-serif">💡 ${p2esc(t.tips||'')}</p></div>
+    <div><div class="pb-field"><label>Your ready-to-run prompt</label><div class="pb-out" id="tf-out"></div></div>
+    <div class="sw-actions"><button class="btn sm" onclick="pbxOpen(p2el('tf-out').textContent)">▶ Test in plAIbox</button><button class="btn sm ghost" onclick="navigator.clipboard.writeText(p2el('tf-out').textContent).then(()=>toast('Prompt copied ✓'))">📋 Copy</button></div></div></div></div>`;
+  p2TplBuild(id);slot.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function p2TplBuild(id){const t=PBANK.templates.find(x=>x.id===id);const out=t.prompt.replace(/\{(\w+)\}/g,(_,k)=>{const e=p2el('tf-'+k);const v=e?(e.value||'').trim():'';const f=t.fields.find(x=>x.k===k);return v||('['+(f?f.label:k)+']');});p2el('tf-out').textContent=out;}
+
+/* ---------- 4. plAIbox SANDBOX ---------- */
+const PBX={mode:'coach',a:'',b:'',sys:'',busy:false,ret:null,challenge:null};
+const PBX_VERBS=['write','draft','create','analyse','analyze','summarise','summarize','explain','compare','list','design','plan','generate','review','evaluate','critique','rewrite','translate','outline','classify','extract','build','calculate','recommend','identify','prepare','develop','assess','propose'];
+function pbxCoach(p){
+  const s=p||'',L=s.toLowerCase(),words=s.trim().split(/\s+/).filter(Boolean).length;
+  const C=[
+   ['Persona / role',/\b(you are|act as|acting as|as an? (expert|experienced|senior|professional)|take the role|role:)/i.test(s),'Tell the AI who to be: "You are an experienced grant writer for African NGOs…"',12],
+   ['Clear task with an action verb',PBX_VERBS.some(v=>new RegExp('\\b'+v+'\\b','i').test(s)),'Start the task with a verb: draft, compare, analyse, design…',12],
+   ['Context & specifics (who, where, numbers)',(/\d/.test(s)||/\b(cameroon|douala|yaound|bamenda|africa|district|region|company|church|clinic|school|ngo|ministry|county|state)\b/i.test(s))&&words>=25,'Add concrete details: location, numbers, constraints, background.',14],
+   ['Target audience',/\b(audience|for (my|our|a|the) [a-z]+|readers?|customers?|clients?|students?|patients?|donors?|board|team|beginners?|managers?|parents?|farmers?|congregation|citizens?|officials?)\b/i.test(s),'Say who the output is for — it changes vocabulary and depth.',10],
+   ['Output format',/\b(table|bullet|list|sections?|headings?|words|paragraphs?|json|steps|format|outline|email|memo|slides?|checklist|template|one[- ]page)\b/i.test(s),'Specify the shape: "a table with 3 columns", "5 bullets", "under 300 words".',12],
+   ['Tone / style',/\b(tone|formal|friendly|warm|professional|concise|plain language|simple|persuasive|neutral|respectful|encouraging|academic|conversational)\b/i.test(s),'Name the tone: warm, formal, plain-language, persuasive…',8],
+   ['Constraints or length limit',/\b(under|max(imum)?|at most|no more than|limit|within|exactly|between \d)\b/i.test(s)||/\d+\s*(words|bullets|points|sentences|pages|items|minutes)/i.test(s),'Set limits: length, budget, deadline, what to exclude.',8],
+   ['Example or reference material',/\b(example|e\.g\.|for instance|sample|like this|reference|based on|attached|below is|here is|style guide|following text)\b/i.test(s),'Give an example or paste reference text so the AI matches it.',8],
+   ['Quality & safety check (Commandment 2)',/\b(clarifying questions?|ask me|cite|sources?|flag|uncertain|assumptions?|verify|double[- ]check|do not invent|don't invent|if unsure|confidence)\b/i.test(s),'Add: "Ask me clarifying questions first, flag anything uncertain, don\'t invent figures."',16]
+  ];
+  let score=C.reduce((a,c)=>a+(c[1]?c[3]:0),0);
+  const warn=[];
+  const br=s.match(/\[[^\]]{2,60}\]/g);if(br)warn.push(['Unfilled placeholders: '+[...new Set(br)].slice(0,4).join(', '),'Replace every [bracket] with your real details before running.']);
+  if(/[\w.+-]+@[\w-]+\.[\w.]+/.test(s)||/(\+?\d[\d\s-]{8,}\d)/.test(s))warn.push(['Possible personal data (email/phone/ID numbers)','Commandment 3 — Do No Harm: remove or anonymise personal details before sending to an AI tool.']);
+  if(words<12)warn.push(['Very short prompt','Short prompts get generic answers. Add context, audience and format.']);
+  if(warn.length&&score>0)score=Math.max(0,score-5*warn.length);
+  return {score:Math.min(100,score),checks:C,warn,words};
+}
+function pbxImprove(p){
+  const r=pbxCoach(p);let out=p.trim();const miss=n=>!r.checks.find(c=>c[0].startsWith(n))[1];
+  const add=[];
+  if(miss('Persona'))out='You are an experienced [role/expert relevant to this task].\n'+out;
+  if(miss('Context'))add.push('Context: [who, where, numbers, constraints, background].');
+  if(miss('Target'))add.push('Audience: [who will read/use this and their level].');
+  if(miss('Output'))add.push('Format: [e.g. a table with columns X, Y, Z / 5 bullet points / one-page memo].');
+  if(miss('Tone'))add.push('Tone: [e.g. warm and professional / plain language].');
+  if(miss('Constraints'))add.push('Constraints: [length limit, budget, deadline, what to avoid].');
+  if(miss('Example'))add.push('Reference: [paste an example or the source text to base this on].');
+  if(miss('Quality'))add.push('Before answering, ask me up to 3 clarifying questions if anything important is missing. State your assumptions, flag anything you are unsure of, and do not invent statistics or sources.');
+  return out+(add.length?'\n\n'+add.join('\n'):'');
+}
+const PBX_CHALLENGES=[
+ {t:'Donor update without hallucinations',d:'Write a prompt asking AI to draft a 250-word donor update for a health NGO in Cameroon from your own figures, with zero invented statistics.',c:[['Persona',/you are|act as/i],['Uses your own data',/my (data|figures|numbers)|below|following|here are/i],['Word limit',/250|words/i],['No invented figures',/invent|only (use|the)|do not add|don't add|cite/i],['Audience = donors',/donor|funder/i]]},
+ {t:'Lesson plan for a real class',d:'Prompt for a 45-minute lesson plan for a specific class (level, subject, size, resources) aligned to an objective, with differentiation.',c:[['Class level & size',/\d/],['Objective stated',/objective|competenc|learning outcome/i],['Time 45 min',/45/],['Differentiation',/differentiat|struggl|advanced|support/i],['Format/sections',/starter|activity|assessment|section|table/i]]},
+ {t:'Safe clinical question',d:'Ask an AI a clinical knowledge question with no patient identifiers and with a request for guideline sources and uncertainty.',c:[['No names/dates of birth',s=>!/\b(born|dob|mr\.|mrs\.|ms\.)\b/i.test(s)],['Age range not exact identity',/aged|year-old|adult|child|patient/i],['Ask for guideline + year',/guideline|who|source/i],['Ask for uncertainty',/uncertain|confidence|unsure|limitations/i],['Not a substitute',/clinician|verify|review|professional/i]]},
+ {t:'Contract risk review',d:'Ask AI to review a pasted contract clause for risks from your side, in a table, flagging what a lawyer must check.',c:[['Your role/side',/i am|we are|our side|as the (buyer|seller|supplier|client)/i],['Table format',/table/i],['Risk + why + fix',/risk/i],['Lawyer check',/lawyer|counsel|legal advice|jurisdiction/i],['Paste reference',/below|following|clause/i]]},
+ {t:'Agent with a human gate',d:'Specify an AI agent task with a goal, tools allowed, stop condition and a human approval step before anything is sent.',c:[['Goal',/goal|objective/i],['Tools allowed',/tool|search|access|permission/i],['Stop condition',/stop|until|limit|maximum|max/i],['Human approval',/approv|review before|confirm before|human/i],['Output/log',/log|report|summary|format/i]]}
+];
+function pbxEngine(){const key=load(P2K.key,'');if(key)return {id:'own',label:'Live AI — your Gemini key',color:'#15803D'};if(gsConnected()&&session&&session.user)return {id:'cloud',label:'Live AI — Team21 cloud (if enabled by admin)',color:'#2563EB'};return {id:'coach',label:'Offline Prompt Coach (no AI connected)',color:'#B45309'};}
+async function pbxCallAI(prompt,sys){
+  const key=load(P2K.key,''),model=load(P2K.model,'')||'gemini-flash-latest';
+  if(key){
+    const body={contents:[{role:'user',parts:[{text:prompt}]}]};if(sys)body.systemInstruction={parts:[{text:sys}]};
+    const r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+encodeURIComponent(model)+':generateContent?key='+encodeURIComponent(key),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    const j=await r.json();if(!r.ok)throw new Error((j.error&&j.error.message)||('HTTP '+r.status));
+    const t=(((j.candidates||[])[0]||{}).content||{}).parts;return (t||[]).map(x=>x.text||'').join('')||'(No text returned — the request may have been blocked by safety filters.)';
+  }
+  if(gsConnected()&&session&&session.user){
+    const r=await fetch(gsEndpoint(),{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({event:'ai',data:{u:session.user,p:session.pass||'',prompt,sys}})});
+    const j=await r.json();if(!j.ok)throw new Error(j.error||'Live AI is not enabled on the Team21 cloud yet.');return j.text;
+  }
+  throw new Error('NO_ENGINE');
+}
+function pbxOpen(prompt){
+  if(typeof session==='undefined'||!session||session.role==='admin'&&!p2el('lms').offsetParent){/* allowed from LMS only */}
+  if(prompt){PBX.a=prompt;PBX.mode=PBX.mode==='compare'?'compare':'coach';}
+  const lessonVisible=p2el('p-lesson')&&!p2el('p-lesson').classList.contains('hidden');
+  PBX.ret=lessonVisible?'lesson':PBX.ret;
+  lmsTab('plaibox');
+}
+function pbxModulePrompts(){
+  const out=[];
+  if(typeof curCourse!=='undefined'&&curCourse&&curCourse.modules){const m=curCourse.modules[curMod];
+    const tmp=document.createElement('div');tmp.innerHTML=m.body;tmp.querySelectorAll('.labp').forEach(p=>out.push({t:'Lesson lab: '+p.textContent.slice(0,70)+'…',p:p.textContent}));
+    [].concat(m.plaibox||[]).forEach(b=>{if(b&&b.type==='builder')out.push({t:'Builder: '+b.title,p:b.template.replace(/\{(\d+)\}/g,(_,i)=>'['+b.fields[+i].label+']'),ch:b});});}
+  return out;
+}
+function renderPlaibox(){
+  const E=pbxEngine(),mp=pbxModulePrompts(),hist=load(P2K.hist,[]);
+  const courseName=(typeof curCourse!=='undefined'&&curCourse)?curCourse.title+' · Module '+(curMod+1):'';
+  p2el('p-plaibox').innerHTML=`<div class="panel" style="background:linear-gradient(180deg,#FBF9FF,#fff);border:1.5px solid #DDD0FA">
+   <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><div><p class="eyebrow" style="color:#6D28D9">plAIbox™ Sandbox</p><h3 style="margin:0">Test, score and improve any prompt</h3>
+   <p style="font-size:13.5px;color:var(--grey);margin:4px 0 0"><span class="engine-dot" style="background:${E.color}"></span>${E.label}${courseName?' · loaded from '+p2esc(courseName):''}</p></div>
+   ${PBX.ret==='lesson'?`<button class="btn sm ghost" onclick="lmsTab('lesson')">← Back to lesson</button>`:''}</div>
+   <div class="sbx-modes" style="margin-top:14px">${[['coach','🧭 Coach & Run'],['compare','⚖️ Compare A vs B'],['challenge','🏆 Challenges'],['settings','⚙️ Live AI setup']].map(m=>`<button class="sbx-mode ${PBX.mode===m[0]?'on':''}" onclick="PBX.mode='${m[0]}';pbxSave();renderPlaibox()">${m[1]}</button>`).join('')}</div>
+   <div id="pbx-body"></div></div>`;
+  const B=p2el('pbx-body');
+  const loader=`<select onchange="if(this.value!==''){const x=pbxModulePrompts()[+this.value];PBX.a=x.p;if(x.ch)PBX.challenge={t:x.ch.title,d:x.ch.intro,builder:x.ch};renderPlaibox();}" style="border:1.5px solid var(--line);border-radius:8px;padding:8px;font-size:13px;max-width:100%"><option value="">📥 Load a prompt from this module…</option>${mp.map((x,i)=>`<option value="${i}">${p2esc(x.t)}</option>`).join('')}</select>`;
+  const openIn=`<button class="btn sm ghost" onclick="pbxOpenIn('chatgpt')">↗ ChatGPT</button><button class="btn sm ghost" onclick="pbxOpenIn('claude')">↗ Claude</button><button class="btn sm ghost" onclick="pbxOpenIn('gemini')">↗ Gemini</button><button class="btn sm ghost" onclick="pbxOpenIn('perplexity')">↗ Perplexity</button>`;
+  if(PBX.mode==='coach'){
+    B.innerHTML=`<div class="sbx"><div>
+      <div class="bar">${loader}<button class="btn sm ghost" onclick="lmsTab('prompts')">📚 Prompt Bank</button></div>
+      <textarea id="pbx-a" rows="11" placeholder="Paste or write a prompt here — or load one from this module / the Prompt Bank…" oninput="PBX.a=this.value;pbxSave();pbxLive()">${p2esc(PBX.a)}</textarea>
+      <details style="margin-top:8px"><summary style="font-family:'Segoe UI',Arial,sans-serif;font-size:13px;cursor:pointer;color:var(--navy)">Optional system instruction (persistent rules for the AI)</summary><textarea id="pbx-sys" rows="3" oninput="PBX.sys=this.value;pbxSave()" placeholder="e.g. You are a careful assistant for a Cameroonian NGO. Always answer in plain English and flag uncertainty.">${p2esc(PBX.sys)}</textarea></details>
+      <div class="bar"><button class="btn" onclick="pbxRun()">▶ Run prompt</button><button class="btn sm ghost" onclick="pbxDoImprove()">✨ Improve my prompt</button><button class="btn sm ghost" onclick="navigator.clipboard.writeText(PBX.a).then(()=>toast('Copied ✓'))">📋 Copy</button><button class="btn sm ghost" onclick="PBX.a='';pbxSave();renderPlaibox()">Clear</button></div>
+      <div class="bar" style="margin-top:0"><span style="font-family:'Segoe UI',Arial,sans-serif;font-size:12.5px;color:var(--grey);align-self:center">Open in:</span>${openIn}</div>
+      <div id="pbx-coach"></div></div>
+     <div><label style="font-family:'Segoe UI',Arial,sans-serif;font-size:12.5px;font-weight:700;color:var(--navy)">AI response</label><div class="sbx-out" id="pbx-out">${E.id==='coach'?'No AI is connected yet, so plAIbox runs as a <b>Prompt Coach</b>: your prompt is scored on the CLEAR elements and safety on the left as you type.\n\nTo get real AI answers here, open ⚙️ Live AI setup (free Gemini key, 2 minutes) — or use the Open in buttons.':'Press ▶ Run prompt to get a live answer. Then critique it (Commandment 2), improve your prompt and run again.'}</div>
+      <div class="sbx-set"><b>History</b> <small style="color:var(--grey)">(this device)</small><div class="sbx-hist">${hist.map((h,i)=>`<div onclick="PBX.a=load(P2K.hist,[])[${i}].p;renderPlaibox()">${p2esc(h.d)} · ${p2esc(h.p.slice(0,90))}… <b>${h.s}%</b></div>`).join('')||'<p style="margin:6px 0 0;color:var(--grey)">Your runs will appear here.</p>'}</div></div></div></div>`;
+    pbxLive();
+  } else if(PBX.mode==='compare'){
+    B.innerHTML=`<p style="font-size:14px;color:var(--grey);margin-top:0">Write two versions of a prompt for the same task. plAIbox scores both and — if Live AI is connected — runs both so you can see how the wording changes the answer.</p>
+     <div class="sbx"><div><label class="pb-field"><b style="font-family:'Segoe UI',Arial,sans-serif;font-size:12.5px">Version A</b></label><textarea id="pbx-a" rows="8" oninput="PBX.a=this.value;pbxSave();pbxCmp()">${p2esc(PBX.a)}</textarea><div id="pbx-sa"></div><div class="sbx-out light" id="pbx-oa" style="min-height:120px"></div></div>
+     <div><label class="pb-field"><b style="font-family:'Segoe UI',Arial,sans-serif;font-size:12.5px">Version B</b></label><textarea id="pbx-b" rows="8" oninput="PBX.b=this.value;pbxSave();pbxCmp()" placeholder="Tip: paste A, then add audience, format and a verification step…">${p2esc(PBX.b)}</textarea><div id="pbx-sb"></div><div class="sbx-out light" id="pbx-ob" style="min-height:120px"></div></div></div>
+     <div class="bar"><button class="btn" onclick="pbxRunBoth()">▶ Run both</button><button class="btn sm ghost" onclick="PBX.b=pbxImprove(PBX.a);pbxSave();renderPlaibox()">✨ Make B an improved A</button></div>`;
+    pbxCmp();
+  } else if(PBX.mode==='challenge'){
+    const mod=pbxModulePrompts().filter(x=>x.ch);
+    const ch=PBX.challenge;
+    B.innerHTML=`<p style="font-size:14px;color:var(--grey);margin-top:0">Pick a challenge, write your prompt from scratch, and get instant pass/fail feedback on each requirement. No AI connection needed.</p>
+     <div class="tplgrid">${mod.map((x,i)=>`<div class="tpl" onclick="PBX.challenge={t:pbxModulePrompts().filter(x=>x.ch)[${i}].ch.title,d:pbxModulePrompts().filter(x=>x.ch)[${i}].ch.intro,builder:pbxModulePrompts().filter(x=>x.ch)[${i}].ch};PBX.a='';renderPlaibox()"><span class="pill2" style="background:#F3EDFF;color:#5B21B6">This module</span><b>${p2esc(x.ch.title)}</b><p>${p2esc(x.ch.intro)}</p></div>`).join('')}
+      ${PBX_CHALLENGES.map((c,i)=>`<div class="tpl" onclick="PBX.challenge=PBX_CHALLENGES[${i}];PBX.a='';renderPlaibox()"><span class="pill2">Core challenge</span><b>${p2esc(c.t)}</b><p>${p2esc(c.d)}</p></div>`).join('')}</div>
+     ${ch?`<div class="tplform"><h4 style="margin:0 0 4px">🏆 ${p2esc(ch.t)}</h4><p style="font-size:14px;color:var(--grey);margin:0 0 10px">${p2esc(ch.d)}</p><textarea id="pbx-a" rows="7" oninput="PBX.a=this.value;pbxSave();pbxChal()" style="width:100%;border:1.5px solid var(--line);border-radius:10px;padding:12px;font-family:ui-monospace,Consolas,monospace;font-size:13.5px">${p2esc(PBX.a)}</textarea><div id="pbx-ch"></div><div class="bar"><button class="btn sm" onclick="PBX.mode='coach';renderPlaibox()">▶ Take it to Coach & Run</button></div></div>`:''}`;
+    if(ch)pbxChal();
+  } else {
+    B.innerHTML=`<div class="sbx"><div class="sbx-set" style="margin-top:0"><b>Option 1 — your own free Gemini key (recommended, 2 minutes)</b>
+      <ol style="margin:8px 0;padding-left:18px;line-height:1.6"><li>Open <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> and sign in with a Google account.</li><li>Click <b>Create API key</b> and copy it.</li><li>Paste it below and press Save. It is stored only in this browser and sent only to Google.</li></ol>
+      <label>Gemini API key<input id="pbx-key" type="password" value="${p2esc(load(P2K.key,''))}" placeholder="AIza…"></label>
+      <label style="display:block;margin-top:8px">Model<input id="pbx-model" value="${p2esc(load(P2K.model,'')||'gemini-flash-latest')}"></label>
+      <p style="font-size:12px;color:var(--grey)">Free-tier limits and data terms are set by Google and change over time; don't paste confidential or personal data into any AI tool (Commandment 3).</p>
+      <div class="bar"><button class="btn sm" onclick="save(P2K.key,p2el('pbx-key').value.trim());save(P2K.model,p2el('pbx-model').value.trim());toast('Saved ✓');pbxTest()">Save & test</button><button class="btn sm ghost" onclick="save(P2K.key,'');toast('Key removed');renderPlaibox()">Remove key</button></div><div id="pbx-test" style="font-size:13px"></div></div>
+      <div class="sbx-set" style="margin-top:0"><b>Option 2 — Team21 cloud AI</b><p style="margin:8px 0">If your academy administrator has enabled Live AI on the Team21 cloud, plAIbox uses it automatically when you are logged in — no key needed.</p>
+      <b>Option 3 — no connection</b><p style="margin:8px 0">The Prompt Coach, Compare scoring and Challenges work fully offline. Use <i>Open in ChatGPT / Claude / Gemini / Perplexity</i> to run your polished prompt in the tool you already use.</p></div></div>`;
+  }
+}
+function pbxSave(){try{save(P2K.draft,{a:PBX.a,b:PBX.b,sys:PBX.sys});}catch(e){}}
+function pbxScoreHTML(r){
+  const col=r.score>=80?'var(--green)':r.score>=50?'var(--amber)':'var(--red)';
+  return `<div class="sbx-score"><div class="sbx-ring" style="background:conic-gradient(${col} ${r.score*3.6}deg,var(--line) 0)"><div style="background:#fff;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center">${r.score}</div></div><div style="font-family:'Segoe UI',Arial,sans-serif;font-size:13.5px"><b>Prompt score</b><br>${r.score>=80?'Strong — run it, then critique the answer.':r.score>=50?'Getting there — fix the red items.':'Thin — the AI will guess. Add the missing elements.'}<br><small style="color:var(--grey)">${r.words} words</small></div></div>
+  <ul class="sbx-ck">${r.checks.map(c=>`<li class="${c[1]?'y':'n'}"><b>${c[1]?'✓':'✗'}</b> ${c[0]}${c[1]?'':`<small>${c[2]}</small>`}</li>`).join('')}${r.warn.map(w=>`<li class="w"><b>⚠</b> ${p2esc(w[0])}<small>${w[1]}</small></li>`).join('')}</ul>`;
+}
+function pbxLive(){const el=p2el('pbx-coach');if(el)el.innerHTML=pbxScoreHTML(pbxCoach(PBX.a));}
+function pbxDoImprove(){PBX.a=pbxImprove(PBX.a);pbxSave();renderPlaibox();toast('Scaffolding added — now replace the [brackets] with your details');}
+async function pbxRun(){
+  const out=p2el('pbx-out');if(!PBX.a.trim()){toast('Write or load a prompt first.');return;}
+  const r=pbxCoach(PBX.a);const hist=load(P2K.hist,[]);hist.unshift({d:new Date().toISOString().slice(5,16).replace('T',' '),p:PBX.a,s:r.score});save(P2K.hist,hist.slice(0,25));
+  out.textContent='⏳ Thinking…';
+  try{const t=await pbxCallAI(PBX.a,PBX.sys);out.textContent=t+'\n\n— — —\nCommandment 2: check every fact, number and source above before you use it.';}
+  catch(e){
+    if(e.message==='NO_ENGINE'){out.innerHTML='<b>Prompt Coach result</b> (no AI connected):\n\nScore '+r.score+'/100. '+(r.score>=80?'This prompt is ready. Use an Open in button below the editor, or connect Live AI in ⚙️ setup to see the answer here.':'Fix the ✗ items on the left, or press ✨ Improve my prompt, then run again.');}
+    else out.textContent='⚠️ '+e.message+'\n\nCheck your key/model in ⚙️ Live AI setup, or use the Open in buttons.';
+  }
+  const h=document.querySelector('.sbx-hist');if(h)h.innerHTML=load(P2K.hist,[]).map((x,i)=>`<div onclick="PBX.a=load(P2K.hist,[])[${i}].p;renderPlaibox()">${p2esc(x.d)} · ${p2esc(x.p.slice(0,90))}… <b>${x.s}%</b></div>`).join('');
+}
+function pbxCmp(){const a=pbxCoach(PBX.a),b=pbxCoach(PBX.b);p2el('pbx-sa').innerHTML=pbxScoreHTML(a);p2el('pbx-sb').innerHTML=pbxScoreHTML(b);}
+async function pbxRunBoth(){
+  for(const [k,o] of [['a','pbx-oa'],['b','pbx-ob']]){const el=p2el(o);if(!PBX[k].trim()){el.textContent='(empty)';continue;}el.textContent='⏳ Thinking…';
+    try{el.textContent=await pbxCallAI(PBX[k],PBX.sys);}catch(e){el.textContent=e.message==='NO_ENGINE'?'No AI connected — compare the scores above, or set up Live AI in ⚙️.':'⚠️ '+e.message;}}
+}
+function pbxChal(){
+  const ch=PBX.challenge,s=PBX.a||'';let rows;
+  if(ch.builder){rows=ch.builder.checks.map(c=>{const v=s.toLowerCase();let ok=true;if(c.min)ok=ok&&v.length>=c.min*1.5;if(c.any)ok=ok&&c.any.some(a=>v.includes(a.toLowerCase()));if(c.re)ok=ok&&new RegExp(c.re,'i').test(v);return [c.label,ok];});}
+  else rows=ch.c.map(c=>[c[0],typeof c[1]==='function'?c[1](s):c[1].test(s)]);
+  const n=rows.filter(r=>r[1]).length,ok=n===rows.length&&s.length>40;
+  p2el('pbx-ch').innerHTML=`<ul class="sbx-ck" style="margin-top:10px">${rows.map(r=>`<li class="${r[1]?'y':'n'}"><b>${r[1]?'✓':'✗'}</b> ${p2esc(r[0])}</li>`).join('')}</ul><p style="font-family:'Segoe UI',Arial,sans-serif;font-weight:700;color:${ok?'var(--green)':'var(--amber)'}">${ok?'🏆 Challenge passed! Now run it and critique the answer.':n+' / '+rows.length+' requirements met'}</p>`;
+}
+async function pbxTest(){const el=p2el('pbx-test');el.textContent='Testing…';try{const t=await pbxCallAI('Reply with exactly: plAIbox connected.','');el.innerHTML='<span style="color:var(--green)">✓ '+p2esc(t.slice(0,80))+'</span>';}catch(e){el.innerHTML='<span style="color:var(--red)">✗ '+p2esc(e.message==='NO_ENGINE'?'No key saved.':e.message)+'</span>';}}
+function pbxOpenIn(w){const p=PBX.a||'';if(!p.trim()){toast('Write a prompt first.');return;}
+  const u={chatgpt:'https://chatgpt.com/?q=',claude:'https://claude.ai/new?q=',perplexity:'https://www.perplexity.ai/search?q=',gemini:null}[w];
+  if(u)window.open(u+encodeURIComponent(p),'_blank','noopener');else{navigator.clipboard.writeText(p).then(()=>toast('Prompt copied — paste it into Gemini'));window.open('https://gemini.google.com/app','_blank','noopener');}}
+
+/* ---------- WIRING (tabs, nav, lesson hooks) ---------- */
+(function p2Init(){
+  try{const d=load(P2K.draft,null);if(d){PBX.a=d.a||'';PBX.b=d.b||'';PBX.sys=d.sys||'';}}catch(e){}
+  // LMS tabs
+  const lt=document.querySelector('#lms .ptabs');
+  if(lt){const ref=lt.querySelector('[data-t="prompts"]');
+    const b1=document.createElement('button');b1.className='ptab';b1.dataset.t='plaibox';b1.innerHTML='🧪 plAIbox';b1.style.color='#6D28D9';b1.onclick=()=>pbxOpen();
+    const b2=document.createElement('button');b2.className='ptab';b2.dataset.t='news';b2.innerHTML="🗞 What's New";b2.onclick=()=>lmsTab('news');
+    lt.insertBefore(b1,ref);lt.appendChild(b2);
+    ref.textContent='📚 Prompt Bank';
+    const body=p2el('p-prompts').parentElement;['plaibox','news'].forEach(x=>{const d=document.createElement('div');d.id='p-'+x;d.className='hidden';body.appendChild(d);});}
+  const _lms=lmsTab;
+  lmsTab=function(t){
+    const extra=['plaibox','news'];
+    extra.forEach(x=>{const e=p2el('p-'+x);if(e)e.classList.toggle('hidden',x!==t);});
+    if(extra.includes(t)){
+      document.querySelectorAll('#lms .ptab').forEach(b=>b.classList.toggle('active',b.dataset.t===t));
+      ['dash','courses','lesson','mentor','prompts','certs','exam'].forEach(x=>{const e=p2el('p-'+x);if(e)e.classList.add('hidden');});
+      if(t==='plaibox')renderPlaibox();if(t==='news')renderNewsTab();window.scrollTo(0,0);return;
+    }
+    if(t!=='lesson')PBX.ret=null;
+    _lms(t);
+  };
+  // Admin tabs
+  const at=document.querySelector('#admin .ptabs');
+  if(at){const ref=at.querySelector('[data-t="a-inq"]');
+    const b1=document.createElement('button');b1.className='ptab';b1.dataset.t='a-reg';b1.textContent='Registrations';b1.onclick=()=>admTab('a-reg');
+    const b2=document.createElement('button');b2.className='ptab';b2.dataset.t='a-news';b2.textContent="What's New";b2.onclick=()=>admTab('a-news');
+    at.insertBefore(b1,ref);at.insertBefore(b2,ref);ref.textContent='Info Requests';
+    const body=p2el('p-a-over').parentElement;['a-reg','a-news'].forEach(x=>{const d=document.createElement('div');d.id='p-'+x;d.className='hidden';body.appendChild(d);});}
+  const _adm=admTab;
+  admTab=function(t){
+    const extra=['a-reg','a-news'];
+    extra.forEach(x=>{const e=p2el('p-'+x);if(e)e.classList.toggle('hidden',x!==t);});
+    if(extra.includes(t)){
+      document.querySelectorAll('#admin .ptab').forEach(b=>b.classList.toggle('active',b.dataset.t===t));
+      ['a-over','a-gen','a-students','a-progress','a-enrol','a-analytics','a-inq','a-sync'].forEach(x=>{const e=p2el('p-'+x);if(e)e.classList.add('hidden');});
+      if(t==='a-reg'){renderRegs();syncRegistrationsFromCloud(true);}if(t==='a-news')renderAdminNews();return;
+    }
+    _adm(t);
+    if(t==='a-over'){const n=registrations.filter(r=>r.status==='new').length;const o=p2el('p-a-over');if(o){const c=document.createElement('div');c.className='callout f';c.style.cursor='pointer';c.onclick=()=>admTab('a-reg');c.innerHTML=n?`<b>📝 ${n} new registration(s) waiting.</b> Click to review and generate credentials in one click.`:'<b>📝 Registrations:</b> no new registrations on this device. Open the Registrations tab and Sync from cloud to pull the latest.';o.insertBefore(c,o.firstChild);}}
+    p2RegBadge();
+  };
+  const _ea=enterAdmin;enterAdmin=function(){_ea();syncRegistrationsFromCloud(true);};
+  // Lesson hooks: banner + "Test in plAIbox" on every lab + floating button
+  const _rl=renderLesson;
+  renderLesson=function(){
+    _rl();
+    const lb=document.querySelector('#p-lesson .lesson-body');
+    if(lb){const ban=document.createElement('div');ban.className='pbx-banner';ban.innerHTML='<div><b>🧪 plAIbox sandbox</b><br><span>Test every prompt in this module, get it scored on CLEAR, improve it, and run it live.</span></div><button class="btn sm" style="background:#6D28D9;border-color:#6D28D9" onclick="pbxOpen()">Open plAIbox →</button>';lb.parentElement.insertBefore(ban,lb);
+      lb.querySelectorAll('.lab').forEach(l=>{const p=l.querySelector('.labp');if(!p)return;const b=document.createElement('button');b.className='btn sm labtest';b.style.background='#6D28D9';b.style.borderColor='#6D28D9';b.textContent='▶ Test in plAIbox';b.onclick=()=>pbxOpen(p.textContent);(l.querySelector('button')||p).insertAdjacentElement('afterend',b);});}
+    document.querySelectorAll('#p-lesson .sw.box .sw-actions').forEach(a=>{if(a.querySelector('.labtest'))return;const out=a.closest('.sw').querySelector('.pb-out');if(!out)return;const b=document.createElement('button');b.className='btn sm labtest';b.style.background='#6D28D9';b.style.borderColor='#6D28D9';b.textContent='▶ Test in plAIbox';b.onclick=()=>pbxOpen(out.textContent);a.appendChild(b);});
+  };
+  const fab=document.createElement('button');fab.className='fab2 hidden';fab.id='pbxFab';fab.innerHTML='🧪 plAIbox';fab.onclick=()=>pbxOpen();document.body.appendChild(fab);
+  const _show=show;show=function(id){_show(id);fab.classList.toggle('hidden',id!=='lms');};
+  // Public site: Register buttons, What's New section, Enroll → Register
+  const nl=p2el('nl');
+  if(nl){const rb=document.createElement('button');rb.className='btn sm gold reg-cta';rb.textContent=p2t('register');rb.onclick=e=>{e.preventDefault();openRegister();};
+    const lg=nl.querySelector('button[onclick="openLogin()"]');nl.insertBefore(rb,lg||null);}
+  const hc=document.querySelector('.hero-card');
+  if(hc){const b=document.createElement('button');b.className='btn gold';b.style.cssText='width:100%;margin-top:10px';b.textContent='📝 '+p2t('register')+' →';b.onclick=()=>openRegister();hc.appendChild(b);}
+  const about=p2el('about');
+  if(about){const s=document.createElement('section');s.id='whatsnew';s.innerHTML=`<div class="wrap"><p class="eyebrow">${p2t('news')}</p><h2 class="h2">What's new in AI and your field</h2><p class="lead" style="margin-bottom:20px">${p2t('newsSub')}</p><div class="newsgrid" id="whatsnew-grid"></div></div>`;about.parentElement.insertBefore(s,about);p2RenderPublicNews();}
+  const cf=p2el('cf-msg');
+  if(cf){const panel=cf.closest('.panel');const note=document.createElement('div');note.className='callout';note.style.cssText='margin:0 0 14px;cursor:pointer';note.innerHTML='<b>ℹ️ This form is for questions and information only.</b> '+p2t('infoNote');note.onclick=()=>openRegister();panel.insertBefore(note,panel.firstChild);
+    const btn=panel.querySelector('button[onclick="submitInquiry()"]');if(btn)btn.textContent='Send information request';}
+  document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('#programs a[href="#contact"]');if(!a)return;e.preventDefault();e.stopPropagation();const card=a.closest('.card,.prog,[class*="card"]');const t=card&&card.querySelector('h3,h4');openRegister(t?t.textContent.trim():null);},true);
+})();
+
 </script>
 </body>
 </html>
